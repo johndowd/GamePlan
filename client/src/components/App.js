@@ -7,7 +7,6 @@ import "../assets/scss/main.scss";
 import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
-import GoogleMapsComponent from "./GoogleMapsComponent";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
