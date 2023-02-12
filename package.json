@@ -1,0 +1,22 @@
+{
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client",
+    "e2e"
+  ],
+  "scripts": {
+    "build:client": "yarn workspace GamePlan-client build",
+    "dev": "yarn workspace GamePlan-server dev",
+    "dev:debug": "yarn workspace GamePlan-server dev:debug",
+    "heroku-postbuild": "yarn workspace GamePlan-client build",
+    "start": "yarn workspace GamePlan-server start",
+    "dev:cypress": "yarn workspace GamePlan-server dev:e2e",
+    "e2e:open": "yarn workspace GamePlan-e2e e2e:open",
+    "e2e:run": "yarn workspace GamePlan-e2e e2e:run"
+  },
+  "engines": {
+    "node": "^16.18"
+  }
+}
