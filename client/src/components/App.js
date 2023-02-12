@@ -29,11 +29,7 @@ const App = (props) => {
       <TopBar user={currentUser} />
       <Switch>
         <Route exact path="/">
-
-          <div>
           <h2>Hello from react</h2>
-          {GoogleMapsComponent}
-          </div>
         </Route>
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
