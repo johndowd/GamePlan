@@ -14,7 +14,7 @@ class Plan extends Model {
         name: { type: "string" },
         game: { type: "string" },
         genre: { type: "string" },
-        players: { type: ["integer","string"] },
+        playerCount: { type: ["integer","string"] },
         location: { type: "string" },
         date: { type: "string" }
       }
