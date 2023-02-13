@@ -8,6 +8,8 @@ import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import PlanList from "./PlanList";
+import NewPlan from "./NewPlan";
+import LandingPage from "./LandingPage";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -29,12 +31,12 @@ const App = (props) => {
       <TopBar user={currentUser} />
       <Switch>
         <Route exact path="/">
-          <h2>Hello from react</h2>
-          <h5><Link to="/plans">Link to plans</Link></h5>
+          <LandingPage />
         </Route>
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
         <Route exact path="/plans" component={PlanList} />
+        <Route exact path="/plans/new" component={NewPlan} />
       </Switch>
     </Router>
   );
