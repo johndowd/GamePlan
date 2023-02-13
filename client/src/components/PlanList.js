@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'
 import PlanTile from './PlanTile';
 
 const PlanList = (props) => {
@@ -22,7 +23,7 @@ const PlanList = (props) => {
   }, [])
 
   const planTiles = plans.map(plan => {
-    return <PlanTile key={plan.id} plan={plan} />
+    return <Link to={`/plans/${plan.id}`}><PlanTile key={plan.id} plan={plan} /></Link>
   })
 
   return ( 

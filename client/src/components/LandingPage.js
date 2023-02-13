@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const LandingPage = () => {
   return (
     <div>
-      <h2>Hello from react</h2>
+      <h2>Game Plan</h2>
       <h5><Link to="/plans">Link to plans</Link></h5>
       <h5><Link to="/plans/new">Link to new plans page</Link></h5>
     </div>
