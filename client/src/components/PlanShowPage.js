@@ -70,7 +70,8 @@ const PlanShowPage = (props) => {
     playerListComponent =
         <ul>
           {playerList}
-          <li>{plan.playerCount - plan.players.length} spots left!</li>
+          {(plan.playerCount - plan.players.length) 
+          ? <li>{plan.playerCount - plan.players.length} spots left!</li> : ""}
         </ul>
     }
 

@@ -1,3 +1,5 @@
+import UserSerializer from "./UserSerializer.js"
+
 class PlanSerializer {
   static async getDetails(plan) {
     const allowedAttributes = ["id","name", "genre", "playerCount", "location", "createdAt", "updatedAt"]
@@ -8,7 +10,10 @@ class PlanSerializer {
     }
 
     const relatedUsers = await plan.$relatedQuery("users")
-    serializedPlan.players = relatedUsers
+
+    serializedPlan.players = relatedUsers.map(user => { 
+      return UserSerializer.getUsername(user)
+    })
     return serializedPlan
   }
 }
