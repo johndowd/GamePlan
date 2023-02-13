@@ -7,9 +7,11 @@ const plansRouter = new express.Router()
 
 plansRouter.get("/:id", async (req, res) => {
   const { id } = req.params
+  const { user } = req
   try {
     const plan = await Plan.query().findById(id)
     const serializedPlan = await PlanSerializer.getDetails(plan)
+    serializedPlan.players.push(user)
     return res.status(200).json({ plan: serializedPlan })
   } catch (error) {
     return res.status(500).json({ errors: error })
