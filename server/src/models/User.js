@@ -32,7 +32,7 @@ class User extends uniqueFunc(Model) {
         email: { type: "string", format: "email" },
         cryptedPassword: { type: "string" },
       },
-    };
+    }
   }
 
   $formatJson(json) {

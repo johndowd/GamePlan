@@ -2,6 +2,13 @@
 @import "~foundation-sites/scss/foundation";
 @include foundation-everything;
 // place global css here
+
+$color-primary: #0081a7;
+$color-secondary: #00afb9;
+$color-light: #fdfcdc;
+$color-cream: #fed9b7;
+$color-redish: #f07167;
+
 *,
 *::before,
 *::after {
@@ -11,4 +18,22 @@
 :root {
   -moz-tab-size: 4;
   tab-size: 4;
+}
+
+body {
+  background-color: $color-light;
+}
+
+.top-bar {
+  background-color: $color-primary;
+}
+
+.plan-list {
+  list-style: none;
+}
+
+.plan-tile {
+  margin: 1rem;
+  border-radius: 3%;
+  border: $color-secondary solid;
 }
