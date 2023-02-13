@@ -4,6 +4,17 @@ import { Plan } from "../../../models/index.js"
 
 const plansRouter = new express.Router()
 
+plansRouter.get("/:id", async (req, res) => {
+  const { id } = req.params
+  console.log(id)
+  try {
+    const plan = await Plan.query().findById(id)
+    return res.status(200).json({ plan })
+  } catch (error) {
+    return res.status(500).json({ errors: error })
+  }
+})
+
 plansRouter.get("/", async (req, res) => {
   try {
     const plans = await Plan.query()

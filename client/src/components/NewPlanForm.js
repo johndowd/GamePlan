@@ -43,7 +43,7 @@ const NewPlan = () => {
 
   console.log(errors)
 
-  const attributes = ['name', 'game', 'genre', 'location', 'date', 'players']
+  const attributes = ['name', 'game', 'genre', 'location', 'date', 'playerCount']
   const inputComponents = attributes.map(attr => {
     const capitalizedAttr = _.capitalize(attr)
     return (

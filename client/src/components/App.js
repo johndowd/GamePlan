@@ -8,8 +8,9 @@ import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import PlanList from "./PlanList";
-import NewPlan from "./NewPlan";
+import NewPlan from "./NewPlanForm";
 import LandingPage from "./LandingPage";
+import PlanShowPage from "./PlanShowPage";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -37,6 +38,7 @@ const App = (props) => {
         <Route exact path="/user-sessions/new" component={SignInForm} />
         <Route exact path="/plans" component={PlanList} />
         <Route exact path="/plans/new" component={NewPlan} />
+        <Route exact path="/plans/:id" component={PlanShowPage} />
       </Switch>
     </Router>
   );
