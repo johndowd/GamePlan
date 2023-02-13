@@ -6,7 +6,7 @@ class PlanSeeder {
       name: "Play Monopoly with a first-timer!",
       game: "Monopoly",
       genre: "Economics",
-      maxPlayers: 4,
+      players: 4,
       location: "301",
       date: "feb 13 2023"
     },
@@ -14,7 +14,7 @@ class PlanSeeder {
       name: "Learn Stratego Secrets!",
       game: "Stratego",
       genre: "War",
-      maxPlayers: 4,
+      players: 4,
       location: "301",
       date: "feb 15 2023"
     },
@@ -22,7 +22,7 @@ class PlanSeeder {
       name: "Help me learn Wingspan!",
       game: "Wingspan",
       genre: "Birds",
-      maxPlayers: 2,
+      players: 2,
       location: "Swissbakers",
       date: "feb 18 2023"
     }]

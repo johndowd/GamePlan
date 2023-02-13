@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import _ from 'lodash'
 import { Redirect } from 'react-router-dom';
+import translateServerErrors from '../services/translateServerErrors'
+import FormError from './layout/FormError';
+
 
 const NewPlan = () => {
   const [formSuccess, setFormSuccess] = useState(false)
   const [formData, setFormData] = useState({})
+  const [errors, setErrors] = useState({})
 
   const handleChange = (event) => {
     setFormData({
@@ -23,28 +27,33 @@ const NewPlan = () => {
         }),
         body: JSON.stringify(formData)
         })
-      const body = await response.json()
-      setFormSuccess(true)
-      if(!response.ok) {
+      if (!response.ok) {
         if(response.status === 422) {
-          console.error(response.statusText)
+          const body = await response.json()
+          const newErrors = translateServerErrors(body.errors)
+          return setErrors(newErrors)
         }
+        throw new Error(response.statusText)
       }
-
+      setFormSuccess(true)
     } catch (error) {
       console.error(error)
     }
   }
 
-  const attributes = ['name', 'game', 'genre', 'maxPlayers', 'location', 'date']
+  console.log(errors)
+
+  const attributes = ['name', 'game', 'genre', 'location', 'date', 'players']
   const inputComponents = attributes.map(attr => {
+    const capitalizedAttr = _.capitalize(attr)
     return (
-      <label key={attr}>{_.capitalize(attr)}:
+      <label key={attr}>{capitalizedAttr}:
         <input 
           type="text" 
           id={attr} 
           value={formData.attr} 
           onChange={handleChange} />
+      <FormError error={errors[capitalizedAttr]} />
       </label>
     )
   })

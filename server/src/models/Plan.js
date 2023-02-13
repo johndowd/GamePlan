@@ -9,12 +9,12 @@ class Plan extends Model {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["name", "game", "genre", "maxPlayers", "location", "date"],
+      required: ["name", "game", "genre", "location", "date"],
       properties: {
         name: { type: "string" },
         game: { type: "string" },
         genre: { type: "string" },
-        maxPlayers: { type: ["integer","string"] },
+        players: { type: ["integer","string"] },
         location: { type: "string" },
         date: { type: "string" }
       }
