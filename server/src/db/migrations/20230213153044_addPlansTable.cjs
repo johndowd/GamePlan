@@ -11,7 +11,7 @@ exports.up = async (knex) => {
     table.string("name").notNullable()
     table.string("game").notNullable()
     table.string("genre").notNullable()
-    table.integer("playerCount")
+    table.integer("playerCount").notNullable()
     table.string("location").notNullable()
     table.string("date").notNullable()
     table.timestamp("createdAt").notNullable().defaultTo(knex.fn.now())

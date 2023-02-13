@@ -20,6 +20,24 @@ class Plan extends Model {
       }
     }
   }
+
+  static get relationMappings() {
+    const { User } = require("./index.js")
+    return {
+      users: {
+        relation: Model.ManyToManyRelation,
+        modelClass: User,
+        join: {
+          from: "plans.id",
+          through: {
+            from: "signups.planId",
+            to: "signups.userId"
+          },
+          to: "users.id"
+        }
+      }
+    }
+  }
 }
 
 module.exports = Plan
