@@ -1,5 +1,6 @@
 @import "./foundation/settings";
 @import "~foundation-sites/scss/foundation";
+@import url('https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic&subset=latin,latin-ext');
 @include foundation-everything;
 // place global css here
 
@@ -19,9 +20,9 @@ $color-redish: #f07167;
   -moz-tab-size: 4;
   tab-size: 4;
 }
-
 body {
   background-color: $color-light;
+  font-family: Roboto;
 }
 
 .search-bar {
@@ -29,9 +30,14 @@ body {
   width: 20%;
 }
 
-.top-bar {
-  background-color: $color-primary;
+.top-bar{
+  opacity: 80%;
+  background-color: $color-redish;
   padding: .5rem
+}
+
+.top-bar ul {
+  background-color: $color-redish;
 }
 
 .plan-list {
@@ -48,6 +54,12 @@ body {
   width: 50%;
 }
 
+.landing-page h3{
+  text-align: center;
+  padding: 1rem;
+  font-weight: 400;
+}
+
 .button {
   border: none;
   background-color: $color-secondary;
@@ -58,6 +70,25 @@ body {
   border-radius: 8px;
 }
 
-p {
+.banner-content {
+  margin: 1rem auto;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  background-color: $color-light;
+  padding: 1rem;
+}
+
+.banner-content img {
+  width: 24rem;
+  height: 16rem;
+}
+
+.content-cell {
+  border-radius: 8px;
+  border: solid black .2rem;
   background-color: white;
+  margin-bottom: 1rem;
+  max-width: 24rem;
 }
