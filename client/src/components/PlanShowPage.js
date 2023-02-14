@@ -89,6 +89,7 @@ const PlanShowPage = (props) => {
       <h2>{plan.name}</h2>
       <h4>Genre: {plan.genre}</h4>
       <h4>Created By: {plan.owner.username}</h4>
+      <h4>Date: {plan.date}</h4>
       <h4>Players: {plan.playerCount} Max</h4>
       {playerListComponent}
       {joinButton}
