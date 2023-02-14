@@ -33,7 +33,7 @@ plansRouter.post("/", async (req, res) => {
   try {
     const plan = await Plan.query().insert({...body, ownerUserId: user.id })
     await Signup.query().insert({planId: plan.id, userId: user.id})
-    return res.status(201)
+    return res.status(201).json({ plan })
   } catch (error) {
     if (error instanceof ValidationError) {
       return res.status(422).json({ errors: error.data })
