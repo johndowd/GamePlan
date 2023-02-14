@@ -3,8 +3,5 @@
     "activityBar.background": "#3A273A",
     "titleBar.activeBackground": "#523751",
     "titleBar.activeForeground": "#FBFAFB"
-  },
-  "cSpell.words": [
-    "signups"
-  ]
+  }
 }

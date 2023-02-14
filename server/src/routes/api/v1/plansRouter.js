@@ -42,4 +42,22 @@ plansRouter.post("/", async (req, res) => {
   }
 })
 
+plansRouter.get("/search/:q", async (req, res) => {
+  const { q } = req.params
+  try {
+    const plansData = await Plan.query()
+    const plans = plansData.filter(plan => {
+      return plan.name
+      .toLowerCase()
+      .includes(q.toLowerCase())
+    })
+    const serializedPlans = await Promise.all(plans.map(plan => {
+      return PlanSerializer.getDetails(plan)
+    }))
+    return res.status(200).json({ plans: serializedPlans })
+  } catch (error) {
+    return res.status(500)
+  }
+})
+
 export default plansRouter

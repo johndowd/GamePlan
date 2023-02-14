@@ -23,7 +23,8 @@ const PlanList = (props) => {
   }, [])
 
   const planTiles = plans.map(plan => {
-    return <Link key={plan.id} to={`/plans/${plan.id}`}><PlanTile plan={plan} /></Link>
+    console.log(plan)
+    return <PlanTile key={plan.id} plan={plan} />
   })
 
   return ( 

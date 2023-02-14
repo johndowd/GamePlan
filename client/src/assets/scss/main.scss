@@ -24,8 +24,14 @@ body {
   background-color: $color-light;
 }
 
+.search-bar {
+  height: 38px;
+  width: 20%;
+}
+
 .top-bar {
   background-color: $color-primary;
+  padding: .5rem
 }
 
 .plan-list {
