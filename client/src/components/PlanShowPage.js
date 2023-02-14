@@ -1,10 +1,8 @@
-import { pullAllBy } from 'lodash';
 import React, { useEffect, useState } from 'react';
-import getCurrentUser from '../services/getCurrentUser';
 
 const PlanShowPage = (props) => {
   const [plan, setPlan] = useState({ players: [], owner: {} })
-  const [user, setUser] = useState({})
+  const { user } = props
 
   const fetchPlan = async () => {
     const { id } = props.match.params
@@ -17,14 +15,8 @@ const PlanShowPage = (props) => {
     }
   }
 
-  const fetchUser = async () => {
-    const currentUser = await getCurrentUser()
-    setUser(currentUser)
-  }
-
   useEffect(() => {
-    fetchPlan(),
-      fetchUser()
+    fetchPlan()
   }, [])
 
   const handleClick = async (event) => {
@@ -34,7 +26,7 @@ const PlanShowPage = (props) => {
         headers: new Headers({
           "Content-Type": "application/json"
         }),
-        body: JSON.stringify({ planId: plan.id, userId: user.id })
+        body: JSON.stringify({ planId: plan.id })
       })
       if (!response.ok) {
         if (response.status === 422) {
@@ -52,25 +44,32 @@ const PlanShowPage = (props) => {
   }
 
   const isCurrentPlayer = () => {
-    let isPlayer = false
-    plan.players.forEach(player => {
-      user.id == player.id ? isPlayer = true : null
-    })
-    return isPlayer
+    return plan.players.find(player => player.id == user.id )
   }
 
-  let playerList, playerListComponent
-  const slotsLeft = plan.playerCount - plan.players.length
-  if (plan.players.length > 0) {
-    playerList = plan.players.map(player => {
-      return <li key={player.username}>{player.username}</li>
-    })
+
+  const playerLength = plan.players.length
+  const slotsLeft = plan.playerCount - playerLength
+
+  let playerList
+  playerList = plan.players.map(player => {
+    return <li key={player.username}>{player.username}</li>
+  })
+
+  let spotsLeftComponent
+  if(slotsLeft < 2) {
+    spotsLeftComponent = <li> {`${slotsLeft} spot left!`} </li>
+  }else {
+    spotsLeftComponent = <li> {`${slotsLeft} spots left!`} </li>
+  }
+
+  let playerListComponent
+  if (playerLength > 0) {
     playerListComponent =
       <ul>
         {playerList}
-        {slotsLeft
-          ? <li>{slotsLeft} spot{slotsLeft ? "s" : ""} left!</li> : ""}
-      </ul>
+        {spotsLeftComponent}
+    </ul>
   }
 
   let joinButton

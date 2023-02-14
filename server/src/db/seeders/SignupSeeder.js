@@ -35,8 +35,6 @@ class SignupSeeder {
     await Signup.query().insert({ userId: user5.id, planId: plan6.id})
     await Signup.query().insert({ userId: user5.id, planId: plan1.id})
 
-
-
   }
 }
 

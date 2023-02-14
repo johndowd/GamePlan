@@ -19,8 +19,6 @@ class UserSeeder {
       }
     }
   }
-
-
 }
 
 export default UserSeeder

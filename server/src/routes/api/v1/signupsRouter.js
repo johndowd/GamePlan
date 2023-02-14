@@ -5,13 +5,13 @@ import { Signup } from "../../../models/index.js"
 const signupsRouter = new express.Router()
 
 signupsRouter.post("/", async (req, res) => {
-  const { body } = req
+  const { body, user } = req
   try {
-    const isSignup = await Signup.query().findOne(body)
+    const isSignup = await Signup.query().findOne({...body, userId: user.id})
     if (isSignup){
       return res.status(422).json({ error: "You are already signed up for this game" })
     }
-    const signup = await Signup.query().insert(body)
+    const signup = await Signup.query().insert({...body, userId: user.id})
     return res.status(201).json({ signup })
   } catch (error) {
     if (error instanceof ValidationError){

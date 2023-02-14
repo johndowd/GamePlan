@@ -15,12 +15,6 @@ class Signup extends Model {
       }
     }
   }
-
-  static get relationMappings() {
-    return {
-
-    }
-  }
 }
 
 module.exports = Signup
