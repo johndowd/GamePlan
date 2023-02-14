@@ -38,7 +38,8 @@ const App = (props) => {
         <Route exact path="/user-sessions/new" component={SignInForm} />
         <Route exact path="/plans" component={PlanList} />
         <Route exact path="/plans/new" component={NewPlan} />
-        <Route exact path="/plans/:id" component={PlanShowPage} />
+        <Route exact path="/plans/:id" 
+          render={(props) => <PlanShowPage {...props} user={currentUser}/>}/>
       </Switch>
     </Router>
   );

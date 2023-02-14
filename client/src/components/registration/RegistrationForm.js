@@ -7,6 +7,7 @@ const RegistrationForm = () => {
     email: "",
     password: "",
     passwordConfirmation: "",
+    username: ""
   });
 
   const [errors, setErrors] = useState({});
@@ -15,7 +16,7 @@ const RegistrationForm = () => {
 
   const validateInput = (payload) => {
     setErrors({});
-    const { email, password, passwordConfirmation } = payload;
+    const { email, password, passwordConfirmation, username } = payload;
     const emailRegexp = config.validation.email.regexp;
     let newErrors = {};
     if (!email.match(emailRegexp)) {
@@ -26,6 +27,13 @@ const RegistrationForm = () => {
     }
 
     if (password.trim() == "") {
+      newErrors = {
+        ...newErrors,
+        password: "is required",
+      };
+    }
+
+    if (username.trim() == "") {
       newErrors = {
         ...newErrors,
         password: "is required",
@@ -94,6 +102,18 @@ const RegistrationForm = () => {
             Email
             <input type="text" name="email" value={userPayload.email} onChange={onInputChange} />
             <FormError error={errors.email} />
+          </label>
+        </div>
+        <div>
+          <label>
+            username
+            <input
+              type="text"
+              name="username"
+              value={userPayload.username}
+              onChange={onInputChange}
+            />
+            <FormError error={errors.username} />
           </label>
         </div>
         <div>

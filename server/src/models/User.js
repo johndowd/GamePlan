@@ -6,7 +6,7 @@ const Model = require("./Model");
 const saltRounds = 10;
 
 const uniqueFunc = unique({
-  fields: ["email"],
+  fields: ["email", "username"],
   identifiers: ["id"],
 });
 
@@ -26,12 +26,40 @@ class User extends uniqueFunc(Model) {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["email"],
+      required: ["email", "username"],
 
       properties: {
-        email: { type: "string", format: "email" },
+        email: { type: "string", pattern: "^\\S+@\\S+\\.\\S+$"},
         cryptedPassword: { type: "string" },
+        username: { type: "string" }
       },
+    }
+  }
+
+  static get relationMappings() {
+    const { Signup, Plan, User } = require("./index")
+
+    return {
+      plans: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Plan,
+        join: {
+          from: "users.id",
+          through: {
+            from: "signups.userId",
+            to: "signups.planId"
+          },
+          to: "plans.id"
+        }
+      },
+      plansOwned: {
+        relation: Model.HasManyRelation,
+        modelClass: Plan,
+        join: {
+          from: "users.id",
+          to: "plans.ownerUserId"
+        }
+      }
     }
   }
 
