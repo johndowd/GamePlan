@@ -40,10 +40,24 @@ body {
 
 .plan-tile {
   margin: 1rem;
-  border-radius: 3%;
+  border-radius: 8px;
   border: $color-secondary solid;
 }
 
 .add-plan-form {
   width: 50%;
+}
+
+.button {
+  border: none;
+  background-color: $color-secondary;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+p {
+  background-color: white;
 }

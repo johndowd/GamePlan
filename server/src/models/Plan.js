@@ -1,7 +1,7 @@
 const Model = require("./Model")
 
 class Plan extends Model {
-  
+
   static get tableName() {
     return "plans"
   }
@@ -19,6 +19,33 @@ class Plan extends Model {
         date: { type: "string" }
       }
     }
+  }
+
+  static get relationMappings() {
+    const { User } = require("./index.js")
+    return {
+      users: {
+        relation: Model.ManyToManyRelation,
+        modelClass: User,
+        join: {
+          from: "plans.id",
+          through: {
+            from: "signups.planId",
+            to: "signups.userId"
+          },
+          to: "users.id"
+        }
+      },
+      owner: { 
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: "plans.ownerUserId",
+          to: "users.id"
+        }
+    }
+  }
+
   }
 }
 
