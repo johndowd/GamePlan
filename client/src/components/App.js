@@ -11,6 +11,7 @@ import PlanList from "./PlanList";
 import NewPlan from "./NewPlanForm";
 import LandingPage from "./LandingPage";
 import PlanShowPage from "./PlanShowPage";
+import SearchPage from "./layout/SearchPage";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -39,6 +40,7 @@ const App = (props) => {
         <Route exact path="/plans" component={PlanList} />
         <Route exact path="/plans/new" component={NewPlan} />
         <Route exact path="/plans/:id" component={PlanShowPage} />
+        <Route path="/search/:q" component={SearchPage} /> 
       </Switch>
     </Router>
   );

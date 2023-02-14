@@ -25,7 +25,6 @@ plansRouter.get("/", async (req, res) => {
 })
 
 plansRouter.post("/", async (req, res) => {
-  console.log(req.body)
   try {
     const plan = await Plan.query().insert(req.body)
     return res.status(201).json({ plan })
@@ -34,6 +33,21 @@ plansRouter.post("/", async (req, res) => {
       return res.status(422).json({ errors: error.data })
     }
     return res.status(500).json({ errors: error })
+  }
+})
+
+plansRouter.get("/search/:q", async (req, res) => {
+  const { q } = req.params
+  try {
+    const plansData = await Plan.query()
+    const plans = plansData.filter(plan => {
+      return plan.name
+      .toLowerCase()
+      .includes(q.toLowerCase())
+    })
+    return res.status(200).json({ plans })
+  } catch (error) {
+    return res.status(500)
   }
 })
 
