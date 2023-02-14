@@ -51,7 +51,10 @@ plansRouter.get("/search/:q", async (req, res) => {
       .toLowerCase()
       .includes(q.toLowerCase())
     })
-    return res.status(200).json({ plans })
+    const serializedPlans = await Promise.all(plans.map(plan => {
+      return PlanSerializer.getDetails(plan)
+    }))
+    return res.status(200).json({ plans: serializedPlans })
   } catch (error) {
     return res.status(500)
   }

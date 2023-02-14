@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 const PlanTile = ({ plan }) => {
   const { id, name, game, date, players, playerCount } = plan
+  console.log(plan)
   return (
     <Link to={`/plans/${id}`}>
       <li className="plan-tile callout">

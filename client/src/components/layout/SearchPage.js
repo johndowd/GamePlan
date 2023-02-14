@@ -5,7 +5,7 @@ const SearchPage = (props) => {
   const [plans, setPlans] = useState([])
   const { q } = props.match.params
 
-  console.log(q)
+  console.log(plans)
 
   const fetchPlans = async () => {
     try {
