@@ -2,7 +2,6 @@ import express from "express"
 import { ValidationError } from "objection"
 import { Plan, Signup } from "../../../models/index.js"
 import PlanSerializer from "../../../serializers/PlanSerializer.js"
-import UserSerializer from "../../../serializers/UserSerializer.js"
 
 const plansRouter = new express.Router()
 
@@ -20,7 +19,10 @@ plansRouter.get("/:id", async (req, res) => {
 plansRouter.get("/", async (req, res) => {
   try {
     const plans = await Plan.query()
-    res.status(200).json({ plans })
+    const serializedPlans = await Promise.all( plans.map(async plan => {
+      return await PlanSerializer.getDetails(plan)
+    }) )
+    res.status(200).json({ plans: serializedPlans })
   } catch (errors) {
     res.status(500).json({ errors })
   }
@@ -30,7 +32,7 @@ plansRouter.post("/", async (req, res) => {
   const { user, body } = req
   try {
     const plan = await Plan.query().insert({...body, ownerUserId: user.id })
-    const signup = await Signup.query().insert({planId: plan.id, userId: user.id})
+    await Signup.query().insert({planId: plan.id, userId: user.id})
     return res.status(201)
   } catch (error) {
     if (error instanceof ValidationError) {
