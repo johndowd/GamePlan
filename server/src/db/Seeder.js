@@ -8,11 +8,11 @@ import SignupSeeder from "./seeders/SignupSeeder.js"
 class Seeder {
   static async seed() {
     // include individual seed commands here
-    console.log("Seeding plans")
-    await PlanSeeder.seed()
-
     console.log("Seeding users")
     await UserSeeder.seed()
+
+    console.log("Seeding plans")
+    await PlanSeeder.seed()
 
     console.log("Seeding signups")
     await SignupSeeder.seed()

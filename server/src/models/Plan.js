@@ -1,7 +1,7 @@
 const Model = require("./Model")
 
 class Plan extends Model {
-  
+
   static get tableName() {
     return "plans"
   }
@@ -35,8 +35,17 @@ class Plan extends Model {
           },
           to: "users.id"
         }
-      }
+      },
+      owner: { 
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: "plans.ownerUserId",
+          to: "users.id"
+        }
     }
+  }
+
   }
 }
 

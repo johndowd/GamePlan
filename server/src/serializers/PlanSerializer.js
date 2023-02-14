@@ -14,6 +14,7 @@ class PlanSerializer {
     serializedPlan.players = relatedUsers.map(user => { 
       return UserSerializer.getUsername(user)
     })
+    serializedPlan.owner = await plan.$relatedQuery("owner")
     return serializedPlan
   }
 }

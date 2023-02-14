@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import getCurrentUser from '../services/getCurrentUser';
 
 const PlanShowPage = (props) => {
-  const [plan, setPlan] = useState({})
+  const [plan, setPlan] = useState({ players: [], owner: {} })
   const [user, setUser] = useState({})
 
   const fetchPlan = async () => {
@@ -24,7 +24,7 @@ const PlanShowPage = (props) => {
 
   useEffect(() => {
     fetchPlan(),
-    fetchUser()
+      fetchUser()
   }, [])
 
   const handleClick = async (event) => {
@@ -32,7 +32,7 @@ const PlanShowPage = (props) => {
       const response = await fetch(`/api/v1/signups`, {
         method: "POST",
         headers: new Headers({
-          "Content-Type":"application/json"
+          "Content-Type": "application/json"
         }),
         body: JSON.stringify({ planId: plan.id, userId: user.id })
       })
@@ -42,7 +42,6 @@ const PlanShowPage = (props) => {
           throw new Error(body.error)
         }
       }
-      const body = await response.json()
       setPlan({
         ...plan,
         players: [...plan.players, user]
@@ -54,34 +53,33 @@ const PlanShowPage = (props) => {
 
   const isCurrentPlayer = () => {
     let isPlayer = false
-    if(plan.players){
-      plan.players.forEach(player => {
-        user.id==player.id ? isPlayer = true : null
-      })
-    }
+    plan.players.forEach(player => {
+      user.id == player.id ? isPlayer = true : null
+    })
     return isPlayer
   }
-    
+
   let playerList, playerListComponent
-  if (plan.players) {
+  const slotsLeft = plan.playerCount - plan.players.length
+  if (plan.players.length > 0) {
     playerList = plan.players.map(player => {
-      return <li key={player.id}>{player.username}</li>
+      return <li key={player.username}>{player.username}</li>
     })
     playerListComponent =
-        <ul>
-          {playerList}
-          {(plan.playerCount - plan.players.length) 
-          ? <li>{plan.playerCount - plan.players.length} spots left!</li> : ""}
-        </ul>
-    }
+      <ul>
+        {playerList}
+        {slotsLeft
+          ? <li>{slotsLeft} spot{slotsLeft ? "s" : ""} left!</li> : ""}
+      </ul>
+  }
 
-  let joinButton = "Need to be logged in to join games!"
-  if(user?.id){
-    if(isCurrentPlayer()){
+  let joinButton
+  if (user?.id) {
+    if (isCurrentPlayer()) {
       joinButton = <a className='button disabled'>Already joined this game</a>
-    }else if(plan?.players?.length > plan.playerCount){
+    } else if (plan.players.length >= plan.playerCount) {
       joinButton = <a className='button disabled warning'>Game is full</a>
-    }else {
+    } else {
       joinButton = <a className='button' onClick={handleClick}>Click to join this game</a>
     }
   }
@@ -90,7 +88,8 @@ const PlanShowPage = (props) => {
     <div className='plan-show'>
       <h2>{plan.name}</h2>
       <h4>Genre: {plan.genre}</h4>
-      <h4>Players:</h4>
+      <h4>Created By: {plan.owner.username}</h4>
+      <h4>Players: {plan.playerCount} Max</h4>
       {playerListComponent}
       {joinButton}
     </div>

@@ -14,6 +14,7 @@ exports.up = async (knex) => {
     table.integer("playerCount").notNullable()
     table.string("location").notNullable()
     table.string("date").notNullable()
+    table.integer("ownerUserId").notNullable().index().references("users.id")
     table.timestamp("createdAt").notNullable().defaultTo(knex.fn.now())
     table.timestamp("updatedAt").notNullable().defaultTo(knex.fn.now())
   })
