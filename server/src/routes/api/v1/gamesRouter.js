@@ -19,6 +19,15 @@ gamesRouter.post("/", async (req, res) => {
   }
 })
 
+gamesRouter.get("/", async (req, res) => {
+  try {
+    const games = await Game.query()
+    return res.status(200).json({ games })
+  } catch (error) {
+    return res.status(500).json({ errors: error })
+  }
+})
+
 gamesRouter.get("/trending", async (req, res) => {
   try {
     const games = await Game.getTrending()
