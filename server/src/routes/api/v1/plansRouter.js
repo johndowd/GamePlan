@@ -1,6 +1,6 @@
 import express from "express"
 import { ValidationError } from "objection"
-import { Plan, Signup } from "../../../models/index.js"
+import { Game, Plan, Signup } from "../../../models/index.js"
 import PlanSerializer from "../../../serializers/PlanSerializer.js"
 
 const plansRouter = new express.Router()
@@ -19,9 +19,9 @@ plansRouter.get("/:id", async (req, res) => {
 plansRouter.get("/", async (req, res) => {
   try {
     const plans = await Plan.query()
-    const serializedPlans = await Promise.all( plans.map(async plan => {
+    const serializedPlans = await Promise.all(plans.map(async plan => {
       return await PlanSerializer.getDetails(plan)
-    }) )
+    }))
     res.status(200).json({ plans: serializedPlans })
   } catch (errors) {
     res.status(500).json({ errors })
@@ -31,8 +31,8 @@ plansRouter.get("/", async (req, res) => {
 plansRouter.post("/", async (req, res) => {
   const { user, body } = req
   try {
-    const plan = await Plan.query().insert({...body, ownerUserId: user.id })
-    await Signup.query().insert({planId: plan.id, userId: user.id})
+    const plan = await Plan.query().insert({ ...body, ownerUserId: user.id })
+    await Signup.query().insert({ planId: plan.id, userId: user.id })
     return res.status(201).json({ plan })
   } catch (error) {
     if (error instanceof ValidationError) {
@@ -48,8 +48,8 @@ plansRouter.get("/search/:q", async (req, res) => {
     const plansData = await Plan.query()
     const plans = plansData.filter(plan => {
       return plan.name
-      .toLowerCase()
-      .includes(q.toLowerCase())
+        .toLowerCase()
+        .includes(q.toLowerCase())
     })
     const serializedPlans = await Promise.all(plans.map(plan => {
       return PlanSerializer.getDetails(plan)

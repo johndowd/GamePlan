@@ -6,7 +6,7 @@ const uniqueFunc = unique({
   identifiers: ["id"]
 })
 
-class Game extends uniqueFunc(Model) { 
+class Game extends uniqueFunc(Model) {
   static get tableName() {
     return "games"
   }
@@ -18,10 +18,9 @@ class Game extends uniqueFunc(Model) {
       properties: {
         name: { type: "string" },
         image_url: { type: "string" },
-        tags: { type: "string" },
         max_players: { type: ["string", "integer"] },
         description: { type: "string" },
-        BGAAPiId: { type: "string" }
+        BGAApiId: { type: "string" }
       }
     }
   }
@@ -44,6 +43,16 @@ class Game extends uniqueFunc(Model) {
     const allGames = await Game.query()
     const trendingGames = [allGames[0], allGames[1], allGames[2]]
     return trendingGames
+  }
+
+  static async search(query) {
+    const gamesData = await Game.query()
+    const games = gamesData.filter(game => {
+      return game.name
+        .toLowerCase()
+        .includes(query.toLowerCase())
+    })
+    return games
   }
 }
 

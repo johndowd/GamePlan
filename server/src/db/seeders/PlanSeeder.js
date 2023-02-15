@@ -1,5 +1,4 @@
 import { Game, Plan, User } from "../../models/index.js"
-import fetchGameFromBGAApi from "../../services/fetchGameFromBGAApi.js"
 
 class PlanSeeder {
   static async seed() {
@@ -11,10 +10,8 @@ class PlanSeeder {
     const wingspan = await Game.query().findOne({ name: "Wingspan" })
     const monopoly = await Game.query().findOne({ name: "Monopoly" })
     const stratego = await Game.query().findOne({ name: "Stratego" })
-    const catan = await Game.query().findOne({ name: "Catan"})
+    const catan = await Game.query().findOne({ name: "Catan" })
     const carcassonne = await Game.query().findOne({ name: "Carcassonne" })
-
-
 
     const planData = [
       {

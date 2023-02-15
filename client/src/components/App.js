@@ -12,6 +12,7 @@ import NewPlan from "./NewPlanForm";
 import LandingPage from "./LandingPage";
 import PlanShowPage from "./PlanShowPage";
 import SearchPage from "./layout/SearchPage";
+import NewGameForm from "./NewGameForm";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -19,7 +20,7 @@ const App = (props) => {
     try {
       const user = await getCurrentUser()
       setCurrentUser(user)
-    } catch(err) {
+    } catch (err) {
       setCurrentUser(null)
     }
   }
@@ -32,19 +33,21 @@ const App = (props) => {
     <Router>
       <TopBar user={currentUser} />
       <Switch>
-        <Route exact path="/">
-          <LandingPage />
-        </Route>
+        <Route exact path="/"
+          render={props => <LandingPage {...props} user={currentUser} />} />
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
         <Route exact path="/plans" component={PlanList} />
-        <Route exact path="/plans/new" component={NewPlan} />
-        <Route exact path="/plans/:id" 
-          render={(props) => <PlanShowPage {...props} user={currentUser}/>}/>
-        <Route path="/search/:q" component={SearchPage} /> 
+        <Route exact path="/plans/new"
+          render={props => <NewPlan {...props} user={currentUser} />} />
+        <Route exact path="/plans/:id"
+          render={(props) => <PlanShowPage {...props} user={currentUser} />} />
+        <Route exact path="/games/new"
+          render={(props) => <NewGameForm {...props} user={currentUser} />} />
+        <Route path="/search/:q" component={SearchPage} />
       </Switch>
     </Router>
-  );
-};
+  )
+}
 
 export default hot(App);

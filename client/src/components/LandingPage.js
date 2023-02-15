@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-
-const LandingPage = () => {
+const LandingPage = ({ user }) => {
   const [games, setGames] = useState([])
 
   const getTrendingGames = async () => {
@@ -21,17 +20,24 @@ const LandingPage = () => {
 
   const gameBoxes = games.map(game => {
     return (
-    <div key={game.id} className='content-cell'>
-    <img className='' src={game.image_url} />
-    <div>
-      <h3>{game.name}</h3>
-      <a>Click here to play!</a>
-    </div>
-  </div>
+      <div key={game.id} className='content-cell'>
+        <img className='' src={game.image_url} />
+        <div>
+          <h3>{game.name}</h3>
+          <a>Click here to play!</a>
+        </div>
+      </div>
     )
   })
 
-
+  let authLinks
+  if (user) {
+    authLinks =
+      <div>
+        <h5><Link to="/plans/new">Add a new game plan!</Link></h5>
+        <h5><Link to="/games/new">Add a new game</Link></h5>
+      </div>
+  }
 
   return (
     <div className='landing-page'>
@@ -41,7 +47,7 @@ const LandingPage = () => {
       </div>
       <div className=''>
         <h5 className='columns'><Link to="/plans">View current game nights being planned!</Link></h5>
-        <h5 className='columns'><Link to="/plans/new">Add a new game night!</Link></h5>
+        {authLinks}
       </div>
     </div>
   )
