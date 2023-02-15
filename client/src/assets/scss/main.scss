@@ -50,9 +50,6 @@ body {
   border: $color-secondary solid;
 }
 
-.add-plan-form {
-  width: 50%;
-}
 
 .landing-page h3{
   text-align: center;
@@ -91,4 +88,39 @@ body {
   background-color: white;
   margin-bottom: 1rem;
   max-width: 24rem;
+}
+
+.game-tile {
+  text-align: center;
+  width: 10rem;
+  border: black solid .2rem;
+  border-radius: 8px;
+  background-color: white;
+  margin: 1rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.game-tile img {
+  display: block;
+  margin: auto;
+  width: 8rem;
+  height: 6rem;
+}
+
+.game-tile-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.select {
+  display:block;
+  margin: auto;
+  margin-bottom: 8px;
+  width: 75%;
+}
+
+li {
+  list-style: none;
 }

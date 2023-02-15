@@ -13,7 +13,7 @@ class Plan extends Model {
       properties: {
         name: { type: "string" },
         gameId: { type: ["string", "integer"] },
-        playerCount: { type: ["integer","string"] },
+        ownerUserId: { type: ["string", "integer"] },
         location: { type: "string" },
         date: { type: "string" }
       }
@@ -35,7 +35,7 @@ class Plan extends Model {
           to: "users.id"
         }
       },
-      owner: { 
+      owner: {
         relation: Model.BelongsToOneRelation,
         modelClass: User,
         join: {

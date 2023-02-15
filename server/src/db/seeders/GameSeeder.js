@@ -1,22 +1,21 @@
-import got from "got"
 import { Game } from "../../models/index.js"
-import fetchGameFromBGAApi from "../../services/fetchGameFromBGAApi.js"
+import fetchGameFromApi from "../../services/apiClientBGA/fetchGameFromApi.js"
 
 class GameSeeder {
   static async seed() {
 
-    const apiGameData1 = await fetchGameFromBGAApi("root")
-    const apiGameData2 = await fetchGameFromBGAApi("wingspan")
-    const apiGameData3 = await fetchGameFromBGAApi("monopoly")
-    const apiGameData4 = await fetchGameFromBGAApi("Stratego")
-    const apiGameData5 = await fetchGameFromBGAApi("catan")
-    const apiGameData6 = await fetchGameFromBGAApi("carcassonne")
+    const apiGameData1 = await fetchGameFromApi("root")
+    const apiGameData2 = await fetchGameFromApi("wingspan")
+    const apiGameData3 = await fetchGameFromApi("monopoly")
+    const apiGameData4 = await fetchGameFromApi("Stratego")
+    const apiGameData5 = await fetchGameFromApi("catan")
+    const apiGameData6 = await fetchGameFromApi("carcassonne")
 
     const gameData = [apiGameData1, apiGameData2, apiGameData3, apiGameData4, apiGameData5, apiGameData6]
 
-    for( const game of gameData){
+    for (const game of gameData) {
       const currentGame = await Game.query().findOne({ name: game.name })
-      if(!currentGame){
+      if (!currentGame) {
         await Game.query().insert(game)
       }
     }

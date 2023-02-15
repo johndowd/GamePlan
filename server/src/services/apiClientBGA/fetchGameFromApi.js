@@ -1,6 +1,6 @@
 import got from "got"
 
-const fetchGameFromBGAApi = async gameName => {
+const fetchGameFromApi = async gameName => {
   try {
     const body = await got(`https://api.boardgameatlas.com/api/search?name=${gameName}&client_id=VVQr9UTrTD`).json()
     const gameData = body.games[0]
@@ -9,7 +9,7 @@ const fetchGameFromBGAApi = async gameName => {
       image_url: gameData.image_url,
       max_players: gameData.max_players,
       description: gameData.description_preview,
-      BGAAPiId: gameData.id
+      BGAApiId: gameData.id
     }
     return game
   } catch (error) {
@@ -17,4 +17,4 @@ const fetchGameFromBGAApi = async gameName => {
   }
 }
 
-export default fetchGameFromBGAApi
+export default fetchGameFromApi
