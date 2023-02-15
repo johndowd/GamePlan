@@ -2,5 +2,6 @@
 const User = require("./User.js")
 const Plan = require("./Plan.js")
 const Signup = require("./Signup.js")
+const Game = require("./Game")
 
-module.exports = { User, Plan, Signup }
+module.exports = { User, Plan, Signup, Game }
