@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const PlanShowPage = (props) => {
-  const [plan, setPlan] = useState({ players: [], owner: {} })
+  const [plan, setPlan] = useState({ players: [], game: {}, owner: {} })
   const { user } = props
 
   const fetchPlan = async () => {
@@ -49,7 +49,8 @@ const PlanShowPage = (props) => {
 
 
   const playerLength = plan.players.length
-  const slotsLeft = plan.playerCount - playerLength
+  const gameSlots = plan.game.max_players
+  const slotsLeft = gameSlots - playerLength
 
   let playerList
   playerList = plan.players.map(player => {
@@ -57,7 +58,9 @@ const PlanShowPage = (props) => {
   })
 
   let spotsLeftComponent
-  if(slotsLeft < 2) {
+  if(slotsLeft == 0) {
+    spotsLeftComponent = ""  
+  }else if(slotsLeft < 2) {
     spotsLeftComponent = <li> {`${slotsLeft} spot left!`} </li>
   }else {
     spotsLeftComponent = <li> {`${slotsLeft} spots left!`} </li>
@@ -76,7 +79,7 @@ const PlanShowPage = (props) => {
   if (user?.id) {
     if (isCurrentPlayer()) {
       joinButton = <a className='button disabled'>Already joined this game</a>
-    } else if (plan.players.length >= plan.playerCount) {
+    } else if (playerLength >= gameSlots) {
       joinButton = <a className='button disabled warning'>Game is full</a>
     } else {
       joinButton = <a className='button' onClick={handleClick}>Click to join this game</a>
@@ -86,12 +89,13 @@ const PlanShowPage = (props) => {
   return (
     <div className='plan-show'>
       <h2>{plan.name}</h2>
-      <h4>Genre: {plan.genre}</h4>
       <h4>Created By: {plan.owner.username}</h4>
+      <h4>Game: {plan.game.name}</h4>
       <h4>Date: {plan.date}</h4>
-      <h4>Players: {plan.playerCount} Max</h4>
+      <h4>Max # of Players: {plan.game.max_players}</h4>
       {playerListComponent}
       {joinButton}
+      <img src={plan.game.image_url} />
     </div>
   )
 }

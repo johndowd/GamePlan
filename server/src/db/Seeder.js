@@ -3,11 +3,15 @@ import { connection } from "../boot.js"
 import PlanSeeder from "./seeders/PlanSeeder.js"
 import UserSeeder from "./seeders/UserSeeder.js"
 import SignupSeeder from "./seeders/SignupSeeder.js"
+import GameSeeder from "./seeders/GameSeeder.js"
 
 
 class Seeder {
   static async seed() {
     // include individual seed commands here
+    console.log("Seeding games")
+    await GameSeeder.seed()
+
     console.log("Seeding users")
     await UserSeeder.seed()
 

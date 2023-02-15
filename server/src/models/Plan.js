@@ -9,11 +9,10 @@ class Plan extends Model {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["name", "game", "genre", "location", "date"],
+      required: ["name", "gameId", "location", "date"],
       properties: {
         name: { type: "string" },
-        game: { type: "string" },
-        genre: { type: "string" },
+        gameId: { type: ["string", "integer"] },
         playerCount: { type: ["integer","string"] },
         location: { type: "string" },
         date: { type: "string" }
@@ -22,7 +21,7 @@ class Plan extends Model {
   }
 
   static get relationMappings() {
-    const { User } = require("./index.js")
+    const { User, Game } = require("./index.js")
     return {
       users: {
         relation: Model.ManyToManyRelation,
@@ -43,9 +42,16 @@ class Plan extends Model {
           from: "plans.ownerUserId",
           to: "users.id"
         }
+      },
+      game: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Game,
+        join: {
+          from: "plans.gameId",
+          to: "games.id"
+        }
+      }
     }
-  }
-
   }
 }
 
