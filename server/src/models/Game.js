@@ -39,6 +39,12 @@ class Game extends uniqueFunc(Model) {
       }
     }
   }
+
+  static async getTrending() {
+    const allGames = await Game.query()
+    const trendingGames = [allGames[0], allGames[1], allGames[2]]
+    return trendingGames
+  }
 }
 
 module.exports = Game
