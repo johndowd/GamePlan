@@ -13,6 +13,7 @@ import LandingPage from "./LandingPage";
 import PlanShowPage from "./PlanShowPage";
 import SearchPage from "./layout/SearchPage";
 import NewGameForm from "./NewGameForm";
+import EditPlanPage from "./EditPlanPage";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -41,9 +42,9 @@ const App = (props) => {
         <Route exact path="/plans/new"
           render={props => <NewPlan {...props} user={currentUser} />} />
         <Route exact path="/plans/:id"
-          render={(props) => <PlanShowPage {...props} user={currentUser} />} />
+          render={props => <PlanShowPage {...props} user={currentUser} />} />
         <Route exact path="/games/new"
-          render={(props) => <NewGameForm {...props} user={currentUser} />} />
+          render={props => <NewGameForm {...props} user={currentUser} />} />
         <Route path="/search/:q" component={SearchPage} />
       </Switch>
     </Router>
