@@ -5,6 +5,24 @@ import PlanSerializer from "../../../serializers/PlanSerializer.js"
 
 const plansRouter = new express.Router()
 
+plansRouter.get("/search/:q", async (req, res) => {
+  const { q } = req.params
+  try {
+    const plansData = await Plan.query()
+    const plans = plansData.filter(plan => {
+      return plan.name
+        .toLowerCase()
+        .includes(q.toLowerCase())
+    })
+    const serializedPlans = await Promise.all(plans.map(plan => {
+      return PlanSerializer.getDetails(plan)
+    }))
+    return res.status(200).json({ plans: serializedPlans })
+  } catch (error) {
+    return res.status(500)
+  }
+})
+
 plansRouter.get("/:id", async (req, res) => {
   const { id } = req.params
   try {
@@ -28,6 +46,21 @@ plansRouter.get("/", async (req, res) => {
   }
 })
 
+plansRouter.patch("/:id", async (req, res) => {
+  const { user, body, params } = req
+  const { id } = params
+  console.log(body);
+  try {
+    const planToUpdate = await Plan.query()
+      .findOne({ id, ownerUserId: user.id })
+      .patchAndFetchById(id, body)
+    const updatedPlan = await PlanSerializer.getDetails(planToUpdate)
+    return res.status(200).json({ plan: updatedPlan })
+  } catch (error) {
+    return res.status(500).json({ errors: error })
+  }
+})
+
 plansRouter.post("/", async (req, res) => {
   const { user, body } = req
   try {
@@ -42,21 +75,21 @@ plansRouter.post("/", async (req, res) => {
   }
 })
 
-plansRouter.get("/search/:q", async (req, res) => {
-  const { q } = req.params
+plansRouter.delete("/:id", async (req, res) => {
+  const { id } = req.params
+  const { user } = req
   try {
-    const plansData = await Plan.query()
-    const plans = plansData.filter(plan => {
-      return plan.name
-        .toLowerCase()
-        .includes(q.toLowerCase())
-    })
-    const serializedPlans = await Promise.all(plans.map(plan => {
-      return PlanSerializer.getDetails(plan)
-    }))
-    return res.status(200).json({ plans: serializedPlans })
+    const planToDelete = await Plan.query().findOne({ id, ownerUserId: user.id })
+    if (planToDelete) {
+      const deleted = await Signup.query().where("planId", id).delete()
+      console.log(planToDelete)
+      const success = await planToDelete.$query().delete()
+      res.status(201).json({ success })
+    } else {
+      throw new Error()
+    }
   } catch (error) {
-    return res.status(500)
+    res.status(500).json({ errors: error })
   }
 })
 

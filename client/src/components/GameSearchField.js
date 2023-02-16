@@ -36,7 +36,7 @@ const GameSearchField = ({ error, setSelectedGame }) => {
   }
 
   const gameTiles = games.map(game => {
-    return <GameTile key={game.id} game={game} setSelectedGame={setSelectedGame} />
+    return <GameTile key={game.name} game={game} setSelectedGame={setSelectedGame} />
   })
 
   let addButton

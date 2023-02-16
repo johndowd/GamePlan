@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
-const PlanShowPage = (props) => {
+import EditPlanPage from "./EditPlanPage"
+
+const PlanShowPage = ({ user, match }) => {
   const [plan, setPlan] = useState({ players: [], game: {}, owner: {} })
-  const { user } = props
+  const [edit, setEdit] = useState(false)
 
   const fetchPlan = async () => {
-    const { id } = props.match.params
+    const { id } = match.params
     try {
       const response = await fetch(`/api/v1/plans/${id}`)
       const body = await response.json()
@@ -43,26 +45,50 @@ const PlanShowPage = (props) => {
     }
   }
 
-  const isCurrentPlayer = () => {
-    return plan.players.find(player => player.id == user.id )
+  const handleLeave = async () => {
+    try {
+      const response = await fetch(`/api/v1/signups/${plan.id}`, {
+        method: "DELETE"
+      })
+      if (!response.ok) {
+        throw new Error(response.message)
+      }
+      setPlan({
+        ...plan,
+        players: plan.players.filter(player => {
+          return player.id !== user.id
+        })
+      })
+    } catch (error) {
+      console.error(error)
+    }
   }
 
+  const isCurrentPlayer = () => {
+    return plan.players.find(player => player.id == user.id)
+  }
+
+  const isAdmin = () => {
+    return user?.id == plan.owner.id
+  }
 
   const playerLength = plan.players.length
   const gameSlots = plan.game.max_players
   const slotsLeft = gameSlots - playerLength
 
+  const dropOutButton = <a className='button' onClick={handleLeave}>Leave Game</a>
+
   let playerList
   playerList = plan.players.map(player => {
-    return <li key={player.username}>{player.username}</li>
+    return <li key={player.id}>{player.username} {player.id == user?.id ? dropOutButton : ""}</li>
   })
 
   let spotsLeftComponent
-  if(slotsLeft == 0) {
-    spotsLeftComponent = ""  
-  }else if(slotsLeft < 2) {
+  if (slotsLeft == 0) {
+    spotsLeftComponent = ""
+  } else if (slotsLeft < 2) {
     spotsLeftComponent = <li> {`${slotsLeft} spot left!`} </li>
-  }else {
+  } else {
     spotsLeftComponent = <li> {`${slotsLeft} spots left!`} </li>
   }
 
@@ -72,7 +98,13 @@ const PlanShowPage = (props) => {
       <ul>
         {playerList}
         {spotsLeftComponent}
-    </ul>
+      </ul>
+  }
+
+  let adminComponent
+  if (isAdmin()) {
+    adminComponent =
+      <a className='button' onClick={e => setEdit(true)}>Edit </a>
   }
 
   let joinButton
@@ -86,16 +118,28 @@ const PlanShowPage = (props) => {
     }
   }
 
+  let showData
+  if (edit) {
+    showData = <EditPlanPage plan={plan} user={user} setPlan={setPlan} />
+  } else {
+    showData =
+      <div>
+        <h2>{plan.name}</h2>
+        <h4>Created By: {plan.owner.username}</h4>
+        <h4>Game: {plan.game.name}</h4>
+        <h4>Date: {plan.date}</h4>
+        <h4>Location: {plan.location}</h4>
+        <h4>Max # of Players: {plan.game.max_players}</h4>
+        <img src={plan.game.image_url} />
+        {adminComponent}
+        {playerListComponent}
+        {joinButton}
+      </div>
+  }
+
   return (
-    <div className='plan-show'>
-      <h2>{plan.name}</h2>
-      <h4>Created By: {plan.owner.username}</h4>
-      <h4>Game: {plan.game.name}</h4>
-      <h4>Date: {plan.date}</h4>
-      <h4>Max # of Players: {plan.game.max_players}</h4>
-      {playerListComponent}
-      {joinButton}
-      <img src={plan.game.image_url} />
+    <div className='plan-show-page'>
+      {showData}
     </div>
   )
 }
