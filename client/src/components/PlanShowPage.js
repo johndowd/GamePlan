@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import EditPlanPage from "./EditPlanPage"
+import translateDate from '../services/translateDate';
 
 const PlanShowPage = ({ user, match }) => {
   const [plan, setPlan] = useState({ players: [], game: {}, owner: {} })
@@ -78,7 +79,7 @@ const PlanShowPage = ({ user, match }) => {
 
   let playerList
   playerList = plan.players.map(player => {
-    return <li key={player.id} className={player.id == user.id ? "bolder" : "" }>{player.username}</li>
+    return <li key={player.id} className={player.id == user?.id ? "bolder" : ""}>{player.username}</li>
   })
 
   let spotsLeftComponent
@@ -116,6 +117,8 @@ const PlanShowPage = ({ user, match }) => {
     }
   }
 
+  const { tDay, tDate, tTime } = translateDate(plan.date)
+
   let showData
   if (edit) {
     showData = <EditPlanPage plan={plan} user={user} setPlan={setPlan} />
@@ -126,7 +129,7 @@ const PlanShowPage = ({ user, match }) => {
         <h4>Hosted By: {plan.owner.username}</h4>
         <img src={plan.game.image_url} />
         <div className='grid-container'>
-          <h4>Date: {plan.date}</h4>
+          <h4>{tDay}, {tDate}, {tTime} </h4>
           <h4>Location: {plan.location}</h4>
           {adminComponent}
           <h4> Attendees: </h4>
