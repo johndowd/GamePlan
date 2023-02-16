@@ -76,11 +76,9 @@ const PlanShowPage = ({ user, match }) => {
   const gameSlots = plan.game.max_players
   const slotsLeft = gameSlots - playerLength
 
-  const dropOutButton = <a className='button' onClick={handleLeave}>Leave Game</a>
-
   let playerList
   playerList = plan.players.map(player => {
-    return <li key={player.id}>{player.username} {player.id == user?.id ? dropOutButton : ""}</li>
+    return <li key={player.id} className={player.id == user.id ? "bolder" : "" }>{player.username}</li>
   })
 
   let spotsLeftComponent
@@ -110,7 +108,7 @@ const PlanShowPage = ({ user, match }) => {
   let joinButton
   if (user?.id) {
     if (isCurrentPlayer()) {
-      joinButton = <a className='button disabled'>Already joined this game</a>
+      joinButton = <a className='button' onClick={handleLeave}>Leave Game</a>
     } else if (playerLength >= gameSlots) {
       joinButton = <a className='button disabled warning'>Game is full</a>
     } else {
