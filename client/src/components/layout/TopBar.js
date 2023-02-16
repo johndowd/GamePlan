@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import SignOutButton from "../authentication/SignOutButton";
-import SearchBar from "./SearchBar";
 
 const TopBar = ({ user }) => {
   const unauthenticatedListItems = [
@@ -25,11 +24,7 @@ const TopBar = ({ user }) => {
     <div className="top-bar">
       <div className="top-bar-left">
         <ul className="menu">
-          <li className="menu-text">GamePlan</li>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <SearchBar />
+          <li className="menu-text"><Link to="/">GamePlan</Link></li>
         </ul>
       </div>
       <div className="top-bar-right">

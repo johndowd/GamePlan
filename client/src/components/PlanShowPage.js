@@ -76,11 +76,9 @@ const PlanShowPage = ({ user, match }) => {
   const gameSlots = plan.game.max_players
   const slotsLeft = gameSlots - playerLength
 
-  const dropOutButton = <a className='button' onClick={handleLeave}>Leave Game</a>
-
   let playerList
   playerList = plan.players.map(player => {
-    return <li key={player.id}>{player.username} {player.id == user?.id ? dropOutButton : ""}</li>
+    return <li key={player.id} className={player.id == user.id ? "bolder" : "" }>{player.username}</li>
   })
 
   let spotsLeftComponent
@@ -110,7 +108,7 @@ const PlanShowPage = ({ user, match }) => {
   let joinButton
   if (user?.id) {
     if (isCurrentPlayer()) {
-      joinButton = <a className='button disabled'>Already joined this game</a>
+      joinButton = <a className='button' onClick={handleLeave}>Leave Game</a>
     } else if (playerLength >= gameSlots) {
       joinButton = <a className='button disabled warning'>Game is full</a>
     } else {
@@ -125,15 +123,16 @@ const PlanShowPage = ({ user, match }) => {
     showData =
       <div>
         <h2>{plan.name}</h2>
-        <h4>Created By: {plan.owner.username}</h4>
-        <h4>Game: {plan.game.name}</h4>
-        <h4>Date: {plan.date}</h4>
-        <h4>Location: {plan.location}</h4>
-        <h4>Max # of Players: {plan.game.max_players}</h4>
+        <h4>Hosted By: {plan.owner.username}</h4>
         <img src={plan.game.image_url} />
-        {adminComponent}
-        {playerListComponent}
-        {joinButton}
+        <div className='grid-container'>
+          <h4>Date: {plan.date}</h4>
+          <h4>Location: {plan.location}</h4>
+          {adminComponent}
+          <h4> Attendees: </h4>
+          {playerListComponent}
+          {joinButton}
+        </div>
       </div>
   }
 

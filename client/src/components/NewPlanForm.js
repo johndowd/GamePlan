@@ -83,7 +83,7 @@ const NewPlan = ({ user }) => {
   let form
   if (user) {
     form =
-      <form className='add-plan-form' onSubmit={handleSubmit}>
+      <form className='grid-container' onSubmit={handleSubmit}>
         <h4>Add a new plan</h4>
         <label>Name:
           <input

@@ -102,7 +102,7 @@ const EditPlanForm = ({ user, plan, setPlan }) => {
   let form
   if (user.id == plan.owner.id) {
     form =
-      <form className='add-plan-form' onSubmit={handleSubmit}>
+      <form className='grid-container' onSubmit={handleSubmit}>
         <h4>Edit plan ({plan.id}):</h4>
         <label>Name:
           <input

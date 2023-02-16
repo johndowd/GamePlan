@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+
+import Footer from './layout/Footer';
 
 const LandingPage = ({ user }) => {
   const [games, setGames] = useState([])
@@ -18,18 +22,6 @@ const LandingPage = ({ user }) => {
     getTrendingGames()
   }, [])
 
-  const gameBoxes = games.map(game => {
-    return (
-      <div key={game.id} className='content-cell'>
-        <img className='' src={game.image_url} />
-        <div>
-          <h3>{game.name}</h3>
-          <a>Click here to play!</a>
-        </div>
-      </div>
-    )
-  })
-
   let authLinks
   if (user) {
     authLinks =
@@ -40,16 +32,37 @@ const LandingPage = ({ user }) => {
   }
 
   return (
-    <div className='landing-page'>
-      <h3 className='banner-header'>Trending Games Today:</h3>
-      <div className='banner-content row'>
-        {gameBoxes}
+    <>
+      <div className='landing-page'>
+        <div className='circle'></div>
+        <div className='banner-content'>
+          <div className='banner-content-text'>
+            <h2>Find your new board game crew</h2>
+            <p>A platform designed to help people organize and coordinate game nights with friends and family.</p>
+          </div>
+          <div>
+            <img src='https://gameplan-jd-development.s3.us-east-2.amazonaws.com/ai-image-1.webp'></img>
+          </div>
+        </div>
+        <div className='bottom-row'>
+          <Link className='bottom-row-cell' to="/plans">
+            <img className='' src="https://gameplan-jd-development.s3.us-east-2.amazonaws.com/ai-image-2.webp" />
+
+            <h5>Make new friends <FontAwesomeIcon icon={faArrowRight} /></h5>
+          </Link>
+          <Link className='bottom-row-cell' to="/games">
+
+            <img className='' src="https://gameplan-jd-development.s3.us-east-2.amazonaws.com/ai-image-3.webp" />
+            <h5>Discover new games <FontAwesomeIcon icon={faArrowRight} /> </h5>
+          </Link>
+          <Link className='bottom-row-cell' to="/places">
+            <img className='' src="https://gameplan-jd-development.s3.us-east-2.amazonaws.com/ai-image-4.webp" />
+            <h5>Connect at a local business <FontAwesomeIcon icon={faArrowRight} /></h5>
+          </Link>
+        </div>
       </div>
-      <div className=''>
-        <h5 className='columns'><Link to="/plans">View current game nights being planned!</Link></h5>
-        {authLinks}
-      </div>
-    </div>
+      <Footer />
+    </>
   )
 }
 
