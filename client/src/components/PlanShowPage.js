@@ -125,15 +125,16 @@ const PlanShowPage = ({ user, match }) => {
     showData =
       <div>
         <h2>{plan.name}</h2>
-        <h4>Created By: {plan.owner.username}</h4>
-        <h4>Game: {plan.game.name}</h4>
-        <h4>Date: {plan.date}</h4>
-        <h4>Location: {plan.location}</h4>
-        <h4>Max # of Players: {plan.game.max_players}</h4>
+        <h4>Hosted By: {plan.owner.username}</h4>
         <img src={plan.game.image_url} />
-        {adminComponent}
-        {playerListComponent}
-        {joinButton}
+        <div className='grid-container'>
+          <h4>Date: {plan.date}</h4>
+          <h4>Location: {plan.location}</h4>
+          {adminComponent}
+          <h4> Attendees: </h4>
+          {playerListComponent}
+          {joinButton}
+        </div>
       </div>
   }
 

@@ -96,7 +96,7 @@ const NewGameForm = ({ user }) => {
   }
 
   return (
-    <div>
+    <div className='grid-container'>
       <h2>Add new game</h2>
       {form}
     </div>

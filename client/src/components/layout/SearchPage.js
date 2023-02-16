@@ -26,7 +26,7 @@ const SearchPage = (props) => {
   })
 
   return (
-    <div>
+    <div className='grid-container'>
       <h3>Plans</h3>
       <ul>
         {planTiles}

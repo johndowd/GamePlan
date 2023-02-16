@@ -4,11 +4,10 @@
 @include foundation-everything;
 // place global css here
 
-$color-primary: #0081a7;
-$color-secondary: #00afb9;
-$color-light: #fdfcdc;
-$color-cream: #fed9b7;
-$color-redish: #f07167;
+$color-primary: #6DC3C8;
+$color-secondary: #F17721;
+$color-lightgrey: #D3CED2;
+$color-darkgrey: #C7C4C0;
 
 *,
 *::before,
@@ -21,13 +20,38 @@ $color-redish: #f07167;
   tab-size: 4;
 }
 body {
-  background-color: $color-light;
+  background-color: white;
   font-family: Roboto;
+}
+
+.footer {
+  background-color: $color-darkgrey;
+  position: absolute;
+  bottom: 0;
+  width:100%;
+  border: 1rem $color-darkgrey solid;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu-text ul {
+  font-size: medium;
+  font-weight: 900;
+}
+
+a {
+  color: inherit;
+}
+
+a:hover {
+  color: inherit;
+  opacity: 60%;
 }
 
 .plan-show-page img{
   width: 16rem;
   height: 12rem;
+  margin-bottom: 1rem;
 }
 
 .search-bar {
@@ -36,27 +60,58 @@ body {
 }
 
 .top-bar{
-  opacity: 80%;
-  background-color: $color-redish;
-  padding: .5rem
+  opacity: 100%;
+  background-color: white;
 }
 
 .top-bar ul {
-  background-color: $color-redish;
+  font-weight: bolder;
+  background-color: white;
 }
 
 .plan-list {
   list-style: none;
 }
 
-.plan-tile {
-  margin: 1rem;
-  border-radius: 8px;
-  border: $color-secondary solid;
+.plan-list-header {
+  display: flex;
+  justify-content: space-between;
 }
 
+.plan-tile {
+  display: flex;
+  flex-direction: row;
+  margin: .5rem;
+  border: solid 65%;
+}
 
-.landing-page h3{
+.plan-tile img {
+  height: 7rem;
+  width: 7rem;
+  margin-right: 2rem;
+}
+
+.landing-page, .plan-list, .plan-show-page, .add-game-form{
+  position: relative;
+  top: 10%;
+  left: 10%;
+  right: 10%;
+  align-content: center;
+  width: 80%;
+}
+
+.grid-container {
+  width: 80%;
+  background-color: $color-lightgrey;
+  border-radius: 12px;
+  padding-bottom: 1rem;
+}
+
+.plan-show-page-content {
+  background-color: $color-lightgrey;
+}
+
+.landing-page h4{
   text-align: center;
   padding: 1rem;
   font-weight: 400;
@@ -64,7 +119,7 @@ body {
 
 .button {
   border: none;
-  background-color: $color-secondary;
+  background-color: $color-primary;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -72,27 +127,57 @@ body {
   border-radius: 8px;
 }
 
+.button:hover {
+  background-color: $color-primary;
+  opacity: 60%;
+}
+
+.button:focus {
+  background-color: $color-primary;
+  opacity: 60%;
+}
+
 .banner-content {
   margin: 1rem auto;
-  text-align: center;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
   justify-content: space-evenly;
-  background-color: $color-light;
+  background-color: white;
   padding: 1rem;
+  margin-bottom: 3rem;
+}
+
+.banner-content-text {
+  margin: 2rem;
 }
 
 .banner-content img {
+  opacity: 75%;
   width: 24rem;
   height: 16rem;
 }
 
-.content-cell {
+.bottom-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.bottom-row img {
+  height: 12rem;
+  border-radius: 10px;
+}
+
+.bottom-row-cell {
+  flex-direction: column;
+  display: flex;
   border-radius: 8px;
-  border: solid black .2rem;
   background-color: white;
   margin-bottom: 1rem;
-  max-width: 24rem;
+  width: 18rem;
+  margin-left: .5rem;
+  margin-right: .5rem;
 }
 
 .game-tile {
@@ -116,6 +201,7 @@ body {
 
 .game-tile-container {
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 
@@ -128,4 +214,22 @@ body {
 
 li {
   list-style: none;
+}
+
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  width: 50%
+}
+.search-bar input {
+  align-items: right ;
+  width: 50%
+}
+.search-bar a {
+  margin: 0 auto;
+}
+
+.search-bar .button{
+  display: inline-block;
+  margin-left: 0;
 }

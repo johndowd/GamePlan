@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import PlanTile from './PlanTile';
 
-const PlanList = (props) => {
-  const [plans, setPlans]= useState([])
+const PlanList = ({ user }) => {
+  const [plans, setPlans] = useState([])
 
   const fetchPlans = async () => {
     try {
@@ -26,10 +26,22 @@ const PlanList = (props) => {
     return <PlanTile key={plan.id} plan={plan} />
   })
 
-  return ( 
-    <ul className='plan-list'>
-      {planTiles}
-    </ul>
+  let addNewPlanLink
+  if (user) {
+    addNewPlanLink = <Link to="/plans/new">Host a new event</Link>
+  }
+
+  return (
+    <div className='plan-list'>
+      <div className='plan-list-header'>
+        <h3>Events</h3>
+        {addNewPlanLink}
+      </div>
+      <ul >
+        {planTiles}
+      </ul>
+    </div>
+
   )
 }
 
