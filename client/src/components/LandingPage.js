@@ -48,16 +48,16 @@ const LandingPage = ({ user }) => {
           <Link className='bottom-row-cell' to="/plans">
             <img className='' src="https://gameplan-jd-development.s3.us-east-2.amazonaws.com/ai-image-2.webp" />
 
-            <h5>Make new friends <FontAwesomeIcon icon={faArrowRight} /></h5>
+            <h5>Find a game night <FontAwesomeIcon icon={faArrowRight} /></h5>
           </Link>
           <Link className='bottom-row-cell' to="/games">
 
             <img className='' src="https://gameplan-jd-development.s3.us-east-2.amazonaws.com/ai-image-3.webp" />
             <h5>Discover new games <FontAwesomeIcon icon={faArrowRight} /> </h5>
           </Link>
-          <Link className='bottom-row-cell' to="/places">
+          <Link className='bottom-row-cell' to="/users">
             <img className='' src="https://gameplan-jd-development.s3.us-east-2.amazonaws.com/ai-image-4.webp" />
-            <h5>Connect at a local business <FontAwesomeIcon icon={faArrowRight} /></h5>
+            <h5>Make new friends <FontAwesomeIcon icon={faArrowRight} /></h5>
           </Link>
         </div>
       </div>

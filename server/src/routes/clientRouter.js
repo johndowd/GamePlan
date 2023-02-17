@@ -12,7 +12,10 @@ const clientRoutes = [
   "/plans/:id",
   "/search/:q",
   "/games",
-  "/games/new"
+  "/games/new",
+  "/users/:username",
+  "/users",
+
 ]
 router.get(clientRoutes, (req, res) => {
   res.sendFile(getClientIndexPath());
