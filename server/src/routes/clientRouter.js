@@ -11,6 +11,7 @@ const clientRoutes = [
   "/plans/new",
   "/plans/:id",
   "/search/:q",
+  "/games",
   "/games/new"
 ]
 router.get(clientRoutes, (req, res) => {

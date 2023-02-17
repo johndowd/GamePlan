@@ -13,6 +13,7 @@ import LandingPage from "./LandingPage";
 import PlanShowPage from "./PlanShowPage";
 import SearchPage from "./layout/SearchPage";
 import NewGameForm from "./NewGameForm";
+import GamesList from "./GamesList";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -46,6 +47,7 @@ const App = (props) => {
         <Route exact path="/games/new"
           render={props => <NewGameForm {...props} user={currentUser} />} />
         <Route path="/search/:q" component={SearchPage} />
+        <Route path="/games" component={GamesList} />
       </Switch>
     </Router>
   )

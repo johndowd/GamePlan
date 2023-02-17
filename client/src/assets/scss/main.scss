@@ -34,11 +34,6 @@ body {
   justify-content: space-between;
 }
 
-.menu-text ul {
-  font-size: medium;
-  font-weight: 900;
-}
-
 a {
   color: inherit;
 }
@@ -64,8 +59,12 @@ a:hover {
 }
 
 .top-bar{
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-top: 1rem;
   opacity: 100%;
   background-color: white;
+  margin-bottom: 2rem;
 }
 
 .top-bar ul {
@@ -95,13 +94,17 @@ a:hover {
   margin-right: 2rem;
 }
 
-.landing-page, .plan-list, .plan-show-page, .add-game-form{
+.landing-page, .plan-list, .plan-show-page, .add-game-form, .games-list-page{
   position: relative;
   top: 10%;
   left: 10%;
   right: 10%;
   align-content: center;
   width: 80%;
+}
+
+.games-list-page h4 {
+  text-align: center;
 }
 
 .grid-container {
@@ -182,6 +185,13 @@ a:hover {
   width: 18rem;
   margin-left: .5rem;
   margin-right: .5rem;
+}
+
+.game-list {
+  padding-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .game-tile {
