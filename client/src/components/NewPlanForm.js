@@ -80,48 +80,56 @@ const NewPlan = ({ user }) => {
     gameSelectComponent = <SelectedGameTile game={game} setGame={setGame} />
   }
 
-  let form
-  if (user) {
-    form =
-      <form className='grid-container' onSubmit={handleSubmit}>
-        <h4>Add a new plan</h4>
-        <label>Name:
-          <input
-            type="text"
-            id="name"
-            value={formData.name}
-            onChange={handleChange}
-          />
-          <FormError error={errors.Name} />
-        </label>
-        <label>Date:
-          <input
-            type="text"
-            id="date"
-            value={formData.date}
-            onChange={handleChange}
-          />
-        </label>
-        <FormError error={errors.Date} />
-        <label>Location:
-          <input
-            type="text"
-            id="location"
-            value={formData.location}
-            onChange={handleChange}
-          />
-          <FormError error={errors.Location} />
-        </label>
-        {gameSelectComponent}
-        {errors["Game Id"] ? <FormError error={errors["Game Id"]} /> : ""}
-        <button className='button'>Submit</button>
-      </form>
+  if (!user) {
+    return <p>Not authorized</p>
   }
 
   return (
-    <div>
-      {form}
-    </div>
+    <form className='grid-container' onSubmit={handleSubmit}>
+      <h4>Add a new plan</h4>
+      <label>Name:
+        <input
+          type="text"
+          id="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+        <FormError error={errors.Name} />
+      </label>
+      <label>Date:
+        <div className='date-select'>
+          <label>Date:
+            <input
+              type='date'
+              id='date'
+              value={formData.date}
+              onChange={handleChange}
+            />
+          </label>
+          <label>Time:
+            <input
+              type="time"
+              id="time"
+              value={formData.time}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+      </label>
+      <FormError error={errors.Date} />
+      <label>Location:
+        <input
+          type="text"
+          id="location"
+          value={formData.location}
+          onChange={handleChange}
+        />
+        <FormError error={errors.Location} />
+      </label>
+      {gameSelectComponent}
+      {errors["Game Id"] ? <FormError error={errors["Game Id"]} /> : ""}
+      <button className='button'>Submit</button>
+    </form>
   )
 }
 

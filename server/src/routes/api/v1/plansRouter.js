@@ -1,7 +1,8 @@
 import express from "express"
 import { ValidationError } from "objection"
-import { Game, Plan, Signup } from "../../../models/index.js"
+import { Plan, Signup } from "../../../models/index.js"
 import PlanSerializer from "../../../serializers/PlanSerializer.js"
+import setReqDate from "../../../services/setReqDate.js"
 
 const plansRouter = new express.Router()
 
@@ -49,7 +50,7 @@ plansRouter.get("/", async (req, res) => {
 plansRouter.patch("/:id", async (req, res) => {
   const { user, body, params } = req
   const { id } = params
-  console.log(body);
+  setReqDate(body)
   try {
     const planToUpdate = await Plan.query()
       .findOne({ id, ownerUserId: user.id })
@@ -63,6 +64,7 @@ plansRouter.patch("/:id", async (req, res) => {
 
 plansRouter.post("/", async (req, res) => {
   const { user, body } = req
+  setReqDate(body)
   try {
     const plan = await Plan.query().insert({ ...body, ownerUserId: user.id })
     await Signup.query().insert({ planId: plan.id, userId: user.id })
@@ -82,7 +84,6 @@ plansRouter.delete("/:id", async (req, res) => {
     const planToDelete = await Plan.query().findOne({ id, ownerUserId: user.id })
     if (planToDelete) {
       const deleted = await Signup.query().where("planId", id).delete()
-      console.log(planToDelete)
       const success = await planToDelete.$query().delete()
       res.status(201).json({ success })
     } else {

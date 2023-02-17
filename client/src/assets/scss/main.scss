@@ -237,3 +237,14 @@ li {
   display: inline-block;
   margin-left: 0;
 }
+
+.date-select {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.edit-delete {
+  display:flex;
+  justify-content: space-between;
+}

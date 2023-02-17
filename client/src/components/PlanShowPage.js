@@ -118,30 +118,23 @@ const PlanShowPage = ({ user, match }) => {
   }
 
   const { tDay, tDate, tTime } = translateDate(plan.date)
-
-  let showData
   if (edit) {
-    showData = <EditPlanPage plan={plan} user={user} setPlan={setPlan} />
-  } else {
-    showData =
-      <div>
-        <h2>{plan.name}</h2>
-        <h4>Hosted By: {plan.owner.username}</h4>
-        <img src={plan.game.image_url} />
-        <div className='grid-container'>
-          <h4>{tDay}, {tDate}, {tTime} </h4>
-          <h4>Location: {plan.location}</h4>
-          {adminComponent}
-          <h4> Attendees: </h4>
-          {playerListComponent}
-          {joinButton}
-        </div>
-      </div>
+    return <EditPlanPage plan={plan} user={user} setPlan={setPlan} />
   }
 
   return (
     <div className='plan-show-page'>
-      {showData}
+      <h2>{plan.name}</h2>
+      <h4>Hosted By: {plan.owner.username}</h4>
+      <img src={plan.game.image_url} />
+      <div className='grid-container'>
+        <h4>{tDay}, {tDate}, {tTime} </h4>
+        <h4>Location: {plan.location}</h4>
+        {adminComponent}
+        <h4> Attendees: </h4>
+        {playerListComponent}
+        {joinButton}
+      </div>
     </div>
   )
 }
