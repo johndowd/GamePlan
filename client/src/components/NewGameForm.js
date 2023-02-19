@@ -30,7 +30,6 @@ const NewGameForm = ({ user }) => {
           for (const err in body.errors) {
             newErrors[err] = body.errors[err][0].message
           }
-          console.log(newErrors)
           setErrors(newErrors)
         }
         throw new Error(response.message)

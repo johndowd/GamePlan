@@ -34,7 +34,6 @@ const EditPlanForm = ({ user, plan, setPlan }) => {
         body: JSON.stringify({ ...formData, gameId: game.id })
       })
       const body = await response.json()
-      console.log(body);
       setFormSuccess(true)
     } catch (error) {
       console.error(`error in fetch: ${error}`)

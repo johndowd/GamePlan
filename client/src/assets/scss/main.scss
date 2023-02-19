@@ -72,6 +72,11 @@ a:hover {
   background-color: white;
 }
 
+.top-bar li {
+  display: flex;
+  flex-direction: row;
+}
+
 .plan-list {
   list-style: none;
 }
@@ -85,6 +90,7 @@ a:hover {
   display: flex;
   flex-direction: row;
   margin: .5rem;
+  width: auto;
   border: solid 65%;
 }
 
@@ -94,13 +100,51 @@ a:hover {
   margin-right: 2rem;
 }
 
-.landing-page, .plan-list, .plan-show-page, .add-game-form, .games-list-page, .user-profile{
-  position: relative;
-  top: 10%;
-  left: 10%;
-  right: 10%;
-  align-content: center;
+.plan-tile-top-row img {
+  border-radius: 50%;
+  margin: .5rem;
+  height: 2.5rem;
+  width: 2.5rem;
+  display: inline;
+}
+
+.landing-page, .plan-list, .plan-show-page, .add-game-form, .games-list-page, .user-profile, .grid-container{
+  margin: auto;
   width: 80%;
+}
+
+.user-tile {
+  display: flex;
+  flex-direction: row;
+  margin: .5rem;
+  border: solid 65%;
+}
+
+.user-tile img {
+  border-radius: 50%;
+  height: 7rem;
+  width: 7rem;
+  margin-right: 2rem;
+}
+
+.user-tile-small {
+  display: flex;
+  flex-direction: row;
+  margin: .5rem;
+  border: solid 65%;
+}
+
+.user-tile-small img {
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  margin-right: 1rem;
+}
+
+.user-profile img {
+  border-radius: 50%;
+  height: 5rem;
+  width: 5rem;
 }
 
 .games-list-page h4 {
@@ -108,7 +152,6 @@ a:hover {
 }
 
 .grid-container {
-  width: 80%;
   background-color: $color-lightgrey;
   border-radius: 12px;
   padding-bottom: 1rem;

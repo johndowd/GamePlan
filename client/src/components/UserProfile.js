@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
 import EditUserProfile from './EditUserProfile';
 import PlanTile from './PlanTile';
 
 const UserProfile = ({ match, user }) => {
   const [userProfile, setUserProfile] = useState({
     username: "",
-    plansCreated: []
+    plansCreated: [],
+    image_url: ""
   })
   const [edit, setEdit] = useState(false)
 
@@ -40,7 +40,7 @@ const UserProfile = ({ match, user }) => {
 
   return (
     <div className='user-profile'>
-      <h3>{userProfile.username}'s Profile</h3>
+      <h3>{userProfile.username} <img src={userProfile.image_url} /></h3>
       {editButton}
       <h4>Games Created: </h4>
       <ul>

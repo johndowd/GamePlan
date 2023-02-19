@@ -1,12 +1,12 @@
 import PlanSerializer from "./PlanSerializer.js"
 
 class UserSerializer {
-  static getUsername(user) {
-    return { id: user.id, username: user.username }
+  static getSummary({ id, username, image_url }) {
+    return { id, username, image_url }
   }
 
   static async getDetails(user) {
-    const allowedAttributes = ["id", "username",]
+    const allowedAttributes = ["id", "username", "image_url"]
     const serializedUser = {}
 
     for (const attr of allowedAttributes) {
@@ -18,7 +18,6 @@ class UserSerializer {
       return await PlanSerializer.getDetails(plan)
     }))
     serializedUser.plansCreated = serializedPlans
-
     return serializedUser
   }
 }
