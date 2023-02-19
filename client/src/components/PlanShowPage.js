@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import EditPlanPage from "./EditPlanPage"
 import translateDate from '../services/translateDate';
+import UserTile from './UserTile';
 
 const PlanShowPage = ({ user, match }) => {
   const [plan, setPlan] = useState({ players: [], game: {}, owner: {} })
@@ -125,7 +126,7 @@ const PlanShowPage = ({ user, match }) => {
   return (
     <div className='plan-show-page'>
       <h2>{plan.name}</h2>
-      <h4>Hosted By: {plan.owner.username}</h4>
+      <h4>Hosted By: <UserTile user={plan.owner} /></h4>
       <img src={plan.game.image_url} />
       <div className='grid-container'>
         <h4>{tDay}, {tDate}, {tTime} </h4>

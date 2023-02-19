@@ -5,8 +5,6 @@ const SearchPage = (props) => {
   const [plans, setPlans] = useState([])
   const { q } = props.match.params
 
-  console.log(plans)
-
   const fetchPlans = async () => {
     try {
       const response = await fetch(`/api/v1/plans/search/${q}`)

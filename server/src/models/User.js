@@ -28,9 +28,10 @@ class User extends uniqueFunc(Model) {
       type: "object",
       required: ["email", "username"],
       properties: {
-        email: { type: "string", pattern: "^\\S+@\\S+\\.\\S+$"},
+        email: { type: "string", pattern: "^\\S+@\\S+\\.\\S+$" },
         cryptedPassword: { type: "string" },
-        username: { type: "string" }
+        username: { type: "string" },
+        image_url: { type: "string" }
       },
     }
   }
