@@ -8,7 +8,7 @@
 exports.up = async (knex) => {
   return knex.schema.createTable("comments", table => {
     table.bigIncrements("id")
-    table.string("text")
+    table.string("text", 2048)
     table.bigInteger("userId")
       .unsigned()
       .notNullable()
