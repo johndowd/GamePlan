@@ -3,5 +3,6 @@ const User = require("./User.js")
 const Plan = require("./Plan.js")
 const Signup = require("./Signup.js")
 const Game = require("./Game")
+const Comment = require("./Comment")
 
-module.exports = { User, Plan, Signup, Game }
+module.exports = { User, Plan, Signup, Game, Comment }

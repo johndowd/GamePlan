@@ -19,10 +19,44 @@ $color-darkgrey: #C7C4C0;
   -moz-tab-size: 4;
   tab-size: 4;
 }
+
 body {
   background-color: white;
   font-family: Roboto;
 }
+
+.top-bar {
+  width: 100% auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  opacity: 100%;
+  background-color: white;
+  text-align: center;
+}
+
+.top-bar ul {
+  font-weight: bolder;
+  background-color: white;
+}
+
+.top-bar li {
+  display: flex;
+  flex-direction: row;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 400px;
+  max-width: 1200px;
+  text-align: center;
+}
+
 
 .footer {
   background-color: $color-darkgrey;
@@ -56,25 +90,6 @@ a:hover {
 .search-bar {
   height: 38px;
   width: 20%;
-}
-
-.top-bar{
-  padding-left: 1rem;
-  padding-right: 1rem;
-  margin-top: 1rem;
-  opacity: 100%;
-  background-color: white;
-  margin-bottom: 2rem;
-}
-
-.top-bar ul {
-  font-weight: bolder;
-  background-color: white;
-}
-
-.top-bar li {
-  display: flex;
-  flex-direction: row;
 }
 
 .plan-list {
@@ -114,7 +129,6 @@ a:hover {
 }
 
 .user-tile {
-  display: flex;
   flex-direction: row;
   margin: .5rem;
   border: solid 65%;
@@ -127,11 +141,21 @@ a:hover {
   margin-right: 2rem;
 }
 
-.user-tile-small {
-  display: flex;
+ul {
+  list-style: none;
+}
+
+.user-tile-small{
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: table-cell;
   flex-direction: row;
-  margin: .5rem;
   border: solid 65%;
+  width: auto;
+}
+
+.user-tile-small a{ 
+  padding: 0 auto;
 }
 
 .user-tile-small img {
@@ -269,10 +293,6 @@ a:hover {
   width: 75%;
 }
 
-li {
-  list-style: none;
-}
-
 .search-bar {
   display: flex;
   flex-direction: row;
@@ -300,4 +320,9 @@ li {
 .edit-delete {
   display:flex;
   justify-content: space-between;
+}
+
+.menu a, .menu .button {
+  padding: .6em .6em;
+  height: 32px;
 }
