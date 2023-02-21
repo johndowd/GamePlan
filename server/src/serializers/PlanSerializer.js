@@ -1,3 +1,4 @@
+import CommentSerializer from "./CommentSerializer.js"
 import UserSerializer from "./UserSerializer.js"
 
 class PlanSerializer {
@@ -18,6 +19,11 @@ class PlanSerializer {
     })
 
     serializedPlan.owner = await plan.$relatedQuery("owner")
+
+    const relatedComments = await plan.$relatedQuery("comments")
+    serializedPlan.comments = await Promise.all(relatedComments.map(comment => {
+      return CommentSerializer.getDetails(comment)
+    }))
 
     return serializedPlan
   }

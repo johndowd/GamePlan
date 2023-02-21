@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react';
 import EditPlanPage from "./EditPlanPage"
 import translateDate from '../services/translateDate';
 import UserTile from './UserTile';
+import CommentList from './CommentList';
 
 const PlanShowPage = ({ user, match }) => {
-  const [plan, setPlan] = useState({ players: [], game: {}, owner: {} })
+  const [plan, setPlan] = useState({ players: [], game: {}, owner: {}, comments: [] })
   const [edit, setEdit] = useState(false)
 
   const fetchPlan = async () => {
@@ -80,7 +81,7 @@ const PlanShowPage = ({ user, match }) => {
 
   let playerList
   playerList = plan.players.map(player => {
-    return <li key={player.id} className={player.id == user?.id ? "bolder" : ""}>{player.username}</li>
+    return <UserTile user={player} small={true} />
   })
 
   let spotsLeftComponent
@@ -136,6 +137,8 @@ const PlanShowPage = ({ user, match }) => {
         {playerListComponent}
         {joinButton}
       </div>
+      <CommentList comments={plan.comments} plan={plan} setPlan={setPlan} user={user} />
+
     </div>
   )
 }

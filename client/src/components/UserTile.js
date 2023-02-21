@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 
-const UserTile = ({ user }) => {
-
+const UserTile = (props) => {
+  const { user } = props
   return (
     <Link to={`/users/${user.username}`}>
-      <li className='user-tile callout'>
+      <div className={`${props?.small ? "user-tile-small" : "user-tile"}`}>
         {user.image_url ? <img src={user.image_url} /> : ""}
         {user.username}
-      </li>
+      </div>
     </Link>
   );
 }

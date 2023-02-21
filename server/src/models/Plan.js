@@ -21,7 +21,7 @@ class Plan extends Model {
   }
 
   static get relationMappings() {
-    const { User, Game } = require("./index.js")
+    const { User, Game, Comment } = require("./index.js")
     return {
       users: {
         relation: Model.ManyToManyRelation,
@@ -49,6 +49,14 @@ class Plan extends Model {
         join: {
           from: "plans.gameId",
           to: "games.id"
+        }
+      },
+      comments: {
+        relation: Model.HasManyRelation,
+        modelClass: Comment,
+        join: {
+          from: "plans.id",
+          to: "comments.planId"
         }
       }
     }

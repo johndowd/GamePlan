@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import SignOutButton from "../authentication/SignOutButton";
+import UserTile from "../UserTile";
 
 const TopBar = ({ user }) => {
   const unauthenticatedListItems = [
@@ -15,8 +16,10 @@ const TopBar = ({ user }) => {
   ]
 
   const authenticatedListItems = [
+    <li>
+      <UserTile user={user} small={true} />
+    </li>,
     <li key="sign-out">
-      <Link to={`/users/${user?.username}`}>{user?.username}</Link>
       <SignOutButton />
     </li>,
   ]
@@ -24,7 +27,7 @@ const TopBar = ({ user }) => {
   return (
     <div className="top-bar">
       <ul className="menu">
-        <li className="menu"><Link to="/">GamePlan</Link></li>
+        <li className=""><Link to="/">GamePlan</Link></li>
       </ul>
       <ul className="menu">{user ? authenticatedListItems : unauthenticatedListItems}
       </ul>
