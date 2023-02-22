@@ -13,7 +13,6 @@ const SimpleMap = (props) => {
     const geocoder = new google.maps.Geocoder()
     const results = await geocoder.geocode({ address: props.address })
     const { lat, lng } = results.results[0].geometry.location
-    console.log(lat(), lng());
     const map = new google.maps.Map(document.getElementById("map"), {
       center: { lat: lat(), lng: lng() },
       zoom: 12,
