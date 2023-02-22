@@ -12,6 +12,7 @@ const clientRoutes = [
   "/plans/:id",
   "/search/:q",
   "/games",
+  "/games/:id/plans",
   "/games/new",
   "/users/:username",
   "/users",

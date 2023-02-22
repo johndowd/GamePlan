@@ -16,6 +16,7 @@ import NewGameForm from "./NewGameForm";
 import GamesList from "./GamesList";
 import UserProfile from "./UserProfile";
 import UserList from "./UserList";
+import SelectedPlanList from "./SelectedPlanList";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -47,10 +48,12 @@ const App = (props) => {
             render={props => <NewPlan {...props} user={currentUser} />} />
           <Route exact path="/plans/:id"
             render={props => <PlanShowPage {...props} user={currentUser} />} />
+          <Route exact path="/games" component={GamesList} />
           <Route exact path="/games/new"
             render={props => <NewGameForm {...props} user={currentUser} />} />
+          <Route exact path="/games/:id/plans"
+            render={props => <SelectedPlanList {...props} user={currentUser} />} />
           <Route exact path="/search/:q" component={SearchPage} />
-          <Route exact path="/games" component={GamesList} />
           <Route exact path="/users" component={UserList} />
           <Route exact path="/users/:username"
             render={props => <UserProfile {...props} user={currentUser} />} />
