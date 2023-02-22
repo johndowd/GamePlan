@@ -5,15 +5,21 @@ import GameSearchField from './GameSearchField';
 import SelectedGameTile from './SelectedGameTile';
 import FormError from './layout/FormError';
 import PlanShowPage from './PlanShowPage';
+import GoogleMap from './GoogleMap';
 
 const EditPlanForm = ({ user, plan, setPlan }) => {
   const [formSuccess, setFormSuccess] = useState(false)
   const [deleteSuccess, setDeleteSuccess] = useState(false)
   const [errors, setErrors] = useState({})
   const [game, setGame] = useState(plan.game)
+  const [showMap, setShowMap] = useState(false)
+
   const [formData, setFormData] = useState({
     name: plan.name,
-    location: plan.location
+    date: plan.date,
+    time: plan.date,
+    location: plan.location,
+    address: plan.address
   })
 
   const handleChange = (event) => {
@@ -98,9 +104,47 @@ const EditPlanForm = ({ user, plan, setPlan }) => {
       render={props => <PlanShowPage {...props} user={user} />} />
   }
 
-  let form
   if (user.id !== plan.owner.id) {
     return <p>Not authorized</p>
+  }
+
+  let mapComponent = ""
+  if (showMap) {
+    mapComponent =
+      <div className='cell'>
+        <GoogleMap
+          setFormData={setFormData}
+          formData={formData}
+          showMap={showMap}
+          setShowMap={setShowMap}
+        />
+      </div>
+  } else {
+    mapComponent =
+      <div className='cell'>
+        <label>Location Name:
+          <input
+            type="text"
+            id="location"
+            value={formData.location}
+            onChange={handleChange}
+          />
+          <FormError error={errors.Location} />
+        </label>
+        <label>Address:
+          <input
+            type="text"
+            id="address"
+            value={formData.address}
+            onChange={handleChange}
+          />
+          <FormError error={errors.Location} />
+        </label>
+        <button className='button' onClick={event => {
+          event.preventDefault()
+          setShowMap(!showMap)
+        }}>Search maps</button>
+      </div>
   }
 
   return (
@@ -136,13 +180,8 @@ const EditPlanForm = ({ user, plan, setPlan }) => {
         </div>
       </label>
       <FormError error={errors.Date} />
-      <label>Location:
-        <input
-          type="text"
-          id="location"
-          value={formData.location}
-          onChange={handleChange}
-        />
+      <label>Location Name:
+        {mapComponent}
         <FormError error={errors.Location} />
       </label>
       {gameSelectComponent}

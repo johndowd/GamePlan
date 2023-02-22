@@ -4,6 +4,7 @@ import translateServerErrors from '../services/translateServerErrors'
 import FormError from './layout/FormError';
 import GameSearchField from './GameSearchField';
 import SelectedGameTile from './SelectedGameTile';
+import GoogleMap from "./GoogleMap"
 
 
 const NewPlan = ({ user }) => {
@@ -11,6 +12,7 @@ const NewPlan = ({ user }) => {
   const [formData, setFormData] = useState({})
   const [errors, setErrors] = useState({})
   const [game, setGame] = useState({})
+  const [showMap, setShowMap] = useState(false)
 
   const handleChange = (event) => {
     setFormData({
@@ -84,6 +86,45 @@ const NewPlan = ({ user }) => {
     return <p>Not authorized</p>
   }
 
+  let mapComponent = ""
+  if (showMap) {
+    mapComponent =
+      <div className='cell'>
+        <GoogleMap
+          setFormData={setFormData}
+          formData={formData}
+          showMap={showMap}
+          setShowMap={setShowMap}
+        />
+      </div>
+  } else {
+    mapComponent =
+      <div className='cell'>
+        <label>Location Name:
+          <input
+            type="text"
+            id="location"
+            value={formData.location}
+            onChange={handleChange}
+          />
+          <FormError error={errors.Location} />
+        </label>
+        <label>Address:
+          <input
+            type="text"
+            id="address"
+            value={formData.address}
+            onChange={handleChange}
+          />
+          <FormError error={errors.Location} />
+        </label>
+        <button className='button' onClick={event => {
+          event.preventDefault()
+          setShowMap(!showMap)
+        }}>Search maps</button>
+      </div>
+  }
+
   return (
     <form className='grid-container' onSubmit={handleSubmit}>
       <h4>Add a new plan</h4>
@@ -117,15 +158,10 @@ const NewPlan = ({ user }) => {
         </div>
       </label>
       <FormError error={errors.Date} />
-      <label>Location:
-        <input
-          type="text"
-          id="location"
-          value={formData.location}
-          onChange={handleChange}
-        />
-        <FormError error={errors.Location} />
-      </label>
+      <div className='grid-x'>
+        {mapComponent}
+
+      </div>
       {gameSelectComponent}
       {errors["Game Id"] ? <FormError error={errors["Game Id"]} /> : ""}
       <button className='button'>Submit</button>

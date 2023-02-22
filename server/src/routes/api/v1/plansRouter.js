@@ -50,7 +50,11 @@ plansRouter.get("/", async (req, res) => {
 plansRouter.patch("/:id", async (req, res) => {
   const { user, body, params } = req
   const { id } = params
-  setReqDate(body)
+  if (body?.date) {
+    setReqDate(body)
+  }
+  console.log(body)
+
   try {
     const planToUpdate = await Plan.query()
       .findOne({ id, ownerUserId: user.id })
@@ -64,7 +68,9 @@ plansRouter.patch("/:id", async (req, res) => {
 
 plansRouter.post("/", async (req, res) => {
   const { user, body } = req
-  setReqDate(body)
+  if (body?.date) {
+    setReqDate(body)
+  }
   try {
     const plan = await Plan.query().insert({ ...body, ownerUserId: user.id })
     await Signup.query().insert({ planId: plan.id, userId: user.id })

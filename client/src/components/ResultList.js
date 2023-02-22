@@ -9,7 +9,7 @@ const ResultList = (props) => {
       event.preventDefault()
       setSelected(result)
       props.setFormData({
-        ...FormData,
+        ...props.formData,
         location: result.name,
         address: result.formatted_address
       })
