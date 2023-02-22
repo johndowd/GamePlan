@@ -53,8 +53,6 @@ plansRouter.patch("/:id", async (req, res) => {
   if (body?.date) {
     setReqDate(body)
   }
-  console.log(body)
-
   try {
     const planToUpdate = await Plan.query()
       .findOne({ id, ownerUserId: user.id })
