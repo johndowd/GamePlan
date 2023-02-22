@@ -79,6 +79,7 @@ a {
 a:hover {
   color: inherit;
   opacity: 60%;
+  transition: .5s ease-out;
 }
 
 .plan-show-page img{
@@ -204,6 +205,7 @@ ul {
 .button:hover {
   background-color: $color-primary;
   opacity: 60%;
+  transition: .6s ease;
 }
 
 .button:focus {
