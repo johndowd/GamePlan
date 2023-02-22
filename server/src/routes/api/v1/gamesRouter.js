@@ -1,6 +1,7 @@
 import express from "express"
 import { ValidationError } from "objection"
 import { Game } from "../../../models/index.js"
+import PlanSerializer from "../../../serializers/PlanSerializer.js"
 import searchApi from "../../../services/apiClientBGA/searchApi.js"
 
 const gamesRouter = new express.Router()
@@ -28,14 +29,20 @@ gamesRouter.get("/", async (req, res) => {
   }
 })
 
-gamesRouter.get("/trending", async (req, res) => {
+gamesRouter.get("/:gameId/plans", async (req, res) => {
+  const { gameId } = req.params
   try {
-    const games = await Game.getTrending()
-    return res.status(200).json({ games })
+    const game = await Game.query().findOne({ id: gameId })
+    const plans = await game.$relatedQuery('plans')
+    const serializedPlans = await Promise.all(plans.map(async plan => {
+      return await PlanSerializer.getDetails(plan)
+    }))
+    return res.status(200).json({ plans: serializedPlans })
   } catch (error) {
     return res.status(500).json({ errors: error })
   }
 })
+
 
 gamesRouter.get("/search/:query", async (req, res) => {
   const { query } = req.params

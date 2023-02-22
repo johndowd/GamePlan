@@ -21,7 +21,6 @@ const MapSearch = (props) => {
           onChange={handleChange}
         />
       </label>
-
       <button className="button" onClick={handleSearch}>Search</button>
     </>
   )

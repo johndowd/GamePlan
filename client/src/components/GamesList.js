@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
 import GameTile from './GameTile';
+import SimpleGameTile from './SimpleGameTile';
 
-const GamesList = () => {
+const GamesList = (props) => {
   const [games, setGames] = useState([])
 
   const fetchGames = async () => {
     try {
-      const response = await fetch("/api/v1/games")
+      const response = await fetch(`/api/v1/games`)
       const body = await response.json()
       setGames(body.games)
     } catch (error) {
@@ -20,7 +20,7 @@ const GamesList = () => {
   }, [])
 
   const gameTiles = games.map(game => {
-    return <Link key={game.id} to={`/games/${game.id}`}><GameTile game={game} /></Link>
+    return <SimpleGameTile key={game.id} game={game} />
   })
 
   return (

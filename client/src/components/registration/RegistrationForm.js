@@ -74,7 +74,6 @@ const RegistrationForm = () => {
         if (!response.ok) {
           const body = await response.json()
           const newErrors = translateServerErrors(body.errors)
-          console.log(newErrors);
           setErrors(newErrors)
         }
         const userData = await response.json();
