@@ -1,26 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect, Route } from 'react-router-dom';
+import { format } from 'date-fns'
 
 import GameSearchField from './GameSearchField';
 import SelectedGameTile from './SelectedGameTile';
 import FormError from './layout/FormError';
 import PlanShowPage from './PlanShowPage';
 import GoogleMap from './GoogleMap';
+import ErrorList from './layout/ErrorList';
+import translateServerErrors from '../services/translateServerErrors';
 
 const EditPlanForm = ({ user, plan, setPlan }) => {
   const [formSuccess, setFormSuccess] = useState(false)
   const [deleteSuccess, setDeleteSuccess] = useState(false)
   const [errors, setErrors] = useState({})
-  const [game, setGame] = useState(plan.game)
+  const [game, setGame] = useState({})
   const [showMap, setShowMap] = useState(false)
 
-  const [formData, setFormData] = useState({
-    name: plan.name,
-    date: plan.date,
-    time: plan.date,
-    location: plan.location,
-    address: plan.address
-  })
+  const [formData, setFormData] = useState({})
+
+  useEffect(() => {
+    const dateObject = new Date(plan.date)
+    const formattedDate = format(dateObject, 'yyyy-MM-dd')
+    const formattedTime = format(dateObject, 'HH:mm')
+    setFormData({
+      name: plan.name,
+      date: formattedDate,
+      time: formattedTime,
+      location: plan.location,
+      address: plan.address,
+      gameId: plan.game.id
+    })
+
+    setGame(plan.game)
+  }, [])
 
   const handleChange = (event) => {
     setFormData({
@@ -39,8 +52,14 @@ const EditPlanForm = ({ user, plan, setPlan }) => {
         }),
         body: JSON.stringify({ ...formData, gameId: game.id })
       })
-      const body = await response.json()
-      setFormSuccess(true)
+      if (!response.ok) {
+        const body = await response.json()
+        const newErrors = translateServerErrors(body.errors)
+        return setErrors(newErrors)
+      } else {
+        const body = await response.json()
+        setFormSuccess(true)
+      }
     } catch (error) {
       console.error(`error in fetch: ${error}`)
     }
@@ -83,6 +102,7 @@ const EditPlanForm = ({ user, plan, setPlan }) => {
 
   const setSelectedGame = (game) => {
     setGame(game)
+    setFormData({ ...formData, gameId: game.id })
     if (!game.id) {
       addSelectedGame(game)
     }
@@ -129,7 +149,6 @@ const EditPlanForm = ({ user, plan, setPlan }) => {
             value={formData.location}
             onChange={handleChange}
           />
-          <FormError error={errors.Location} />
         </label>
         <label>Address:
           <input
@@ -138,7 +157,6 @@ const EditPlanForm = ({ user, plan, setPlan }) => {
             value={formData.address}
             onChange={handleChange}
           />
-          <FormError error={errors.Location} />
         </label>
         <button className='button' onClick={event => {
           event.preventDefault()
@@ -157,7 +175,6 @@ const EditPlanForm = ({ user, plan, setPlan }) => {
           value={formData.name}
           onChange={handleChange}
         />
-        <FormError error={errors.Name} />
       </label>
       <label>Date:
         <div className='date-select'>
@@ -179,8 +196,7 @@ const EditPlanForm = ({ user, plan, setPlan }) => {
           </label>
         </div>
       </label>
-      <FormError error={errors.Date} />
-      <label>Location Name:
+      <label>
         {mapComponent}
         <FormError error={errors.Location} />
       </label>

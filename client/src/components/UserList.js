@@ -20,7 +20,7 @@ const UserList = () => {
   }, [])
 
   const userTiles = users.map(user => {
-    return <UserTile user={user} />
+    return <UserTile user={user} key={user.id} />
   })
 
   return (

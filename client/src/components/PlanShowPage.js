@@ -82,7 +82,7 @@ const PlanShowPage = ({ user, match }) => {
 
   let playerList
   playerList = plan.players.map(player => {
-    return <UserTile user={player} small={true} />
+    return <UserTile key={player.id} user={player} small={true} />
   })
 
   let spotsLeftComponent
