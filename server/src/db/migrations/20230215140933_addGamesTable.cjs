@@ -11,7 +11,7 @@ exports.up = async (knex) => {
     table.string("name").notNullable().unique()
     table.string("image_url")
     table.integer("max_players").notNullable()
-    table.string("description", 2048)
+    table.string("description", 5000)
     table.string("BGAApiId")
     table.timestamp("createdAt").notNullable().defaultTo(knex.fn.now())
     table.timestamp("updatedAt").notNullable().defaultTo(knex.fn.now())
