@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import FormError from './layout/FormError';
 import UserTile from './UserTile';
 
 const CommentForm = ({ setPlan, plan, user }) => {
 
   const [comment, setComment] = useState({ text: "" })
+  const [error, setError] = useState({})
 
   const handleChange = event => {
     setComment({ text: event.currentTarget.value })
@@ -11,6 +13,9 @@ const CommentForm = ({ setPlan, plan, user }) => {
 
   const handleSubmit = async event => {
     event.preventDefault()
+    if (comment.trim() == "") {
+      return setError({ text: "Must not be empty" })
+    }
     try {
       const response = await fetch(`/api/v1/comments/${plan.id}`, {
         method: 'POST',
@@ -44,6 +49,7 @@ const CommentForm = ({ setPlan, plan, user }) => {
           value={comment.text}
           onChange={handleChange}
         ></input>
+        <FormError error={error.text} />
         <button className='button'>Submit</button>
       </form>
     </>

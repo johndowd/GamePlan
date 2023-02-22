@@ -61,7 +61,6 @@ const LandingPage = ({ user }) => {
           </Link>
         </div>
       </div>
-      <Footer />
     </>
   )
 }
