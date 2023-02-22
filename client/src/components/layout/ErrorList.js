@@ -8,10 +8,11 @@ const ErrorList = props => {
       index++
       return (
         <li key={index}>
-          {field} {props.errors[field]}
+          {field} {props.errors[field][0].message}
         </li>
       )
     })
+
     return (
       <div className="callout alert">
         <ul>{listItems}</ul>

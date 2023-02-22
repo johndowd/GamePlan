@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import FormError from "../layout/FormError";
 import config from "../../config";
+import ErrorList from "../layout/ErrorList";
 
 const RegistrationForm = () => {
   const [userPayload, setUserPayload] = useState({
@@ -36,7 +37,7 @@ const RegistrationForm = () => {
     if (username.trim() == "") {
       newErrors = {
         ...newErrors,
-        password: "is required",
+        username: "is required",
       };
     }
 
@@ -70,9 +71,9 @@ const RegistrationForm = () => {
           }),
         });
         if (!response.ok) {
-          const errorMessage = `${response.status} (${response.statusText})`;
-          const error = new Error(errorMessage);
-          throw error;
+          const body = await response.json()
+          const newErrors = body.errors
+          setErrors(newErrors)
         }
         const userData = await response.json();
         setShouldRedirect(true);
@@ -97,11 +98,11 @@ const RegistrationForm = () => {
     <div className="grid-container">
       <h1>Register</h1>
       <form onSubmit={onSubmit}>
+        <ErrorList errors={errors} />
         <div>
           <label>
             Email
             <input type="text" name="email" value={userPayload.email} onChange={onInputChange} />
-            <FormError error={errors.email} />
           </label>
         </div>
         <div>
@@ -113,7 +114,6 @@ const RegistrationForm = () => {
               value={userPayload.username}
               onChange={onInputChange}
             />
-            <FormError error={errors.username} />
           </label>
         </div>
         <div>
@@ -125,7 +125,6 @@ const RegistrationForm = () => {
               value={userPayload.password}
               onChange={onInputChange}
             />
-            <FormError error={errors.password} />
           </label>
         </div>
         <div>
@@ -137,7 +136,6 @@ const RegistrationForm = () => {
               value={userPayload.passwordConfirmation}
               onChange={onInputChange}
             />
-            <FormError error={errors.passwordConfirmation} />
           </label>
         </div>
         <div>
