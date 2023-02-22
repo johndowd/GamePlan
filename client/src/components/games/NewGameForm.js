@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import FormError from './layout/FormError';
+import FormError from '../layout/FormError';
 
 const NewGameForm = ({ user }) => {
   const [formData, setFormData] = useState({})

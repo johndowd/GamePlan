@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
 import EditPlanPage from "./EditPlanPage"
-import translateDate from '../services/translateDate';
-import UserTile from './UserTile';
+import translateDate from '../../services/translateDate';
+import UserTile from '../users/UserTile';
 import CommentList from './CommentList';
-import SimpleMap from './SimpleMap';
+import SimpleMap from '../Map/SimpleMap';
 
 const PlanShowPage = ({ user, match }) => {
   const [plan, setPlan] = useState({ players: [], game: {}, owner: {}, comments: [] })

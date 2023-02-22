@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import GameTile from './GameTile';
 import SimpleGameTile from './SimpleGameTile';
 
 const GamesList = (props) => {

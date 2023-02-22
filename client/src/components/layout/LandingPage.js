@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
-import Footer from './layout/Footer';
 
 const LandingPage = ({ user }) => {
   const [games, setGames] = useState([])

@@ -13,5 +13,4 @@ const SimpleGameTile = ({ game }) => {
   )
 }
 
-
 export default SimpleGameTile

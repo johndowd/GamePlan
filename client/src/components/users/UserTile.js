@@ -10,7 +10,7 @@ const UserTile = (props) => {
         {user.username}
       </div>
     </Link>
-  );
+  )
 }
 
 export default UserTile;

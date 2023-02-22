@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import EditUserProfile from './EditUserProfile';
-import PlanTile from './PlanTile';
+import PlanTile from '../plans/PlanTile';
 
 const UserProfile = ({ match, user }) => {
   const [userProfile, setUserProfile] = useState({

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import translateDate from '../services/translateDate';
+import translateDate from '../../services/translateDate';
 
 const PlanTile = ({ plan }) => {
   const { id, name, game, date, location, players, owner, } = plan
