@@ -5,6 +5,6 @@ const FormError = ({ error = "" }) => {
     return <span className="form-error is-visible">{error}</span>;
   }
   return null;
-};
+}
 
 export default FormError;
