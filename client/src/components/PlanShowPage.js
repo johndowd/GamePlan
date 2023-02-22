@@ -4,6 +4,7 @@ import EditPlanPage from "./EditPlanPage"
 import translateDate from '../services/translateDate';
 import UserTile from './UserTile';
 import CommentList from './CommentList';
+import SimpleMap from './SimpleMap';
 
 const PlanShowPage = ({ user, match }) => {
   const [plan, setPlan] = useState({ players: [], game: {}, owner: {}, comments: [] })
@@ -133,7 +134,7 @@ const PlanShowPage = ({ user, match }) => {
         <h3>{tDay}, {tDate}, {tTime} </h3>
         <h3>Location: {plan.location}</h3>
         <h5>{plan.address}</h5>
-
+        {plan?.address ? <SimpleMap address={plan.address} /> : ""}
         {adminComponent}
         <h4> Attendees: </h4>
         {playerListComponent}
