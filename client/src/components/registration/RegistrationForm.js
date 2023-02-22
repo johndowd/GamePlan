@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import FormError from "../layout/FormError";
 import config from "../../config";
 import ErrorList from "../layout/ErrorList";
+import translateServerErrors from "../../services/translateServerErrors";
 
 const RegistrationForm = () => {
   const [userPayload, setUserPayload] = useState({
@@ -72,7 +73,8 @@ const RegistrationForm = () => {
         });
         if (!response.ok) {
           const body = await response.json()
-          const newErrors = body.errors
+          const newErrors = translateServerErrors(body.errors)
+          console.log(newErrors);
           setErrors(newErrors)
         }
         const userData = await response.json();
@@ -104,6 +106,7 @@ const RegistrationForm = () => {
             Email
             <input type="text" name="email" value={userPayload.email} onChange={onInputChange} />
           </label>
+          {/* <FormError error={errors.email} /> */}
         </div>
         <div>
           <label>
@@ -114,6 +117,7 @@ const RegistrationForm = () => {
               value={userPayload.username}
               onChange={onInputChange}
             />
+            {/* <FormError error={errors.username} /> */}
           </label>
         </div>
         <div>
@@ -125,6 +129,7 @@ const RegistrationForm = () => {
               value={userPayload.password}
               onChange={onInputChange}
             />
+            {/* <FormError error={errors.password} /> */}
           </label>
         </div>
         <div>
@@ -136,6 +141,7 @@ const RegistrationForm = () => {
               value={userPayload.passwordConfirmation}
               onChange={onInputChange}
             />
+            {/* <FormError error={errors.passwordConfirmation} /> */}
           </label>
         </div>
         <div>
