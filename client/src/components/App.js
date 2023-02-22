@@ -4,19 +4,19 @@ import { hot } from "react-hot-loader/root";
 
 import getCurrentUser from "../services/getCurrentUser";
 import "../assets/scss/main.scss";
-import RegistrationForm from "./registration/RegistrationForm";
+import RegistrationForm from "./users/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
-import PlanList from "./PlanList";
-import NewPlan from "./NewPlanForm";
-import LandingPage from "./LandingPage";
-import PlanShowPage from "./PlanShowPage";
+import PlanList from "./plans/PlanList";
+import NewPlan from "./plans/NewPlanForm";
+import LandingPage from "./layout/LandingPage";
+import PlanShowPage from "./plans/PlanShowPage";
 import SearchPage from "./layout/SearchPage";
-import NewGameForm from "./NewGameForm";
-import GamesList from "./GamesList";
-import UserProfile from "./UserProfile";
-import UserList from "./UserList";
-import SelectedPlanList from "./SelectedPlanList";
+import NewGameForm from "./games/NewGameForm";
+import GamesList from "./games/GamesList";
+import UserProfile from "./users/UserProfile";
+import UserList from "./users/UserList";
+import SelectedPlanList from "./games/SelectedPlanList";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -45,6 +45,8 @@ const App = (props) => {
           <Route exact path="/plans"
             render={props => <PlanList {...props} user={currentUser} />} />
           <Route exact path="/plans/new"
+            render={props => <NewPlan {...props} user={currentUser} />} />
+          <Route exact path="/plans/new/:id"
             render={props => <NewPlan {...props} user={currentUser} />} />
           <Route exact path="/plans/:id"
             render={props => <PlanShowPage {...props} user={currentUser} />} />

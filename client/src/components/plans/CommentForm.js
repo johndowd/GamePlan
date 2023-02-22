@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import FormError from './layout/FormError';
-import UserTile from './UserTile';
+import FormError from '../layout/FormError';
+import UserTile from '../users/UserTile';
 
 const CommentForm = ({ setPlan, plan, user }) => {
 

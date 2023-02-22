@@ -1,19 +1,39 @@
-import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
-import translateServerErrors from '../services/translateServerErrors'
-import FormError from './layout/FormError';
-import GameSearchField from './GameSearchField';
-import SelectedGameTile from './SelectedGameTile';
-import GoogleMap from "./GoogleMap"
-import ErrorList from './layout/ErrorList';
+import React, { useEffect, useState } from 'react';
+import { Redirect, Route } from 'react-router-dom';
+import { format } from 'date-fns'
 
+import GameSearchField from '../games/GameSearchField';
+import SelectedGameTile from '../games/SelectedGameTile';
+import FormError from '../layout/FormError';
+import PlanShowPage from './PlanShowPage';
+import GoogleMap from '../Map/GoogleMap';
+import ErrorList from '../layout/ErrorList';
+import translateServerErrors from '../../services/translateServerErrors';
 
-const NewPlan = ({ user }) => {
+const EditPlanForm = ({ user, plan, setPlan }) => {
   const [formSuccess, setFormSuccess] = useState(false)
-  const [formData, setFormData] = useState({})
+  const [deleteSuccess, setDeleteSuccess] = useState(false)
   const [errors, setErrors] = useState({})
   const [game, setGame] = useState({})
   const [showMap, setShowMap] = useState(false)
+
+  const [formData, setFormData] = useState({})
+
+  useEffect(() => {
+    const dateObject = new Date(plan.date)
+    const formattedDate = format(dateObject, 'yyyy-MM-dd')
+    const formattedTime = format(dateObject, 'HH:mm')
+    setFormData({
+      name: plan.name,
+      date: formattedDate,
+      time: formattedTime,
+      location: plan.location,
+      address: plan.address,
+      gameId: plan.game.id
+    })
+
+    setGame(plan.game)
+  }, [])
 
   const handleChange = (event) => {
     setFormData({
@@ -22,25 +42,40 @@ const NewPlan = ({ user }) => {
     })
   }
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
     try {
-      const response = await fetch("/api/v1/plans", {
-        method: "POST",
+      const response = await fetch(`/api/v1/plans/${plan.id}`, {
+        method: "PATCH",
         headers: new Headers({
           "Content-Type": "application/json"
         }),
         body: JSON.stringify({ ...formData, gameId: game.id })
       })
       if (!response.ok) {
-        if (response.status === 422) {
-          const body = await response.json()
-          const newErrors = translateServerErrors(body.errors)
-          return setErrors(newErrors)
-        }
-        throw new Error(response.statusText)
+        const body = await response.json()
+        const newErrors = translateServerErrors(body.errors)
+        return setErrors(newErrors)
+      } else {
+        const body = await response.json()
+        setFormSuccess(true)
       }
-      setFormSuccess(true)
+    } catch (error) {
+      console.error(`error in fetch: ${error}`)
+    }
+  }
+
+  const handleDelete = async (event) => {
+    event.preventDefault()
+    try {
+      const response = await fetch(`/api/v1/plans/${plan.id}`, {
+        method: "DELETE"
+      })
+      const body = await response.json()
+      if (body.success) {
+        return setDeleteSuccess(true)
+      }
+      throw new Error(body)
     } catch (error) {
       console.error(error)
     }
@@ -67,13 +102,10 @@ const NewPlan = ({ user }) => {
 
   const setSelectedGame = (game) => {
     setGame(game)
+    setFormData({ ...formData, gameId: game.id })
     if (!game.id) {
       addSelectedGame(game)
     }
-  }
-
-  if (formSuccess) {
-    return <Redirect to="/plans" />
   }
 
   let gameSelectComponent
@@ -83,7 +115,16 @@ const NewPlan = ({ user }) => {
     gameSelectComponent = <SelectedGameTile game={game} setGame={setGame} />
   }
 
-  if (!user) {
+  if (deleteSuccess) {
+    return <Redirect to="/plans" />
+  }
+
+  if (formSuccess) {
+    return <Route exact path="/plans/:id"
+      render={props => <PlanShowPage {...props} user={user} />} />
+  }
+
+  if (user.id !== plan.owner.id) {
     return <p>Not authorized</p>
   }
 
@@ -108,7 +149,6 @@ const NewPlan = ({ user }) => {
             value={formData.location}
             onChange={handleChange}
           />
-          <FormError error={errors.Location} />
         </label>
         <label>Address:
           <input
@@ -117,7 +157,6 @@ const NewPlan = ({ user }) => {
             value={formData.address}
             onChange={handleChange}
           />
-          <FormError error={errors.Location} />
         </label>
         <button className='button' onClick={event => {
           event.preventDefault()
@@ -128,7 +167,7 @@ const NewPlan = ({ user }) => {
 
   return (
     <form className='grid-container' onSubmit={handleSubmit}>
-      <h4>Add a new plan</h4>
+      <h4>Edit plan ({plan.id}):</h4>
       <ErrorList errors={errors} />
       <label>Name:
         <input
@@ -158,16 +197,18 @@ const NewPlan = ({ user }) => {
           </label>
         </div>
       </label>
-      <FormError error={errors.Date} />
-      <div className='grid-x'>
+      <label>
         {mapComponent}
-
-      </div>
+        <FormError error={errors.Location} />
+      </label>
       {gameSelectComponent}
       {errors["Game Id"] ? <FormError error={errors["Game Id"]} /> : ""}
-      <button className='button'>Submit</button>
+      <div className='edit-delete'>
+        <button className='button'>Update</button>
+        <button className='button alert' onClick={handleDelete}>Delete</button>
+      </div>
     </form>
   )
 }
 
-export default NewPlan
+export default EditPlanForm

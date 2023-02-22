@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'
 
-import PlanTile from './PlanTile';
+import PlanTile from '../plans/PlanTile';
 
 const SelectedPlanList = (props) => {
 
@@ -25,6 +26,10 @@ const SelectedPlanList = (props) => {
   const planTiles = plans.map(plan => {
     return <PlanTile key={plan.id} plan={plan} />
   })
+
+  if (!plans.length) {
+    return <Link to={`/plans/new/${gameId}`}><h1>No plans yet! Click here to make one</h1></Link>
+  }
 
   return (
     <ul>

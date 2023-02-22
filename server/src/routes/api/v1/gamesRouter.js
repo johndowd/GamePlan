@@ -29,6 +29,16 @@ gamesRouter.get("/", async (req, res) => {
   }
 })
 
+gamesRouter.get("/:id", async (req, res) => {
+  const { id } = req.params
+  try {
+    const game = await Game.query().findById(id)
+    return res.status(200).json({ game })
+  } catch (error) {
+    return res.status(500).json({ errors: error })
+  }
+})
+
 gamesRouter.get("/:gameId/plans", async (req, res) => {
   const { gameId } = req.params
   try {
@@ -42,7 +52,6 @@ gamesRouter.get("/:gameId/plans", async (req, res) => {
     return res.status(500).json({ errors: error })
   }
 })
-
 
 gamesRouter.get("/search/:query", async (req, res) => {
   const { query } = req.params

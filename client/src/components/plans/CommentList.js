@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import UserTile from './UserTile';
-import translateDate from '../services/translateDate';
+import React from 'react';
+import UserTile from '../users/UserTile';
+import translateDate from '../../services/translateDate';
 import CommentForm from './CommentForm';
 
 const CommentList = ({ setPlan, plan, user }) => {

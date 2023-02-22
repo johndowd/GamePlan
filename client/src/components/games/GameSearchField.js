@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 import GameTile from './GameTile';
-import FormError from './layout/FormError';
+import FormError from '../layout/FormError';
 
 const GameSearchField = ({ error, setSelectedGame }) => {
   const [search, setSearch] = useState("")

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PlanTile from '../PlanTile';
 
 const SearchPage = (props) => {
   const [plans, setPlans] = useState([])
