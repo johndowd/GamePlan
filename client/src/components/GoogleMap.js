@@ -12,7 +12,7 @@ const GoogleMap = (props) => {
   const [error, setError] = useState("")
 
   const loader = new Loader({
-    apiKey: "AIzaSyBraMYwUbKzwtWbXX2s4r4ENgPHJ32f28o",
+    apiKey: "AIzaSyC5Gj_-ovAnb8B9ViBYmW4v8Qu5r4L7iyU",
     libraries: ["places"]
   });
 
