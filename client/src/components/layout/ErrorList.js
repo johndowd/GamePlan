@@ -10,7 +10,7 @@ const ErrorList = props => {
       index++
       return (
         <li key={index}>
-          {props.errors[field]}
+          {field} {props.errors[field]}
         </li>
       )
     })

@@ -65,7 +65,7 @@ const NewGameForm = ({ user }) => {
         </label>
         <label>Max Players:
           <input
-            type="text"
+            type="number"
             id='max_players'
             value={formData.max_players}
             onChange={handleChange}

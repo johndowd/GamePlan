@@ -16,7 +16,7 @@ const TopBar = ({ user }) => {
   ]
 
   const authenticatedListItems = [
-    <li>
+    <li key='usertile'>
       <UserTile user={user} small={true} />
     </li>,
     <li key="sign-out">

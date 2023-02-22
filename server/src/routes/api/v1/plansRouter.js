@@ -2,6 +2,7 @@ import express from "express"
 import { ValidationError } from "objection"
 import { Plan, Signup } from "../../../models/index.js"
 import PlanSerializer from "../../../serializers/PlanSerializer.js"
+import cleanUserInput from "../../../services/cleanUserInput.js"
 import setReqDate from "../../../services/setReqDate.js"
 
 const plansRouter = new express.Router()
@@ -53,13 +54,17 @@ plansRouter.patch("/:id", async (req, res) => {
   if (body?.date) {
     setReqDate(body)
   }
+  const plan = cleanUserInput(body)
   try {
     const planToUpdate = await Plan.query()
       .findOne({ id, ownerUserId: user.id })
-      .patchAndFetchById(id, body)
+      .patchAndFetchById(id, plan)
     const updatedPlan = await PlanSerializer.getDetails(planToUpdate)
     return res.status(200).json({ plan: updatedPlan })
   } catch (error) {
+    if (error instanceof ValidationError) {
+      return res.status(422).json({ errors: error.data })
+    }
     return res.status(500).json({ errors: error })
   }
 })
