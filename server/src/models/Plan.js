@@ -14,6 +14,7 @@ class Plan extends Model {
         name: { type: "string" },
         gameId: { type: ["string", "integer"] },
         ownerUserId: { type: ["string", "integer"] },
+        address: { type: "string" },
         location: { type: "string" },
         date: { type: ["object", "string"] }
       }

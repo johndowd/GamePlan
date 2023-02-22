@@ -127,11 +127,13 @@ const PlanShowPage = ({ user, match }) => {
   return (
     <div className='plan-show-page'>
       <h2>{plan.name}</h2>
-      <h4>Hosted By: <UserTile user={plan.owner} /></h4>
+      <h3>Hosted By: <UserTile user={plan.owner} /></h3>
       <img src={plan.game.image_url} />
       <div className='grid-container'>
-        <h4>{tDay}, {tDate}, {tTime} </h4>
-        <h4>Location: {plan.location}</h4>
+        <h3>{tDay}, {tDate}, {tTime} </h3>
+        <h3>Location: {plan.location}</h3>
+        <h5>{plan.address}</h5>
+
         {adminComponent}
         <h4> Attendees: </h4>
         {playerListComponent}

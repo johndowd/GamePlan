@@ -17,35 +17,38 @@ class PlanSeeder {
       {
         name: "Play Monopoly with a first-timer!",
         gameId: monopoly.id,
-        location: "301",
         date: new Date(2023, 2, 28, 19),
-        ownerUserId: user1.id
+        ownerUserId: user1.id,
+        location: "Boston Public Market",
+        address: '100 Hanover St, Boston, MA 02108'
       },
       {
         name: "Learn Stratego Secrets!",
         gameId: stratego.id,
-        location: "301",
+        location: "Tavern of Tales",
+        address: '1478 Tremont St, Boston, MA 02120',
         date: new Date(2023, 4, 20, 19, 30),
         ownerUserId: user3.id
       },
       {
         name: "Help me learn Wingspan!",
         gameId: wingspan.id,
-        location: "Swissbakers",
+        location: "swissbakers",
+        address: '168 Western Ave, Boston, MA 02134',
         date: new Date(2023, 3, 28, 20, 30),
         ownerUserId: user2.id
       },
       {
         name: "Join the Settlers of Catan!",
         gameId: catan.id,
-        location: "Starbucks",
+        location: "Starbucks by my house",
         date: new Date(2022, 4, 20, 19),
         ownerUserId: user1.id
       },
       {
         name: "Get ready for Carcassonne!",
         gameId: carcassonne.id,
-        location: "Panera Bread",
+        location: "Panera Bread in copley",
         date: new Date(2023, 5, 30, 18),
         ownerUserId: user2.id
       }]

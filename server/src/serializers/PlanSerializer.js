@@ -3,7 +3,7 @@ import UserSerializer from "./UserSerializer.js"
 
 class PlanSerializer {
   static async getDetails(plan) {
-    const allowedAttributes = ["id", "name", "location", "createdAt", "updatedAt", "date"]
+    const allowedAttributes = ["id", "name", "location", "address", "createdAt", "updatedAt", "date"]
     const serializedPlan = {}
 
     for (const attr of allowedAttributes) {
