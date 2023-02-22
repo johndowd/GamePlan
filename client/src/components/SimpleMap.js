@@ -11,7 +11,6 @@ const SimpleMap = (props) => {
 
   loader.load().then(async () => {
     const geocoder = new google.maps.Geocoder()
-
     const results = await geocoder.geocode({ address: props.address })
     const { lat, lng } = results.results[0].geometry.location
     console.log(lat(), lng());
