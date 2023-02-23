@@ -15,7 +15,7 @@ const SimpleMap = (props) => {
     const { lat, lng } = results.results[0].geometry.location
     const map = new google.maps.Map(document.getElementById("map"), {
       center: { lat: lat(), lng: lng() },
-      zoom: 12,
+      zoom: 14,
     });
 
     new google.maps.Marker({
@@ -26,7 +26,7 @@ const SimpleMap = (props) => {
 
   return (
     <>
-      <div id="map" style={{ height: 400 }}></div>
+      <div id="map" style={{ height: 290 }}></div>
     </>
   )
 }

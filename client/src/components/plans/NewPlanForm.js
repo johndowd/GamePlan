@@ -115,7 +115,7 @@ const NewPlan = (props) => {
       </div>
   } else {
     mapComponent =
-      <div className='cell'>
+      <div className=''>
         <label>Location Name:
           <input
             type="text"
@@ -123,7 +123,6 @@ const NewPlan = (props) => {
             value={formData.location}
             onChange={handleChange}
           />
-          <FormError error={errors.Location} />
         </label>
         <label>Address:
           <input
@@ -132,13 +131,12 @@ const NewPlan = (props) => {
             value={formData.address}
             onChange={handleChange}
           />
-          <FormError error={errors.Location} />
         </label>
         <button className='button' onClick={event => {
           event.preventDefault()
           setShowMap(!showMap)
         }}>Search maps</button>
-      </div>
+      </div >
   }
 
   return (
@@ -174,13 +172,12 @@ const NewPlan = (props) => {
         </div>
       </label>
       <FormError error={errors.Date} />
-      <div className='grid-x'>
+      <div className=''>
         {mapComponent}
-
       </div>
       {gameSelectComponent}
       {errors["Game Id"] ? <FormError error={errors["Game Id"]} /> : ""}
-      <button className='button'>Submit</button>
+      <button id='submit' className='button'>Submit</button>
     </form>
   )
 }

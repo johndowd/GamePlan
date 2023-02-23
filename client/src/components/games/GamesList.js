@@ -24,7 +24,7 @@ const GamesList = (props) => {
 
   return (
     <div className='game-list-page'>
-      <ul className='grid-container game-list'>
+      <ul className='game-list'>
         {gameTiles}
       </ul>
     </div>
