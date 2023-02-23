@@ -40,9 +40,10 @@ const UserProfile = ({ match, user }) => {
 
   return (
     <div className='user-profile'>
-      <h3>{userProfile.username} <img src={userProfile.image_url} /></h3>
+      <img id='user-profile-image' src={userProfile.image_url} />
+      <h1>{userProfile.username}</h1>
       {editButton}
-      <h4>Games Created: </h4>
+      <h2>Created Games </h2>
       <ul>
         {plansCreatedTiles}
       </ul>

@@ -5,30 +5,6 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 
 const LandingPage = ({ user }) => {
-  const [games, setGames] = useState([])
-
-  const getTrendingGames = async () => {
-    try {
-      const response = await fetch("/api/v1/games/trending")
-      const body = await response.json()
-      setGames(body.games)
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  useEffect(() => {
-    getTrendingGames()
-  }, [])
-
-  let authLinks
-  if (user) {
-    authLinks =
-      <div>
-        <h5><Link to="/plans/new">Add a new game plan!</Link></h5>
-        <h5><Link to="/games/new">Add a new game</Link></h5>
-      </div>
-  }
 
   return (
     <>
@@ -36,7 +12,7 @@ const LandingPage = ({ user }) => {
         <div className='circle'></div>
         <div className='banner-content'>
           <div className='banner-content-text'>
-            <h2>Find your new board game crew</h2>
+            <h1>Find your new board game crew</h1>
             <p>A platform designed to help people organize and coordinate game nights with friends and family.</p>
           </div>
           <div>

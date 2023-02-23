@@ -16,7 +16,6 @@ const EditPlanForm = ({ user, plan, setPlan }) => {
   const [errors, setErrors] = useState({})
   const [game, setGame] = useState({})
   const [showMap, setShowMap] = useState(false)
-
   const [formData, setFormData] = useState({})
 
   useEffect(() => {
@@ -141,7 +140,7 @@ const EditPlanForm = ({ user, plan, setPlan }) => {
       </div>
   } else {
     mapComponent =
-      <div className='cell'>
+      <div className=''>
         <label>Location Name:
           <input
             type="text"
@@ -162,12 +161,12 @@ const EditPlanForm = ({ user, plan, setPlan }) => {
           event.preventDefault()
           setShowMap(!showMap)
         }}>Search maps</button>
-      </div>
+      </div >
   }
 
   return (
     <form className='grid-container' onSubmit={handleSubmit}>
-      <h4>Edit plan ({plan.id}):</h4>
+      <h4>Edit plan:</h4>
       <ErrorList errors={errors} />
       <label>Name:
         <input

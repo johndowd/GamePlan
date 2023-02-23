@@ -39,7 +39,7 @@ const CommentForm = ({ setPlan, plan, user }) => {
   }
 
   return (
-    <>
+    <div className='comment-form'>
       <h4>Add comment</h4>
       {user?.id ? <UserTile user={user} small={true} /> : ""}
       <form onSubmit={handleSubmit}>
@@ -52,7 +52,7 @@ const CommentForm = ({ setPlan, plan, user }) => {
         <FormError error={error.text} />
         <button className='button'>Submit</button>
       </form>
-    </>
+    </div>
   )
 }
 

@@ -12,7 +12,7 @@ const SelectedGameTile = ({ game, setGame }) => {
       <p>Currently Selected:</p>
       <p>{game.name}</p>
       <img src={game.image_url}></img>
-      <a className='button' onClick={handleClick}>Unselect</a>
+      <a className='button' onClick={handleClick}>Remove</a>
     </li>
   )
 }

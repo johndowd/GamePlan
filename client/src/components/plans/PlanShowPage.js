@@ -97,7 +97,7 @@ const PlanShowPage = ({ user, match }) => {
   let playerListComponent
   if (playerLength > 0) {
     playerListComponent =
-      <ul>
+      <ul className='player-list'>
         {playerList}
         {spotsLeftComponent}
       </ul>
@@ -106,13 +106,15 @@ const PlanShowPage = ({ user, match }) => {
   let adminComponent
   if (isAdmin()) {
     adminComponent =
-      <a className='button' onClick={e => setEdit(true)}>Edit </a>
+      <div className='centered'>
+        <a id="edit" className='button' onClick={e => setEdit(true)}>Edit Plan</a>
+      </div>
   }
 
   let joinButton
   if (user?.id) {
     if (isCurrentPlayer()) {
-      joinButton = <a className='button' onClick={handleLeave}>Leave Game</a>
+      joinButton = <a id="edit" className='button' onClick={handleLeave}>Leave Game</a>
     } else if (playerLength >= gameSlots) {
       joinButton = <a className='button disabled warning'>Game is full</a>
     } else {
@@ -128,20 +130,28 @@ const PlanShowPage = ({ user, match }) => {
   return (
     <div className='plan-show-page'>
       <h2>{plan.name}</h2>
-      <h3>Hosted By: <UserTile user={plan.owner} /></h3>
-      <img src={plan.game.image_url} />
-      <div className='grid-container'>
-        <h3>{tDay}, {tDate}, {tTime} </h3>
-        <h3>Location: {plan.location}</h3>
-        <h5>{plan.address}</h5>
-        {plan?.address ? <SimpleMap address={plan.address} /> : ""}
+      <div className='grid-x'>
+        <img className='cell small-6' src={plan.game.image_url} />
+        <div>
+          <h3 className='cell small-6 host-name'>Host</h3>
+          <UserTile user={plan.owner} />
+        </div>
+      </div>
+      <div className='grid-x grid-x-padding plan-details'>
+        <div className='cell small-6'>
+          <h5>{tDay}, {tDate}, {tTime} </h5>
+          <h3>@ {plan.location}</h3>
+          <h5>{plan.address}</h5>
+          {plan?.address ? <SimpleMap address={plan.address} /> : ""}
+        </div>
+        <div className='cell small-6'>
+          <h4> Attendees </h4>
+          {playerListComponent}
+          {joinButton}
+        </div>
         {adminComponent}
-        <h4> Attendees: </h4>
-        {playerListComponent}
-        {joinButton}
       </div>
       <CommentList comments={plan.comments} plan={plan} setPlan={setPlan} user={user} />
-
     </div>
   )
 }

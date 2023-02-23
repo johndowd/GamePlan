@@ -16,12 +16,10 @@ const TopBar = ({ user }) => {
   ]
 
   const authenticatedListItems = [
-    <li key='usertile'>
-      <UserTile user={user} small={true} />
-    </li>,
-    <li key="sign-out">
+    <UserTile key="user-tile" user={user} small={true} />,
+    <div className="sign-out-container">
       <SignOutButton />
-    </li>,
+    </div>
   ]
 
   return (

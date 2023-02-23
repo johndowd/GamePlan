@@ -6,8 +6,7 @@ const UserTile = (props) => {
   return (
     <Link to={`/users/${user.username}`} key={user.id}>
       <div className={`${props?.small ? "user-tile-small" : "user-tile"}`}>
-        {user.image_url ? <img src={user.image_url} /> : ""}
-        {user.username}
+        <img src={user.image_url} /> {user.username}
       </div>
     </Link>
   )

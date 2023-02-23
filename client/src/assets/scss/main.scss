@@ -21,24 +21,31 @@ $color-darkgrey: #C7C4C0;
 }
 
 body {
-  background-color: white;
+  // background-color: #FFFFFF;
   font-family: Roboto;
+  background: url("https://gameplan-jd-development.s3.us-east-2.amazonaws.com/blob-scene-haikei.png") no-repeat center center fixed;
+  background-size: cover;
+}
+
+.app {
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 .top-bar {
   width: 100% auto;
   padding-left: 1rem;
   padding-right: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+  margin-top: .5rem;
+  margin-bottom: 1.5rem;
   opacity: 100%;
-  background-color: white;
+  background-color: inherit;
   text-align: center;
 }
 
 .top-bar ul {
   font-weight: bolder;
-  background-color: white;
+  background-color: inherit;
 }
 
 .top-bar li {
@@ -47,16 +54,6 @@ body {
   padding-left: 1rem;
   padding-right: 1rem;
 }
-
-.app {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 400px;
-  max-width: 1200px;
-  text-align: center;
-}
-
 
 .footer {
   background-color: $color-darkgrey;
@@ -78,14 +75,18 @@ a {
 
 a:hover {
   color: inherit;
-  opacity: 60%;
+  opacity: 77.5%;
   transition: .5s ease-out;
 }
 
+a:focus {
+  color: inherit
+}
+
 .plan-show-page img{
-  width: 16rem;
-  height: 12rem;
-  margin-bottom: 1rem;
+  width: auto;
+  height: auto;
+  margin: 1.5rem;
 }
 
 .search-bar {
@@ -105,15 +106,32 @@ a:hover {
 .plan-tile {
   display: flex;
   flex-direction: row;
-  margin: .5rem;
+  align-content: right;
+  justify-content: left;
+  margin: 2rem;
   width: auto;
-  border: solid 65%;
+  border: solid 65% $color-primary .5rem;
+  border-radius: 12px;
 }
 
-.plan-tile img {
-  height: 7rem;
-  width: 7rem;
-  margin-right: 2rem;
+.plan-tile:hover {
+  border-radius: 8px;
+  box-shadow: 2px 4px 8px $color-primary;
+}
+
+.plan-tile img {@media screen and (max-width: 680px) {
+    display: none;
+  }
+  order: 1;
+  height: 250px;
+  max-width: 323px;
+  margin: 1rem;
+  margin-left: auto;
+  align-content: flex-end;
+}
+
+#hosted-by-name p{
+  font-weight: bold;
 }
 
 .plan-tile-top-row img {
@@ -124,9 +142,74 @@ a:hover {
   display: inline;
 }
 
-.landing-page, .plan-list, .plan-show-page, .add-game-form, .games-list-page, .user-profile, .grid-container{
+.landing-page {
   margin: auto;
+  max-width: 850px;
+}
+
+.plan-list, .plan-show-page, .add-game-form, .games-list-page, .user-profile, .grid-container, .users-list, .plan-show-page, .game-list-page{
+  margin: auto;
+  max-width: 750px;
+  margin-bottom: 2rem;
+}
+
+.grid-container {
+  background-color: $color-lightgrey;
+  padding: 1.5rem;
+  margin: auto;
+}
+
+.plan-show-page, .users-list {
+  text-align: center;
+  padding: 1rem;
+  background-color: white;
+  border: $color-darkgrey solid thin;
+  border-radius: 16px;
+  opacity: 93%;
+}
+
+.search-button-container {
+  width:auto;
+}
+
+.plan-details {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: $color-lightgrey solid thin;
+  border-top: $color-lightgrey solid thin;
+}
+
+.plan-details:last-child {
+  border-left: solid thin $color-darkgrey
+}
+
+.plan-show-page h5 {
+  font-weight: normal;
+}
+
+.plan-show-page h2 {
+  font-weight: normal;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.player-list {
+  text-align: justify;
+  margin-right: 40px;
+}
+
+.comment-list {
+  margin: 2rem;
+}
+
+.comment-form {
   width: 80%;
+  display: inline-block;
+}
+
+.landing-page h1,h5 {
+  text-shadow: black;
+  font-weight: bolder;
 }
 
 .user-tile {
@@ -146,7 +229,7 @@ ul {
   list-style: none;
 }
 
-.user-tile-small{
+.user-tile-small {
   padding-left: 1rem;
   padding-right: 1rem;
   display: table-cell;
@@ -166,20 +249,25 @@ ul {
   margin-right: 1rem;
 }
 
-.user-profile img {
+#user-profile-image {
   border-radius: 50%;
-  height: 5rem;
-  width: 5rem;
+  height: 250px;
+  width: 250px;
 }
 
 .games-list-page h4 {
   text-align: center;
 }
 
+.users-list {
+  text-align: left;
+}
+
 .grid-container {
   background-color: $color-lightgrey;
   border-radius: 12px;
   padding-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .plan-show-page-content {
@@ -197,6 +285,7 @@ ul {
   background-color: $color-primary;
   text-align: center;
   text-decoration: none;
+  font-weight: bold;
   display: inline-block;
   font-size: 16px;
   border-radius: 8px;
@@ -204,13 +293,22 @@ ul {
 
 .button:hover {
   background-color: $color-primary;
-  opacity: 60%;
-  transition: .6s ease;
+  opacity: 77.5%;
+  transition: .75s ease;
 }
 
 .button:focus {
   background-color: $color-primary;
-  opacity: 60%;
+}
+
+.centered {
+  margin: auto;
+  padding-top: 2rem;
+  display: inline-block;
+}
+
+#submit, #edit {
+  background-color: $color-secondary;
 }
 
 .banner-content {
@@ -218,19 +316,25 @@ ul {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  background-color: white;
+  background-color: inherit;
   padding: 1rem;
   margin-bottom: 3rem;
 }
 
 .banner-content-text {
   margin: 2rem;
+  font-weight: bold;
 }
 
 .banner-content img {
+  @media screen and (max-width: 623px){
+    display: none;
+  }
   opacity: 75%;
-  width: 24rem;
-  height: 16rem;
+  width: 26rem;
+  height: 18rem;
+  border-radius: 16px;
+  border: $color-darkgrey thin solid;
 }
 
 .bottom-row {
@@ -243,15 +347,16 @@ ul {
 .bottom-row img {
   height: 12rem;
   border-radius: 10px;
+  border: $color-darkgrey thin solid;
 }
 
 .bottom-row-cell {
   flex-direction: column;
   display: flex;
   border-radius: 8px;
-  background-color: white;
+  background-color: inherit;
   margin-bottom: 1rem;
-  width: 18rem;
+  width: 250px;
   margin-left: .5rem;
   margin-right: .5rem;
 }
@@ -266,13 +371,21 @@ ul {
 .game-tile {
   text-align: center;
   width: 10rem;
-  border: black solid .2rem;
+  border: thin $color-darkgrey solid;
   border-radius: 8px;
   background-color: white;
-  margin: 1rem;
+  margin: auto;
+  margin-bottom: 1rem;
+  padding-top: .3rem;
+  padding-bottom: 1rem;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  font-weight: bold;
+}
+
+.game-tile:hover {
+  border: $color-secondary solid;
 }
 
 .game-tile img {
@@ -280,6 +393,13 @@ ul {
   margin: auto;
   width: 8rem;
   height: 6rem;
+}
+
+.game-tile .button {
+  justify-content: center;
+  text-align: center;
+  max-width: 90px;
+  margin: auto;
 }
 
 .game-tile-container {
@@ -324,7 +444,19 @@ ul {
   justify-content: space-between;
 }
 
-.menu a, .menu .button {
+.menu {
+  display: flex;
+}
+
+.sign-out-container {
+  margin: auto;
+}
+
+.menu .button {
   padding: .6em .6em;
   height: 32px;
+}
+
+.menu a {
+  padding: none;
 }

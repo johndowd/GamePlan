@@ -24,10 +24,13 @@ const UserList = () => {
   })
 
   return (
-    <ul>
-      {userTiles}
-    </ul>
-  );
+    <div className='users-list'>
+      <h1>Active Users </h1>
+      <ul className='user-list'>
+        {userTiles}
+      </ul>
+    </div>
+  )
 }
 
 export default UserList;
