@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import FrequencyCalendar from '../plans/FrequencyCalendar';
 
 
 const LandingPage = ({ user }) => {
@@ -34,6 +35,10 @@ const LandingPage = ({ user }) => {
             <img className='' src="https://gameplan-jd-development.s3.us-east-2.amazonaws.com/ai-image-4.webp" />
             <h5>Make new friends <FontAwesomeIcon icon={faArrowRight} /></h5>
           </Link>
+        </div>
+        <div className='data-vis'>
+          <h2>See when our games are happening</h2>
+          <FrequencyCalendar />
         </div>
       </div>
     </>

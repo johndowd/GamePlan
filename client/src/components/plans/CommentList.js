@@ -11,7 +11,6 @@ const CommentList = ({ setPlan, plan, user }) => {
   const commentTiles = plan.comments.map(comment => {
     const { tDay, tDate, tTime } = translateDate(comment.createdAt)
     const [month, day, year] = tDate.split("/")
-    console.log(month, day, year);
     const dateString = `${months[month - 1]} ${day}, ${year}`
     return (
       <li key={comment.id} className='callout '>

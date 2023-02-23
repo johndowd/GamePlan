@@ -1,4 +1,6 @@
 import express from "express"
+import { format } from 'date-fns'
+
 import { ValidationError } from "objection"
 import { Plan, Signup } from "../../../models/index.js"
 import PlanSerializer from "../../../serializers/PlanSerializer.js"
@@ -25,6 +27,33 @@ plansRouter.get("/search/:q", async (req, res) => {
   }
 })
 
+plansRouter.get("/frequency", async (req, res) => {
+  try {
+    const plans = await Plan.query()
+    const usedDates = []
+    const pairArray = []
+
+    plans.forEach(plan => {
+      const dateObject = new Date(plan.date)
+      const formattedDate = format(dateObject, 'yyyy-MM-dd')
+      if (usedDates.includes(formattedDate)) {
+        const index = pairArray.findIndex(pair => pair.day === formattedDate)
+        pairArray[index].value += 1
+      } else {
+        const pair = {
+          value: 1,
+          day: formattedDate
+        }
+        usedDates.push(formattedDate)
+        pairArray.push(pair)
+      }
+    })
+    return res.status(200).json({ frequencyPairs: pairArray })
+  } catch (error) {
+    return res.status(500).json({ errors: error })
+  }
+})
+
 plansRouter.get("/:id", async (req, res) => {
   const { id } = req.params
   try {
@@ -42,11 +71,12 @@ plansRouter.get("/", async (req, res) => {
     const serializedPlans = await Promise.all(plans.map(async plan => {
       return await PlanSerializer.getDetails(plan)
     }))
-    res.status(200).json({ plans: serializedPlans })
+    return res.status(200).json({ plans: serializedPlans })
   } catch (errors) {
-    res.status(500).json({ errors })
+    return res.status(500).json({ errors })
   }
 })
+
 
 plansRouter.patch("/:id", async (req, res) => {
   const { user, body, params } = req
