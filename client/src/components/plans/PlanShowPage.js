@@ -127,6 +127,16 @@ const PlanShowPage = ({ user, match }) => {
     return <EditPlanPage plan={plan} user={user} setPlan={setPlan} />
   }
 
+  let descriptionComponent
+  if (plan.game.description) {
+    descriptionComponent = (
+      <div className='plan-show-description'>
+        <h4>{plan.game.name}</h4>
+        <p>{plan.game.description}</p>
+      </div>
+    )
+  }
+
   return (
     <div className='plan-show-page'>
       <h2>{plan.name}</h2>
@@ -151,6 +161,7 @@ const PlanShowPage = ({ user, match }) => {
         </div>
         {adminComponent}
       </div>
+      {descriptionComponent}
       <CommentList comments={plan.comments} plan={plan} setPlan={setPlan} user={user} />
     </div>
   )

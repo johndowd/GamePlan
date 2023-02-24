@@ -89,6 +89,11 @@ a:focus {
   margin: 1.5rem;
 }
 
+.plan-show-description {
+  margin: 1.5rem;
+  border-bottom: thin $color-darkgrey solid;
+}
+
 .search-bar {
   height: 38px;
   width: 20%;
@@ -307,7 +312,7 @@ ul {
   display: inline-block;
 }
 
-#submit, #edit {
+#submit, #edit, #host-button {
   background-color: $color-secondary;
 }
 
@@ -468,4 +473,35 @@ ul {
 
 .menu a {
   padding: none;
+}
+
+.highlighted-text {
+  color: $color-secondary;
+  font-weight: bolder;
+}
+
+.buttons-container {
+  margin: 1rem;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  direction: ltr;
+}
+
+.buttons-container button, .buttons-container input{
+  color: black;
+  border: solid thin $color-darkgrey;
+  background-color: white;
+  margin: .3rem;
+  margin-top: none;
+}
+
+
+.buttons-container button:hover{
+  opacity: 100%;
+  transition: .33s ease-in;
+}
+
+.orange .button {
+  background-color: $color-secondary;
 }
