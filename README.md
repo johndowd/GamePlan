@@ -31,6 +31,8 @@ pass: 123456
 - [ ] Pagination
 - [ ] Footer on page
 - [ ] Data visualation at /games to see most popular games on the site
+- [ ] controller tests for api endpoints
+- [ ] model level tests for methods
 
 # Technologies Used
 
