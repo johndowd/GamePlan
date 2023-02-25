@@ -24,10 +24,11 @@ pass: 123456
 * Users can leave comments on plans to share ideas and thoughts with other users. 
 * Users can edit/delete plans if they are the one who created them.
 * Users can view most popular days for board game plans on the landing page using Nivo Calendar 
+* Users can view their friends on their profile page, and go to other user's profile pages to add them as friends
 
 ### TO DO:
 
-- [x] Add and view Friends [#29](https://github.com/johndowd/GamePlan/tree/adding-friends-feature)
+- [x] Add and view Friends [#29](https://github.com/johndowd/GamePlan/tree/adding-friends-feature) 
 - [ ] Pagination
 - [ ] Footer on page
 - [ ] Data visualation at /games to see most popular games on the site
