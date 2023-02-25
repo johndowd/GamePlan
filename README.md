@@ -27,7 +27,7 @@ pass: 123456
 
 ### TO DO:
 
-- [ ] Add and view Friends [#29](https://github.com/johndowd/GamePlan/tree/adding-friends-feature)
+- [x] Add and view Friends [#29](https://github.com/johndowd/GamePlan/tree/adding-friends-feature)
 - [ ] Pagination
 - [ ] Footer on page
 - [ ] Data visualation at /games to see most popular games on the site
