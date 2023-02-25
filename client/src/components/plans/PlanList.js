@@ -77,6 +77,10 @@ const PlanList = ({ user }) => {
     setShowPlans(filteredPlans)
   }
 
+  useEffect(() => {
+    searchPlans()
+  }, [search])
+
   const hideFullGames = () => {
     const filteredPlans = showPlans.filter(plan => {
       if (plan.players.length < plan.game.max_players) {
@@ -85,10 +89,6 @@ const PlanList = ({ user }) => {
     })
     setShowPlans(filteredPlans)
   }
-
-  useEffect(() => {
-    searchPlans()
-  }, [search])
 
   const planTiles = showPlans.map(plan => {
     return <PlanTile key={plan.id} plan={plan} />

@@ -15,6 +15,7 @@ exports.up = async (knex) => {
  * @param {Knex} knex
  */
 exports.down = (knex) => {
+  console.log('rolling back address column');
   return knex.schema.table("plans", table => {
     table.dropColumn("address")
   })

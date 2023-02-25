@@ -18,6 +18,10 @@ class UserSerializer {
       return await PlanSerializer.getDetails(plan)
     }))
     serializedUser.plansCreated = serializedPlans
+
+    const relatedFriends = await user.getFriends()
+    serializedUser.friends = relatedFriends
+
     return serializedUser
   }
 }
