@@ -2,7 +2,6 @@
 const Bcrypt = require("bcrypt");
 const unique = require("objection-unique");
 const Friendship = require("./Friendship");
-const { useLimitInFirst } = require("./Model");
 const Model = require("./Model");
 
 const saltRounds = 10;
@@ -33,14 +32,14 @@ class User extends uniqueFunc(Model) {
       properties: {
         email: { type: "string", pattern: "^\\S+@\\S+\\.\\S+$" },
         cryptedPassword: { type: "string" },
-        username: { type: "string" },
+        username: { type: "string", max: 15 },
         image_url: { type: "string" }
       },
     }
   }
 
   static get relationMappings() {
-    const { Signup, Plan, User, Friendship } = require("./index")
+    const { Plan, User, Friendship } = require("./index")
 
     return {
       plans: {
@@ -106,7 +105,13 @@ class User extends uniqueFunc(Model) {
     }
   }
 
-  async friends() {
+  async addFriend(user) {
+    const newFriendship = await Friendship.query().insert({ frienderId: this.id, friendeeId: user.id })
+    const newFriend = await User.query().findById(newFriendship.friendeeId)
+    return this
+  }
+
+  async getFriends() {
     const frienderFriends = await this.$relatedQuery("friendsForFriender")
     const friendeeFriends = await this.$relatedQuery("friendsForFriendee")
     const friends = frienderFriends.concat(friendeeFriends)

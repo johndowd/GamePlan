@@ -5,7 +5,7 @@ import UserSeeder from "./seeders/UserSeeder.js"
 import SignupSeeder from "./seeders/SignupSeeder.js"
 import GameSeeder from "./seeders/GameSeeder.js"
 import CommentSeeder from "./seeders/CommentSeeder.js"
-
+import FriendSeeder from "./seeders/FriendSeeder.js"
 
 class Seeder {
   static async seed() {
@@ -15,6 +15,9 @@ class Seeder {
 
     console.log("Seeding users")
     await UserSeeder.seed()
+
+    console.log("Seeding friendships")
+    await FriendSeeder.seed()
 
     console.log("Seeding plans")
     await PlanSeeder.seed()

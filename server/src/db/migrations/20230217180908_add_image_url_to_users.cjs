@@ -15,6 +15,7 @@ exports.up = async (knex) => {
  * @param {Knex} knex
  */
 exports.down = (knex) => {
+  console.log('rolling back image column');
   return knex.schema.table("users", table => {
     table.dropColumn("image_url")
   })

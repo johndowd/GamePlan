@@ -27,5 +27,6 @@ exports.up = async (knex) => {
  * @param {Knex} knex
  */
 exports.down = (knex) => {
+  console.log('rolling back signups');
   return knex.schema.dropTableIfExists("signups")
 }
