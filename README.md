@@ -11,7 +11,7 @@ Some, but not all features are hidden to users unless they are logged in. Feel f
 email: knickfan99@notreal.com
 pass: 123456
 
-[Link to site](gameplan.herokuapp.com)
+[Link to site](https://gameplan.herokuapp.com)
 
 # Features
 
