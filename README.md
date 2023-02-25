@@ -63,4 +63,4 @@ Then go to `localhost:3000` in your browser to see the app!
 
 Bug reports and pull requests are welcome on Github at [https://github.com/johndowd/GamePlan/](https://github.com/johndowd/GamePlan/). Use the [fork-and-branch](https://blog.scottlowe.org/2015/01/27/using-fork-branch-git-workflow/) workflow to contribute.
 
-This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](https://www.contributor-covenant.org/) code of conduct.
+This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](https://www.contributor-covenant.org/) code of conduct. 
