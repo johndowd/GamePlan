@@ -37,6 +37,7 @@ pass: 123456
 # Technologies Used
 
 Front End: ReactJs, HTML/Sass
+
 Back End: NodeJs, Express, Postgres, Objection & Knex
 
 # Contributors
