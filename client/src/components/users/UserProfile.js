@@ -42,7 +42,7 @@ const UserProfile = ({ match, user }) => {
   }
 
   let addFriend
-  if (user) {
+  if (user && user.id !== userProfile.id) {
     addFriend = <AddFriendButton userProfile={userProfile} setUserProfile={setUserProfile} />
   }
 
