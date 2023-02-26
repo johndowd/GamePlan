@@ -13,7 +13,7 @@ const CommentForm = ({ setPlan, plan, user }) => {
 
   const handleSubmit = async event => {
     event.preventDefault()
-    if (comment.trim() == "") {
+    if (comment.text.trim() == "") {
       return setError({ text: "Must not be empty" })
     }
     try {
