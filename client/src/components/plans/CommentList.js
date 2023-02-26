@@ -21,11 +21,22 @@ const CommentList = ({ setPlan, plan, user }) => {
     )
   })
 
+  let commentsText = ""
+  if (plan.comments.length === 0) {
+    commentsText = "No comments yet!"
+    if (user) {
+      commentsText += " Leave one below!"
+    } else {
+      commentsText += " Sign in to leave a comment!"
+    }
+  }
+
   return (
     <div className='comment-list'>
       <h2>Comments</h2>
       <ul>
         {commentTiles}
+        {commentsText}
       </ul>
       {user ? <CommentForm
         setPlan={setPlan}
