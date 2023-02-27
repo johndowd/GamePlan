@@ -15,10 +15,10 @@ class CommentSeeder {
     const plan5 = await Plan.query().findOne({ name: "Get ready for Carcassonne!" })
 
     await Comment.query().insert({
-      userId: user2.id, planId: plan1.id, text: "Monopoly is a type of market structure where there is only one seller, known as the monopolist, and many buyers. In this market, the monopolist has significant market power and can control the price and output of the good or service they provide."
+      userId: user2.id, planId: plan1.id, text: "Root is a game with an undeniably high barrier to entry. Wehrle and Leder Games have done what they can to make it accessible, but it's no gateway game. However, the beautiful design of the asymmetric factions means there's more depth here than almost any game on my shelf."
     })
     await Comment.query().insert({
-      userId: user3.id, planId: plan1.id, text: "Wow @Kim thats so true"
+      userId: user3.id, planId: plan1.id, text: "Wow thats so true"
     })
     await Comment.query().insert({
       userId: user5.id, planId: plan1.id, text: "So excited to finally play with you guys!"

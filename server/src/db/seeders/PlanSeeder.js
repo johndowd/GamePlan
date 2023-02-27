@@ -63,7 +63,7 @@ class PlanSeeder {
         ownerUserId: users[6].id
       },
       {
-        name: "Lets make some wine!",
+        name: "Make some wine with me!",
         gameId: games[9].id,
         location: "Eureka",
         address: "1355 Beacon St Brookline, MA 02446",
