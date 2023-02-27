@@ -79,16 +79,13 @@ usersRouter.post("/friend/:id", async (req, res) => {
   const { user, body } = req
   try {
     const newFriend = await User.query().findById(body.id)
-    const currentFriends = await user.getFriends()
-    for (const user of currentFriends) {
-      if (user.id == newFriend.id) {
-        return res.status(422).json({ error: 'already friends' })
-      }
-    }
     const friend = await user.addFriend(newFriend)
     return res.status(201).json({ friend })
   } catch (error) {
-    return res.status(500).json({ error: error })
+    if (error.error == "Already friended this user") {
+      return res.status(422).json(error)
+    }
+    return res.status(500).json({ errors: error })
   }
 })
 
