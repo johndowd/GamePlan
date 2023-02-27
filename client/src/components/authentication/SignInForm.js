@@ -29,7 +29,6 @@ const SignInForm = () => {
     return newErrors
   }
 
-
   const onSubmit = async (event) => {
     event.preventDefault()
     const newErrors = validateInput(userPayload)
@@ -66,8 +65,8 @@ const SignInForm = () => {
     setUserPayload({
       ...userPayload,
       [event.currentTarget.name]: event.currentTarget.value,
-    });
-  };
+    })
+  }
 
   if (shouldRedirect) {
     location.href = "/";
@@ -102,7 +101,7 @@ const SignInForm = () => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
 export default SignInForm;
