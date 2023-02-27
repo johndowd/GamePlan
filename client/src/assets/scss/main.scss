@@ -86,6 +86,7 @@ a:focus {
 .plan-show-page img{
   width: auto;
   height: auto;
+  max-width: 300px;
   margin: 1.5rem;
 }
 
@@ -504,4 +505,9 @@ ul {
 
 .orange .button {
   background-color: $color-secondary;
+}
+
+#map {
+  height: 325px;
+  width: auto
 }
