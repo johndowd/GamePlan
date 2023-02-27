@@ -17,6 +17,7 @@ import GamesList from "./games/GamesList";
 import UserProfile from "./users/UserProfile";
 import UserList from "./users/UserList";
 import SelectedPlanList from "./games/SelectedPlanList";
+import ScrollToTop from "./layout/ScrollToTop";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -37,6 +38,7 @@ const App = (props) => {
     <Router>
       <TopBar user={currentUser} />
       <div className="app">
+        <ScrollToTop />
         <Switch>
           <Route exact path="/"
             render={props => <LandingPage {...props} user={currentUser} />} />
