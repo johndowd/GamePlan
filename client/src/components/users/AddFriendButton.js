@@ -19,7 +19,7 @@ const AddFriendButton = ({ userProfile, setUserProfile }) => {
       const body = await response.json()
       if (!response.ok) {
         setError(body.error)
-        throw new Error(response.statusText)
+        throw new Error(body.error)
       }
       setUserProfile({
         ...userProfile,
