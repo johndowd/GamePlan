@@ -25,15 +25,17 @@ const SignInForm = () => {
         password: "is required",
       };
     }
+    setErrors(newErrors)
+    return newErrors
+  }
 
-    setErrors(newErrors);
-  };
 
   const onSubmit = async (event) => {
     event.preventDefault()
-    validateInput(userPayload)
+    const newErrors = validateInput(userPayload)
     try {
-      if (Object.keys(errors).length === 0) {
+      if (Object.keys(newErrors).length === 0) {
+        setErrors({})
         const response = await fetch("/api/v1/user-sessions", {
           method: "post",
           body: JSON.stringify(userPayload),
@@ -41,15 +43,21 @@ const SignInForm = () => {
             "Content-Type": "application/json",
           })
         })
-        if(!response.ok) {
+        if (!response.ok) {
+          if (response.status === 401) {
+            setErrors({
+              ...errors,
+              login: "Incorrect Email/Password"
+            })
+          }
           const errorMessage = `${response.status} (${response.statusText})`
           const error = new Error(errorMessage)
-          throw(error)
+          throw (error)
         }
         const userData = await response.json()
         setShouldRedirect(true)
       }
-    } catch(err) {
+    } catch (err) {
       console.error(`Error in fetch: ${err.message}`)
     }
   }
@@ -68,6 +76,7 @@ const SignInForm = () => {
   return (
     <div className="grid-container" onSubmit={onSubmit}>
       <h1>Sign In</h1>
+      <FormError error={errors.login} />
       <form>
         <div>
           <label>
