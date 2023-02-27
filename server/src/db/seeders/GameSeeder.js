@@ -14,10 +14,10 @@ class GameSeeder {
     const apiGameData8 = await fetchGameFromApi("great western trail")
     const apiGameData9 = await fetchGameFromApi("azul")
     const apiGameData10 = await fetchGameFromApi("viticulture")
+    const apiGameData11 = await fetchGameFromApi("Lost ruins of arnak")
+    const apiGameData12 = await fetchGameFromApi("gloomhaven")
 
-
-
-    const gameData = [apiGameData1, apiGameData2, apiGameData3, apiGameData4, apiGameData5, apiGameData6, apiGameData7, apiGameData8, apiGameData9, apiGameData10]
+    const gameData = [apiGameData1, apiGameData2, apiGameData3, apiGameData4, apiGameData5, apiGameData6, apiGameData7, apiGameData8, apiGameData9, apiGameData10, apiGameData11, apiGameData12]
 
     for (const game of gameData) {
       const currentGame = await Game.query().findOne({ name: game.name })
