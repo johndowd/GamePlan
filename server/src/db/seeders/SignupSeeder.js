@@ -21,7 +21,7 @@ class SignupSeeder {
     const plan5 = await Plan.query().findOne({ name: "Get ready for Carcassonne!" })
     const plan6 = await Plan.query().findOne({ name: "Lets create a bustling economy in a british city!" })
     const plan7 = await Plan.query().findOne({ name: "I want to change mars!" })
-    const plan8 = await Plan.query().findOne({ name: "Lets make some wine!" })
+    const plan8 = await Plan.query().findOne({ name: "Make some wine with me!" })
     const plan9 = await Plan.query().findOne({ name: "Lets make some Cow friends!" })
     const plan10 = await Plan.query().findOne({ name: "Lets make some tiles!" })
 
@@ -50,6 +50,11 @@ class SignupSeeder {
     await Signup.query().insert({ userId: user9.id, planId: plan4.id })
     await Signup.query().insert({ userId: user8.id, planId: plan3.id })
     await Signup.query().insert({ userId: user6.id, planId: plan1.id })
+
+    await Signup.query().insert({ userId: user4.id, planId: plan10.id })
+    await Signup.query().insert({ userId: user5.id, planId: plan8.id })
+    await Signup.query().insert({ userId: user6.id, planId: plan9.id })
+
 
 
   }
