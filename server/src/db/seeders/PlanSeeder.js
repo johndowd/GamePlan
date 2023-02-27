@@ -75,7 +75,7 @@ class PlanSeeder {
         gameId: games[7].id,
         location: "Lulus",
         address: "421 Cambridge St, Allston, MA 02134",
-        date: new Date(2023, 4, 30, 18),
+        date: new Date(2023, 3, 28, 18),
         ownerUserId: users[8].id
       },
       {
@@ -84,7 +84,7 @@ class PlanSeeder {
         location: "Notch Brewery & Tap Room - Brighton",
         address: "525 Western Ave, Brighton, MA 02135",
         date: new Date(2023, 4, 30, 18),
-        ownerUserId: users[8].id
+        ownerUserId: users[2].id
       }
     ]
 
