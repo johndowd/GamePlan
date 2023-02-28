@@ -1,31 +1,13 @@
 import express from "express"
 import { format } from 'date-fns'
 
-import { ValidationError } from "objection"
+import { ValidationError, raw } from "objection"
 import { Plan, Signup } from "../../../models/index.js"
 import PlanSerializer from "../../../serializers/PlanSerializer.js"
 import cleanUserInput from "../../../services/cleanUserInput.js"
 import setReqDate from "../../../services/setReqDate.js"
 
 const plansRouter = new express.Router()
-
-plansRouter.get("/search/:q", async (req, res) => {
-  const { q } = req.params
-  try {
-    const plansData = await Plan.query()
-    const plans = plansData.filter(plan => {
-      return plan.name
-        .toLowerCase()
-        .includes(q.toLowerCase())
-    })
-    const serializedPlans = await Promise.all(plans.map(plan => {
-      return PlanSerializer.getDetails(plan)
-    }))
-    return res.status(200).json({ plans: serializedPlans })
-  } catch (error) {
-    return res.status(500)
-  }
-})
 
 plansRouter.get("/frequency", async (req, res) => {
   try {
@@ -54,6 +36,23 @@ plansRouter.get("/frequency", async (req, res) => {
   }
 })
 
+plansRouter.get("/find/?", async (req, res) => {
+  const { index, search } = req.query
+  console.log(index, search);
+  try {
+    const planQuery = await Plan.query()
+      .where('date', '>', new Date())
+      .orderBy("date").limit(2)
+      .offset(index)
+    const serializedPlans = await Promise.all(planQuery.map(async plan => {
+      return await PlanSerializer.getDetails(plan)
+    }))
+    return res.status(200).json({ plans: serializedPlans })
+  } catch (errors) {
+    return res.status(500).json({ errors })
+  }
+})
+
 plansRouter.get("/:id", async (req, res) => {
   const { id } = req.params
   try {
@@ -76,7 +75,6 @@ plansRouter.get("/", async (req, res) => {
     return res.status(500).json({ errors })
   }
 })
-
 
 plansRouter.patch("/:id", async (req, res) => {
   const { user, body, params } = req

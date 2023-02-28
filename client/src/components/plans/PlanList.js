@@ -1,24 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import PlanTile from './PlanTile';
-
+import InfiniteScroll from 'react-infinite-scroll-component'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
+import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 const PlanList = ({ user }) => {
   const [plans, setPlans] = useState([])
-  const [showPlans, setShowPlans] = useState([])
+  const [index, setIndex] = useState(0)
   const [search, setSearch] = useState('')
 
   const fetchPlans = async () => {
+    const url = `api/v1/plans/find/?index=${index}`
     try {
-      const response = await fetch("/api/v1/plans")
+      const response = await fetch(url)
       if (!response.ok) {
         console.error(error)
       }
       const body = await response.json()
+      setIndex(index + 2)
+      setPlans(plans.concat(body.plans))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const searchPlans = async () => {
+    try {
+      const url = `api/v1/plans/find/?search=${search}`
+      const response = await fetch(url)
+      const body = await response.json()
       setPlans(body.plans)
-      setShowPlans(body.plans)
     } catch (error) {
       console.error(error)
     }
@@ -28,69 +40,7 @@ const PlanList = ({ user }) => {
     fetchPlans()
   }, [])
 
-  const sortByComingSoon = () => {
-    const currentDate = new Date()
-    const plansAfterCurrentDate = showPlans.filter(plan => {
-      return new Date(plan.date) > currentDate
-    })
-    const sortedPlans = plansAfterCurrentDate.sort((plan1, plan2) => {
-      const date1 = new Date(plan1.date)
-      const date2 = new Date(plan2.date)
-      return (date1 > date2 ? 1 : -1)
-    })
-    setShowPlans(sortedPlans)
-  }
-
-  const sortByGame = () => {
-    const sortedPlans = showPlans.sort((plan1, plan2) => {
-      const game1 = plan1.game.name
-      const game2 = plan2.game.name
-      return (game1 > game2 ? 1 : -1)
-    })
-    setShowPlans([...sortedPlans])
-  }
-
-  const searchPlans = () => {
-    const filteredPlans = plans.filter(plan => {
-      for (const key in plan) {
-        if (typeof plan[key] == 'string') {
-          if (plan[key].toLowerCase().includes(search.toLowerCase())) {
-            return plan
-          }
-        }
-      }
-      const { game } = plan
-      for (const key in game) {
-        if (typeof game[key] == 'string') {
-          if (game[key].toLowerCase().includes(search.toLowerCase())) {
-            return plan
-          }
-        }
-      }
-      const { players } = plan
-      for (const player of players) {
-        if (player.username.toLowerCase().includes(search.toLowerCase())) {
-          return plan
-        }
-      }
-    })
-    setShowPlans(filteredPlans)
-  }
-
-  useEffect(() => {
-    searchPlans()
-  }, [search])
-
-  const hideFullGames = () => {
-    const filteredPlans = showPlans.filter(plan => {
-      if (plan.players.length < plan.game.max_players) {
-        return plan
-      }
-    })
-    setShowPlans(filteredPlans)
-  }
-
-  const planTiles = showPlans.map(plan => {
+  const planTiles = plans.map(plan => {
     return <PlanTile key={plan.id} plan={plan} />
   })
 
@@ -108,9 +58,8 @@ const PlanList = ({ user }) => {
         {addNewPlanLink}
       </div>
       <div className='buttons-container row'>
-        <button onClick={sortByComingSoon} className='button'>Sort By Coming Soon {downArrow}</button>
-        <button onClick={sortByGame} className='button'>Sort By Game {downArrow}</button>
-        <button onClick={hideFullGames} className='button'>Hide full {downArrow}</button>
+        <button onClick={() => { }} className='button'>Sort By Coming Soon {downArrow}</button>
+        <button onClick={() => { }} className='button'>Sort By Game {downArrow}</button>
         <label>
           <input
             id='search'
@@ -121,12 +70,25 @@ const PlanList = ({ user }) => {
               setSearch(e.currentTarget.value)
             }}
           />
+          <button className='button' onClick={searchPlans}>Search</button>
         </label>
 
       </div>
-      <ul >
-        {planTiles}
-      </ul>
+      <InfiniteScroll
+        dataLength={plans.length}
+        next={() => {
+          fetchPlans()
+        }}
+        hasMore={true}
+        loader={<button
+          className='button'
+          onClick={e => window.scrollTo(0, 0)}
+        >To Top <FontAwesomeIcon icon={faArrowUp} /></button>}
+      >
+        <ul >
+          {planTiles}
+        </ul>
+      </InfiniteScroll>
     </div>
   )
 }
