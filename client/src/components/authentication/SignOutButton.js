@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
 const SignOutButton = () => {
   const [shouldRedirect, setShouldRedirect] = useState(false);
@@ -34,7 +33,7 @@ const SignOutButton = () => {
     <a type="button" className="button" onClick={signOut}>
       Sign Out
     </a>
-  );
-};
+  )
+}
 
 export default SignOutButton;
