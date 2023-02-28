@@ -51,7 +51,7 @@ class PlanSeeder {
         gameId: games[2].id,
         location: "Launch Academy",
         address: "77 Summer Street , Boston, MA 02111",
-        date: new Date(2022, 4, 20, 19),
+        date: new Date(2023, 4, 20, 19),
         ownerUserId: users[5].id
       },
       {
