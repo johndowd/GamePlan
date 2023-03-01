@@ -37,8 +37,7 @@ plansRouter.get("/frequency", async (req, res) => {
 })
 
 plansRouter.get("/find/?", async (req, res) => {
-  const { index, search } = req.query
-  console.log(index, search);
+  const { index } = req.query
   try {
     const planQuery = await Plan.query()
       .where('date', '>', new Date())

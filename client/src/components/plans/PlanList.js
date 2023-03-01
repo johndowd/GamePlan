@@ -3,12 +3,11 @@ import { Link } from 'react-router-dom'
 import PlanTile from './PlanTile';
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons'
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 const PlanList = ({ user }) => {
   const [plans, setPlans] = useState([])
   const [index, setIndex] = useState(0)
-  const [search, setSearch] = useState('')
 
   const fetchPlans = async () => {
     const url = `api/v1/plans/find/?index=${index}`
@@ -25,16 +24,6 @@ const PlanList = ({ user }) => {
     }
   }
 
-  const searchPlans = async () => {
-    try {
-      const url = `api/v1/plans/find/?search=${search}`
-      const response = await fetch(url)
-      const body = await response.json()
-      setPlans(body.plans)
-    } catch (error) {
-      console.error(error)
-    }
-  }
 
   useEffect(() => {
     fetchPlans()
@@ -49,31 +38,13 @@ const PlanList = ({ user }) => {
     addNewPlanLink = <button id="host-button" className='button orange'><Link to="/plans/new">Host a new event</Link></button>
   }
 
-  const downArrow = <FontAwesomeIcon icon={faArrowDown} />
-
   return (
     <div className='plan-list'>
       <div className='plan-list-header'>
         <h1>Events</h1>
         {addNewPlanLink}
       </div>
-      <div className='buttons-container row'>
-        <button onClick={() => { }} className='button'>Sort By Coming Soon {downArrow}</button>
-        <button onClick={() => { }} className='button'>Sort By Game {downArrow}</button>
-        <label>
-          <input
-            id='search'
-            type='text'
-            value={search}
-            placeholder='search...'
-            onChange={e => {
-              setSearch(e.currentTarget.value)
-            }}
-          />
-          <button className='button' onClick={searchPlans}>Search</button>
-        </label>
 
-      </div>
       <InfiniteScroll
         dataLength={plans.length}
         next={() => {
@@ -89,7 +60,7 @@ const PlanList = ({ user }) => {
           {planTiles}
         </ul>
       </InfiniteScroll>
-    </div>
+    </div >
   )
 }
 
