@@ -49,6 +49,7 @@
     "react-dom": "~17.00",
     "react-dropzone": "^14.2.3",
     "react-hot-loader": "^4.12.21",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-router-dom": "5.2",
     "redbox-react": "~1.6",
     "sass-loader": "^6.0.7",
