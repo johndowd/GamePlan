@@ -51,7 +51,7 @@ const UserProfile = ({ match, user }) => {
   })
 
   return (
-    <div className='user-profile'>
+    <div className='user-profile content-background'>
       <img id='user-profile-image' src={userProfile.image_url} />
       <h1>{userProfile.username}</h1>
       {editButton}

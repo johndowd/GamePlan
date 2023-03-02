@@ -24,7 +24,7 @@ const UserList = () => {
   })
 
   return (
-    <div className='users-list'>
+    <div className='users-list content-background'>
       <h1>Active Users </h1>
       <ul className='user-list'>
         {userTiles}

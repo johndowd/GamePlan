@@ -6,7 +6,7 @@
 
 $color-primary: #6DC3C8;
 $color-secondary: #F17721;
-$color-lightgrey: #D3CED2;
+$color-lightgrey: #F3F2EE;
 $color-darkgrey: #C7C4C0;
 
 *,
@@ -75,7 +75,7 @@ a {
 
 a:hover {
   color: inherit;
-  opacity: 77.5%;
+  opacity: inherit;
   transition: .5s ease-out;
 }
 
@@ -121,8 +121,9 @@ a:focus {
 }
 
 .plan-tile:hover {
+  opacity: none;
   border-radius: 8px;
-  box-shadow: 2px 4px 8px $color-primary;
+  border: $color-primary solid;
 }
 
 .plan-tile img {
@@ -154,8 +155,6 @@ a:focus {
   max-width: 850px;
 }
 
-.plan-list,
-.plan-show-page,
 .add-game-form,
 .games-list-page,
 .user-profile,
@@ -174,14 +173,16 @@ a:focus {
   margin: auto;
 }
 
-.plan-show-page,
-.users-list {
+.content-background{
   text-align: center;
-  padding: 1rem;
-  background-color: white;
+  padding: 2rem;
+  background-color: $color-lightgrey;
   border: $color-darkgrey solid thin;
   border-radius: 16px;
   opacity: 93%;
+  margin: auto;
+  max-width: 750px;
+  margin-bottom: 2rem;
 }
 
 .search-button-container {
@@ -204,13 +205,11 @@ a:focus {
 }
 
 .plan-show-page h2 {
-  font-weight: normal;
   margin-top: 1rem;
   margin-bottom: 2rem;
 }
 
 .player-list {
-  text-align: justify;
   margin-right: 40px;
 }
 
@@ -220,22 +219,55 @@ a:focus {
 
 .comment-form {
   width: 80%;
+  margin: 1rem;
+  padding: 1rem;
   display: inline-block;
 }
 
-.landing-page h1,h5 {
+.comment-tile {
+  text-align: center;
+  margin: auto;
+  background-color: $color-lightgrey;
+  border-radius: 25px;
+}
+
+.comment-tile h5 {
+  margin: auto;
+}
+.comment-head{
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+}
+
+.comment {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1rem;
+  border: $color-darkgrey solid;
+}
+
+h1,h2,h5 {
   text-shadow: black;
   font-weight: bolder;
 }
 
+.grid {
+  margin: auto;
+}
+
 .user-tile {
+  font-weight: bolder;
   flex-direction: row;
   margin: .5rem;
-  border: solid 65%;
+  border: solid $color-darkgrey;
+  background-color: white;
+  padding-right: 25px;
+  border-radius: 26px;
 }
 
 .user-tile img {
-  border-radius: 50%;
+  border-radius: 26px;
   height: 7rem;
   width: 7rem;
   margin-right: 2rem;
@@ -246,12 +278,15 @@ ul {
 }
 
 .user-tile-small {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  margin-top: 3rem;
   display: table-cell;
   flex-direction: row;
-  border: solid 65%;
   width: auto;
+  border: solid $color-darkgrey;
+  background-color: white;
+  border-radius: 26px;
+  margin: 1rem;
+  padding-right: 2rem;
 }
 
 .user-tile-small a {
@@ -277,10 +312,13 @@ ul {
 
 .users-list {
   text-align: left;
+  padding-left: 3rem;
+  padding-right: 3rem;
 }
 
 .grid-container {
   background-color: $color-lightgrey;
+  opacity: none;
   border-radius: 12px;
   padding-bottom: 1rem;
   margin-bottom: 2rem;
@@ -522,6 +560,10 @@ ul {
 }
 
 #map {
-  height: 325px;
+  height: 100%;
   width: auto
+}
+
+.white-background {
+  background-color: white;
 }
