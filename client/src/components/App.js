@@ -18,6 +18,7 @@ import UserProfile from "./users/UserProfile";
 import UserList from "./users/UserList";
 import SelectedPlanList from "./games/SelectedPlanList";
 import ScrollToTop from "./layout/ScrollToTop";
+import About from "./About"
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -61,9 +62,10 @@ const App = (props) => {
           <Route exact path="/users" component={UserList} />
           <Route exact path="/users/:username"
             render={props => <UserProfile {...props} user={currentUser} />} />
+          <Route exact path="/about" component={About} />
         </Switch>
       </div>
-    </Router>
+    </Router >
   )
 }
 

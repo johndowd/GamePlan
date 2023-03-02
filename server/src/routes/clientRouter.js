@@ -16,6 +16,7 @@ const clientRoutes = [
   "/games/new",
   "/users/:username",
   "/users",
+  "/about"
 ]
 router.get(clientRoutes, (req, res) => {
   res.sendFile(getClientIndexPath());
