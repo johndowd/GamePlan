@@ -24,7 +24,6 @@ const PlanList = ({ user }) => {
     }
   }
 
-
   useEffect(() => {
     fetchPlans()
   }, [])
@@ -39,7 +38,7 @@ const PlanList = ({ user }) => {
   }
 
   return (
-    <div className='plan-list'>
+    <div className='content-background'>
       <div className='plan-list-header'>
         <h1>Events</h1>
         {addNewPlanLink}

@@ -51,7 +51,7 @@ const SelectedPlanList = (props) => {
   }
 
   return (
-    <div className='plan-list'>
+    <div className='plan-list content-background'>
       {gameHeader}
       <ul>
         {planTiles}

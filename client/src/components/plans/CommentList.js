@@ -13,10 +13,14 @@ const CommentList = ({ setPlan, plan, user }) => {
     const [month, day, year] = tDate.split("/")
     const dateString = `${months[month - 1]} ${day}, ${year}`
     return (
-      <li key={comment.id} className='callout '>
-        On {dateString} @ {tTime}, <UserTile user={comment.user} small={true} />
-        <br />
-        {comment.text}
+      <li key={comment.id} className='callout comment-tile'>
+        <div className='comment-head'>
+          <UserTile user={comment.user} small={true} />
+          <h5>{dateString} @ {tTime}</h5>
+        </div>
+        <div className='comment'>
+          {comment.text}
+        </div>
       </li>
     )
   })

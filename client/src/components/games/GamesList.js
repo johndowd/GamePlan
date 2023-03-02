@@ -28,7 +28,7 @@ const GamesList = (props) => {
   })
 
   return (
-    <div className='game-list-page'>
+    <div className='game-list-page content-background'>
       <h2>Recent Games</h2>
       <ul className='game-list'>
         {gameTiles}
