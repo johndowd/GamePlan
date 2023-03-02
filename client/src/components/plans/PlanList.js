@@ -34,13 +34,13 @@ const PlanList = ({ user }) => {
 
   let addNewPlanLink
   if (user) {
-    addNewPlanLink = <button id="host-button" className='button orange'><Link to="/plans/new">Host a new event</Link></button>
+    addNewPlanLink = <button id="host-button" className='button orange'><Link to="/plans/new">Host a new game night</Link></button>
   }
 
   return (
     <div className='content-background'>
       <div className='plan-list-header'>
-        <h1>Events</h1>
+        <h1>Upcoming Plans</h1>
         {addNewPlanLink}
       </div>
 
