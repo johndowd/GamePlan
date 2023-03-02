@@ -39,6 +39,9 @@ const LandingPage = ({ user }) => {
         <div className='data-vis'>
           <h2>See when our games are happening</h2>
           <FrequencyCalendar />
+          <div className='about-tag'>
+            <a href="/about">about</a>
+          </div>
         </div>
       </div>
     </>

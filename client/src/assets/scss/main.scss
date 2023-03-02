@@ -361,6 +361,11 @@ ul {
   display: inline-block;
 }
 
+.about-tag {
+  text-align: center;
+  padding-bottom: 2rem;
+}
+
 #submit,
 #edit,
 #host-button {
@@ -566,4 +571,21 @@ ul {
 
 .white-background {
   background-color: white;
+}
+
+.about img {
+  margin: auto;
+  height: 225px;
+  width: 225px;
+  border-radius: 25px;
+  border: solid white;
+}
+
+.row {
+  display: flex;
+  margin: 10px;
+}
+
+.text {
+  margin: 1rem;
 }
