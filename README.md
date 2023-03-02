@@ -29,7 +29,7 @@ pass: 123456
 ### TO DO:
 
 - [x] Add and view Friends [#29](https://github.com/johndowd/GamePlan/tree/adding-friends-feature) 
-- [ ] Pagination [in progress](https://github.com/johndowd/GamePlan/tree/adding-pagination)
+- [x] Pagination [#51](https://github.com/johndowd/GamePlan/tree/adding-pagination)
 - [ ] Footer on page
 - [ ] Data visualation at /games to see most popular games on the site
 - [ ] controller tests for api endpoints
