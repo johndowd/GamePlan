@@ -31,6 +31,7 @@ pass: 123456
 - [x] Add and view Friends [#29](https://github.com/johndowd/GamePlan/pull/29) 
 - [x] Pagination [#51](https://github.com/johndowd/GamePlan/pull/51)
 - [x] About page [#54](https://github.com/johndowd/GamePlan/pull/54)
+- [ ] Cypress testing for all pages
 - [ ] Footer on page
 - [ ] Data visualation at /games to see most popular games on the site
 - [ ] controller tests for api endpoints
