@@ -1,4 +1,5 @@
 const { insert, truncate, find, deleteRecords, update } = require("./db");
+const { userSignIn } = require("./user");
 
 /// <reference types="cypress" />
 /**
@@ -21,6 +22,9 @@ module.exports = (on, config) => {
     "db:update"({ modelName, conditions, json }) {
       return update({ modelName, conditions, json });
     },
+    "user:in"({ User }) {
+      return userSignIn({ User })
+    }
   });
   return config;
 };
