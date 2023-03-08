@@ -9,11 +9,11 @@ describe("As a user visiting the sign in page", () => {
     cy.task("db:truncate", "User");
   });
 
-  it("If I provide a valid email, password, and password confirmation, I will be signed in", () => {
+  it("If I provide a valid email, username, password, and password confirmation, I will be signed in", () => {
     visitRegistrationPage();
     cy.get("form").within(() => {
       cy.findByLabelText("Email").type("user@example.com");
-
+      cy.findByLabelText("Username").type("_testy_boy_");
       cy.findByLabelText("Password").type("password");
       cy.findByLabelText("Password Confirmation").type("password");
 
@@ -54,7 +54,7 @@ describe("As a user visiting the sign in page", () => {
       cy.findByLabelText("Password").type("migratedata");
       cy.root().submit();
 
-      cy.contains("is invalid");
+      cy.contains("Errors");
     });
   });
 });

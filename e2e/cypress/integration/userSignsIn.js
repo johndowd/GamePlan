@@ -9,7 +9,7 @@ describe("As a user visiting the sign in page", () => {
     cy.task("db:truncate", "User");
     cy.task("db:insert", {
       modelName: "User",
-      json: { email: "user@example.com", password: "password" },
+      json: { email: "user@example.com", username: "testy_boy", password: "password" },
     });
   });
 
@@ -24,7 +24,7 @@ describe("As a user visiting the sign in page", () => {
 
       cy.url().should("eq", `${Cypress.config().baseUrl}/`);
     });
-    cy.contains("Sign Out");
+    cy.contains("testy_boy");
   });
 
   it("If I provide an invalid email and password, I will remain on the same page", () => {
@@ -43,8 +43,8 @@ describe("As a user visiting the sign in page", () => {
     cy.get("form").within(() => {
       cy.findByLabelText("Password").type("password");
       cy.root().submit();
-
-      cy.contains("is invalid");
+      cy.get(".form-error")
+        .contains("is invalid")
     });
   });
 });

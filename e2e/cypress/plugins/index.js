@@ -1,4 +1,5 @@
 const { insert, truncate, find, deleteRecords, update } = require("./db");
+const { userSignIn } = require("./user");
 
 /// <reference types="cypress" />
 /**

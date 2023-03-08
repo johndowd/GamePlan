@@ -1,0 +1,14 @@
+{ 
+  "user":{
+      "email": "google@google.com", 
+      "username": "TheGoogz", 
+      "password": "12"
+    },
+    "game": {
+      "name": "Battleship",
+      "image_url": "https://s3-us-west-1.amazonaws.com/5cc.images/games/uploaded/1559254873443-51Sf8HSbPHL.jpg",
+      "max_players": 2,
+      "description": "Battleship  is the classic game of head-to-head naval combat. Players search for the enemy fleet of ships and destroy them one by one. Each player announces the coordinates of each strike, and sees if it hits.",
+      "BGAApiId": "advokFgpj6"
+    }
+}
