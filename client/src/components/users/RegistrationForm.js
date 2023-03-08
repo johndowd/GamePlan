@@ -3,6 +3,7 @@ import FormError from "../layout/FormError";
 import config from "../../config";
 import ErrorList from "../layout/ErrorList";
 import translateServerErrors from "../../services/translateServerErrors";
+import UserClient from "../../services/apiClient/UserClient";
 
 const RegistrationForm = () => {
   const [userPayload, setUserPayload] = useState({
@@ -27,21 +28,18 @@ const RegistrationForm = () => {
         email: "is invalid",
       };
     }
-
     if (password.trim() == "") {
       newErrors = {
         ...newErrors,
         password: "is required",
       };
     }
-
     if (username.trim() == "") {
       newErrors = {
         ...newErrors,
         username: "is required",
       };
     }
-
     if (passwordConfirmation.trim() === "") {
       newErrors = {
         ...newErrors,
@@ -55,34 +53,26 @@ const RegistrationForm = () => {
         };
       }
     }
-
     setErrors(newErrors);
+    return newErrors
   };
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    validateInput(userPayload);
-    try {
-      if (Object.keys(errors).length === 0) {
-        const response = await fetch("/api/v1/users", {
-          method: "post",
-          body: JSON.stringify(userPayload),
-          headers: new Headers({
-            "Content-Type": "application/json",
-          }),
-        });
-        if (!response.ok) {
-          const body = await response.json()
-          const newErrors = translateServerErrors(body.errors)
-          setErrors(newErrors)
-        }
-        const userData = await response.json();
-        setShouldRedirect(true);
+    const formErrors = validateInput(userPayload)
+    if (Object.keys(formErrors).length === 0) {
+      const res = await UserClient.createUser(userPayload)
+      if (res?.errors) {
+        setErrors({
+          ...errors,
+          ...res.errors
+        })
+      } else {
+        setShouldRedirect(true)
       }
-    } catch (err) {
-      console.error(`Error in fetch: ${err.message}`);
     }
-  };
+  }
+
 
   const onInputChange = (event) => {
     setUserPayload({

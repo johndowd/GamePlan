@@ -3,6 +3,7 @@ import EditUserProfile from './EditUserProfile';
 import PlanTile from '../plans/PlanTile';
 import UserTile from './UserTile';
 import AddFriendButton from './AddFriendButton';
+import UserClient from '../../services/apiClient/UserClient';
 
 const UserProfile = ({ match, user }) => {
   const [userProfile, setUserProfile] = useState({
@@ -15,13 +16,8 @@ const UserProfile = ({ match, user }) => {
 
   const fetchUserProfile = async () => {
     const { username } = match.params
-    try {
-      const response = await fetch(`/api/v1/users/${username}`)
-      const body = await response.json()
-      setUserProfile(body.userProfile)
-    } catch (error) {
-      console.error(error)
-    }
+    const newUserProfile = await UserClient.fetchProfileByUsername(username)
+    setUserProfile(newUserProfile)
   }
 
   useEffect(() => {
