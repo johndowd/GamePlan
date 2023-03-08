@@ -8,7 +8,7 @@ let translateServerErrors = (errors) => {
       const field = key //_.startCase(key)
       serializedErrors = {
         ...serializedErrors,
-        [field]: error.message
+        [field]: error.message.replace(key, "")
       }
     })
   });
