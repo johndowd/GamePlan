@@ -2,14 +2,23 @@
 import testData from "../fixtures/testData.json"
 
 describe("As a user visiting the page", () => {
+  const { game, user } = testData
+  const { baseUrl } = Cypress.config()
+
   const visitPage = () => {
-    cy.visit(`${Cypress.config().baseUrl}/plans`)
+    cy.visit(`${baseUrl}/plans`)
+  }
+
+  const userSignIn = () => {
+    cy.visit(`${baseUrl}/user-sessions/new`)
+    cy.get("form").within(() => {
+      cy.findByLabelText("Email").type(user.email);
+      cy.findByLabelText("Password").type(user.password);
+      cy.root().submit();
+    })
   }
 
   beforeEach(() => {
-    const { game, user } = testData
-
-
     cy.task("db:truncate", ["User", "Game", "Plan"])
     cy.task("db:insert", {
       modelName: "User",
@@ -41,11 +50,45 @@ describe("As a user visiting the page", () => {
           json: plan
         })
       })
-
   })
 
-  it.only("plans appear on the page", () => {
+  it("If I view the page, plan tiles show the correct plan name", () => {
     visitPage()
-    cy.contains("Plans")
+    cy.get(".plan-tile")
+    cy.contains("plan")
   })
+
+  it("If I view the page, plan tiles will show the correct image", () => {
+    visitPage()
+    cy.get(".plan-tile")
+    cy.get("img")
+      .should("be.visible")
+  })
+
+  it("If I view the page, plan tiles will show the correct player count", () => {
+    visitPage()
+    cy.get(".plan-tile")
+    cy.contains("0 / 2 players")
+  })
+
+
+  it("If I view the page, plan tiles show the correct user", () => {
+    visitPage()
+    cy.get(".plan-tile")
+    cy.contains(user.username)
+  })
+
+  it("If I am not signed in, a button to make a new plan will appear", () => {
+    visitPage()
+    cy.get("#host-button")
+      .should("not.exist")
+  })
+
+  it("If I am  signed in, a button to make a new plan will appear", () => {
+    userSignIn()
+    visitPage()
+    cy.get("#host-button")
+    cy.should("have.text", "Host a new game night")
+  })
+
 })

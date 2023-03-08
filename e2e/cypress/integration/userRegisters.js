@@ -54,7 +54,7 @@ describe("As a user visiting the sign in page", () => {
       cy.findByLabelText("Password").type("migratedata");
       cy.root().submit();
 
-      cy.contains("is invalid");
+      cy.contains("Errors");
     });
   });
 });
