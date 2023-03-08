@@ -4,31 +4,28 @@ import PlanTile from './PlanTile';
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
+import PlanClient from '../../services/apiClient/PlanClient';
 
 const PlanList = ({ user }) => {
-  const [plans, setPlans] = useState([])
-  const [index, setIndex] = useState(0)
+  const [state, setState] = useState({
+    plans: [],
+    index: 0
+  })
 
   const fetchPlans = async () => {
-    const url = `api/v1/plans/find/?index=${index}`
-    try {
-      const response = await fetch(url)
-      if (!response.ok) {
-        console.error(error)
-      }
-      const body = await response.json()
-      setIndex(index + 2)
-      setPlans(plans.concat(body.plans))
-    } catch (error) {
-      console.error(error)
-    }
+    const newPlans = await PlanClient.fetchTwoPlans(state.index)
+    setState({
+      ...state,
+      plans: state.plans.concat(newPlans),
+      index: state.index + 2
+    })
   }
 
   useEffect(() => {
-    fetchPlans()
+    fetchPlans(state.index)
   }, [])
 
-  const planTiles = plans.map(plan => {
+  const planTiles = state.plans.map(plan => {
     return <PlanTile key={plan.id} plan={plan} />
   })
 
@@ -45,9 +42,9 @@ const PlanList = ({ user }) => {
       </div>
 
       <InfiniteScroll
-        dataLength={plans.length}
+        dataLength={state.plans.length}
         next={() => {
-          fetchPlans()
+          fetchPlans(state.index)
         }}
         hasMore={true}
         loader={<button
