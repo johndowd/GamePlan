@@ -1,87 +1,84 @@
 import React, { useEffect, useState } from 'react';
-
 import EditPlanPage from "./EditPlanPage"
 import translateDate from '../../services/translateDate';
 import UserTile from '../users/UserTile';
 import CommentList from './CommentList';
 import SimpleMap from '../Map/SimpleMap';
+import PlanClient from '../../services/apiClient/PlanClient';
+import SignupClient from '../../services/apiClient/SignupClient';
 
 const PlanShowPage = ({ user, match }) => {
-  const [plan, setPlan] = useState({ players: [], game: {}, owner: {}, comments: [] })
-  const [edit, setEdit] = useState(false)
+  const [state, setState] = useState({
+    plan: {
+      players: [],
+      game: {},
+      owner: {},
+      comments: []
+    },
+    edit: false
+  })
+
+  const setPlan = (plan) => {
+    setState({
+      ...state, plan
+    })
+  }
 
   const fetchPlan = async () => {
     const { id } = match.params
-    try {
-      const response = await fetch(`/api/v1/plans/${id}`)
-      const body = await response.json()
-      setPlan(body.plan)
-    } catch (error) {
-      console.error(error)
-    }
+    const plan = await PlanClient.fetchPlanById(id)
+    return setPlan(plan)
   }
 
   useEffect(() => {
     fetchPlan()
   }, [])
 
-  const handleClick = async (event) => {
-    try {
-      const response = await fetch(`/api/v1/signups`, {
-        method: "POST",
-        headers: new Headers({
-          "Content-Type": "application/json"
-        }),
-        body: JSON.stringify({ planId: plan.id })
-      })
-      if (!response.ok) {
-        if (response.status === 422) {
-          const body = await response.json()
-          throw new Error(body.error)
-        }
-      }
+  const joinGame = async () => {
+    const newPlayers = await SignupClient.addSignup(state.plan.id)
+    if (!newPlayers?.error) {
       setPlan({
-        ...plan,
-        players: [...plan.players, user]
+        ...state.plan,
+        players: state.plan.players.concat(user)
       })
-    } catch (error) {
-      console.error(error)
     }
   }
 
-  const handleLeave = async () => {
-    try {
-      const response = await fetch(`/api/v1/signups/${plan.id}`, {
-        method: "DELETE"
-      })
-      if (!response.ok) {
-        throw new Error(response.message)
-      }
+  const handleClick = async (event) => {
+    const idArray = state.plan.players.map(player => player.id)
+    if (idArray.includes(user.id)) {
+      leaveGame()
+    } else {
+      joinGame()
+    }
+  }
+
+  const leaveGame = async () => {
+    const success = await SignupClient.deleteSignup(state.plan.id)
+    if (success) {
       setPlan({
-        ...plan,
-        players: plan.players.filter(player => {
+        ...state.plan,
+        players: state.plan.players.filter(player => {
           return player.id !== user.id
         })
       })
-    } catch (error) {
-      console.error(error)
     }
   }
 
   const isCurrentPlayer = () => {
-    return plan.players.find(player => player.id == user.id)
+    return state.plan.players.find(player => player.id == user.id)
   }
 
   const isAdmin = () => {
-    return user?.id == plan.owner.id
+    return user?.id == state.plan.owner.id
   }
 
-  const playerLength = plan.players.length
-  const gameSlots = plan.game.max_players
+  const playerLength = state.plan?.players.length
+  const gameSlots = state.plan?.game.max_players
   const slotsLeft = gameSlots - playerLength
 
   let playerList
-  playerList = plan.players.map(player => {
+  playerList = state.plan.players.map(player => {
     return <UserTile key={player.id} user={player} small={true} />
   })
 
@@ -114,7 +111,7 @@ const PlanShowPage = ({ user, match }) => {
   let joinButton
   if (user?.id) {
     if (isCurrentPlayer()) {
-      joinButton = <a id="edit" className='button' onClick={handleLeave}>Leave Game</a>
+      joinButton = <a id="edit" className='button' onClick={handleClick}>Leave Game</a>
     } else if (playerLength >= gameSlots) {
       joinButton = <a className='button disabled warning'>Game is full</a>
     } else {
@@ -122,17 +119,17 @@ const PlanShowPage = ({ user, match }) => {
     }
   }
 
-  const { tDay, tDate, tTime } = translateDate(plan.date)
-  if (edit) {
+  const { tDay, tDate, tTime } = translateDate(state.plan.date)
+  if (state.edit) {
     return <EditPlanPage plan={plan} user={user} setPlan={setPlan} />
   }
 
   let descriptionComponent
-  if (plan.game.description) {
+  if (state.plan.game.description) {
     descriptionComponent = (
       <div className='plan-show-description'>
-        <h2>{plan.game.name}</h2>
-        <p>{plan.game.description}</p>
+        <h2>{state.plan.game.name}</h2>
+        <p>{state.plan.game.description}</p>
       </div>
     )
   }
@@ -140,21 +137,21 @@ const PlanShowPage = ({ user, match }) => {
   return (
     <div className='white-background content-background '>
       <div className='plan-show-page'>
-        <h1>{plan.name}</h1>
+        <h1>{state.plan.name}</h1>
         <div className='grid-x'>
-          <img className='cell small-6' src={plan.game.image_url} />
+          <img className='cell small-6' src={state.plan.game.image_url} />
           <div>
             <h3 className='cell small-6 host-name'>Host</h3>
-            <UserTile user={plan.owner} />
+            <UserTile user={state.plan.owner} />
           </div>
         </div>
         <div className='grid-x grid-x-padding plan-details row'>
           <div className='cell small-6'>
             <h2>Location</h2>
             <h5>{tDay}, {tDate}, {tTime} </h5>
-            <h3>@ {plan.location}</h3>
-            <h5>{plan.address}</h5>
-            {plan?.address ? <SimpleMap address={plan.address} /> : ""}
+            <h3>@ {state.plan.location}</h3>
+            <h5>{state.plan.address}</h5>
+            {state.plan?.address ? <SimpleMap address={state.plan.address} /> : ""}
           </div>
           <div className='cell small-6 grid'>
             <h2> Attendees </h2>
@@ -164,7 +161,7 @@ const PlanShowPage = ({ user, match }) => {
           {adminComponent}
         </div>
         {descriptionComponent}
-        <CommentList comments={plan.comments} plan={plan} setPlan={setPlan} user={user} />
+        <CommentList comments={state.plan.comments} plan={state.plan} setPlan={setPlan} user={user} />
       </div>
     </div>
   )
