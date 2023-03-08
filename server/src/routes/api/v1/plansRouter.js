@@ -119,7 +119,7 @@ plansRouter.delete("/:id", async (req, res) => {
   try {
     const planToDelete = await Plan.query().findOne({ id, ownerUserId: user.id })
     if (planToDelete) {
-      const deleted = await Signup.query().where("planId", id).delete()
+      await Signup.query().where("planId", id).delete()
       const success = await planToDelete.$query().delete()
       res.status(201).json({ success })
     } else {
