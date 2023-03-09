@@ -17,11 +17,8 @@ describe("As a user visiting the sign in page", () => {
     visitSignInPage();
     cy.get("form").within(() => {
       cy.findByLabelText("Email").type("user@example.com");
-
       cy.findByLabelText("Password").type("password");
-
       cy.root().submit();
-
       cy.url().should("eq", `${Cypress.config().baseUrl}/`);
     });
     cy.contains("testy_boy");
