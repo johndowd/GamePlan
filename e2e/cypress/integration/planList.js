@@ -1,18 +1,19 @@
 /// <reference types="Cypress" />
 import testData from "../fixtures/testData.json"
-import seed from "../support/seed"
-import userSignIn from "../support/userrSignIn"
+import CypressSeeder from "../support/CypressSeeder"
+import userSignIn from "../support/userSignIn"
 
 describe("As a user visiting the plans list page", () => {
-  const { game, user } = testData
   const { baseUrl } = Cypress.config()
+
+  const seeder = new CypressSeeder()
 
   const visitPage = () => {
     cy.visit(`${baseUrl}/plans`)
   }
 
   beforeEach(() => {
-    seed()
+    seeder.seed()
   })
 
   it("If I view the page, plan tiles show the correct plan name", () => {
@@ -38,7 +39,7 @@ describe("As a user visiting the plans list page", () => {
   it("If I view the page, plan tiles show the correct user", () => {
     visitPage()
     cy.get(".plan-tile")
-    cy.contains(user.username)
+    cy.contains(seeder.user.username)
   })
 
   it("If I am not signed in, a button to make a new plan will appear", () => {
@@ -47,11 +48,16 @@ describe("As a user visiting the plans list page", () => {
       .should("not.exist")
   })
 
-  it("If I am  signed in, a button to make a new plan will appear", () => {
-    userSignIn(user, baseUrl)
-    visitPage()
-    cy.get("#host-button")
-    cy.should("have.text", "Host a new game night")
+  describe("As a signed in user visiting the page,", () => {
+
+    it("I can view button to make a new plan", () => {
+      userSignIn(seeder.user, baseUrl)
+      visitPage()
+      cy.get("#host-button")
+      cy.should("have.text", "Host a new game night")
+    })
+
   })
+
 
 })
