@@ -4,6 +4,7 @@ import PlanTile from '../plans/PlanTile';
 import UserTile from './UserTile';
 import AddFriendButton from './AddFriendButton';
 import UserClient from '../../services/apiClient/UserClient';
+import SignOutButton from '../authentication/SignOutButton'
 
 const UserProfile = ({ match, user }) => {
   const [userProfile, setUserProfile] = useState({
@@ -28,9 +29,15 @@ const UserProfile = ({ match, user }) => {
     return <PlanTile key={plan.id} plan={plan} />
   })
 
-  let editButton
+  let authButtons
   if (user?.id == userProfile.id) {
-    editButton = <a className='button warning' onClick={e => setEdit(true)}>Edit Profile</a>
+    authButtons = (
+      <>
+        <a className='button warning' onClick={e => setEdit(true)}>Edit Profile</a>
+        <SignOutButton />
+      </>
+    )
+
   }
 
   if (edit) {
@@ -50,7 +57,7 @@ const UserProfile = ({ match, user }) => {
     <div className='user-profile content-background'>
       <img id='user-profile-image' src={userProfile.image_url} />
       <h1>{userProfile.username}</h1>
-      {editButton}
+      {authButtons}
       <h2>Friends {addFriend}</h2>
       {friendTiles}
       <h2>Created Games </h2>
