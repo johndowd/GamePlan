@@ -75,6 +75,8 @@ const SignInForm = () => {
   return (
     <div className="grid-container" onSubmit={onSubmit}>
       <h1>Sign In</h1>
+      <a href="/users/new">Don't have an account? Click here</a>
+      <br />
       <FormError error={errors.login} />
       <form>
         <div>
