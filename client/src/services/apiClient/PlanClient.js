@@ -1,10 +1,10 @@
 class PlanClient {
-  static async fetchTwoPlans(index) {
-    const url = `api/v1/plans/find/?index=${index}`
+  static async fetchThreePlans(index) {
+    const url = `/api/v1/plans/find?index=${index}`
     try {
       const response = await fetch(url)
       if (!response.ok) {
-        console.error(error)
+        console.error('error in fetch')
       }
       const body = await response.json()
       return body.plans
