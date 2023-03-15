@@ -36,12 +36,12 @@ plansRouter.get("/frequency", async (req, res) => {
   }
 })
 
-plansRouter.get("/find/?", async (req, res) => {
+plansRouter.get("/find", async (req, res) => {
   const { index } = req.query
   try {
     const planQuery = await Plan.query()
       .where('date', '>', new Date())
-      .orderBy("date").limit(2)
+      .orderBy("date").limit(3)
       .offset(index)
     const serializedPlans = await Promise.all(planQuery.map(async plan => {
       return await PlanSerializer.getDetails(plan)
@@ -66,6 +66,7 @@ plansRouter.get("/:id", async (req, res) => {
 plansRouter.get("/", async (req, res) => {
   try {
     const plans = await Plan.query()
+    console.log(typeof (plans[0].id))
     const serializedPlans = await Promise.all(plans.map(async plan => {
       return await PlanSerializer.getDetails(plan)
     }))

@@ -13,11 +13,11 @@ const PlanList = ({ user }) => {
   })
 
   const fetchPlans = async () => {
-    const newPlans = await PlanClient.fetchTwoPlans(state.index)
+    const newPlans = await PlanClient.fetchThreePlans(state.index)
     setState({
       ...state,
       plans: state.plans.concat(newPlans),
-      index: state.index + 2
+      index: state.index + 3
     })
   }
 
@@ -44,9 +44,10 @@ const PlanList = ({ user }) => {
       <InfiniteScroll
         dataLength={state.plans.length}
         next={() => {
-          fetchPlans(state.index)
+          fetchPlans()
         }}
         hasMore={true}
+        scrollThreshold={.2}
         loader={<button
           className='button'
           onClick={e => window.scrollTo(0, 0)}

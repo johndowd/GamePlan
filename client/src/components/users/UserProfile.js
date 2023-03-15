@@ -37,7 +37,6 @@ const UserProfile = ({ match, user }) => {
         <SignOutButton />
       </>
     )
-
   }
 
   if (edit) {
