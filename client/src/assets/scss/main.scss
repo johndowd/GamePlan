@@ -179,7 +179,7 @@ a:focus {
   margin: auto;
   max-width: 750px;
   margin-bottom: 2rem;
-  @media screen and (max-width: 623px) {
+  @media screen and (max-width: 640px) {
     border-radius: 0;
   }
 }
@@ -396,7 +396,7 @@ ul {
 }
 
 .banner-content img {
-  @media screen and (max-width: 623px) {
+  @media screen and (max-width: 640px) {
     display: none;
   }
   opacity: 75%;
