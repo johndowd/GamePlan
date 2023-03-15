@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import translateDate from '../../services/translateDate';
-
 import { format } from 'date-fns'
 
 const PlanTile = ({ plan }) => {
@@ -21,13 +20,13 @@ const PlanTile = ({ plan }) => {
     <Link to={`/plans/${id}`}>
       <li className="callout plan-tile ">
         <img src={game.image_url} />
-        <div>
-          <div className='plan-tile-top-row'>
-            <p id='hosted-by-name' className={todayStyling}> {todayMessage}{tDay}, {tDate}, {tTime}. </p>
-            <p />Hosted By {owner.username}
-            <img className='plan-tile-top-row' src={owner.image_url} />
-          </div>
+        <div style={{ width: 100000 }}>
           <h4>{name}</h4>
+          <div className='plan-tile-top-row'>
+            <p /><b>{owner.username}<img className='plan-tile-top-row' src={owner.image_url} /></b>
+            <p id='hosted-by-name' className={todayStyling}> {todayMessage}{tDay}, {tDate}, {tTime}. </p>
+
+          </div>
           <p className='cell small-6'>@ {location} </p>
           <p>{players.length} / {game.max_players} players</p>
         </div>

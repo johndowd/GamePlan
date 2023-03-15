@@ -28,16 +28,13 @@ body {
 }
 
 .app {
-  margin-left: 2rem;
-  margin-right: 2rem;
+  margin: auto
 }
 
 .top-bar {
   width: 100% auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
   margin-top: .5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: .5rem;
   opacity: 100%;
   background-color: inherit;
   text-align: center;
@@ -112,23 +109,23 @@ a:focus {
 .plan-tile {
   display: flex;
   flex-direction: row;
-  align-content: right;
-  justify-content: left;
-  margin: 2rem;
+  margin: 1rem;
   width: auto;
   border: solid 65% $color-primary .5rem;
   border-radius: 12px;
+  @media screen and (max-width:623px){
+    flex-wrap: wrap;
+  }
 }
 
 .plan-tile:hover {
-  opacity: none;
   border-radius: 8px;
   border: $color-primary solid;
 }
 
 .plan-tile img {
-  @media screen and (max-width: 680px) {
-    display: none;
+  @media screen and (max-width: 640px) {
+    width: 100%;
   }
   order: 1;
   height: 250px;
@@ -139,7 +136,7 @@ a:focus {
 }
 
 #hosted-by-name p {
-  font-weight: bold;
+  font-weight: italic;
 }
 
 .plan-tile-top-row img {
@@ -147,7 +144,7 @@ a:focus {
   margin: .5rem;
   height: 2.5rem;
   width: 2.5rem;
-  display: inline;
+  display: inline
 }
 
 .landing-page {
@@ -175,14 +172,16 @@ a:focus {
 
 .content-background{
   text-align: center;
-  padding: 2rem;
-  background-color: $color-lightgrey;
+  padding: 1em;
+  background-color: rgba(199,196,192, .7);
   border: $color-darkgrey solid thin;
   border-radius: 16px;
-  opacity: 93%;
   margin: auto;
   max-width: 750px;
   margin-bottom: 2rem;
+  @media screen and (max-width: 747px) {
+    border-radius: 0;
+  }
 }
 
 .search-button-container {
@@ -397,7 +396,7 @@ ul {
 }
 
 .banner-content img {
-  @media screen and (max-width: 623px) {
+  @media screen and (max-width: 640px) {
     display: none;
   }
   opacity: 75%;
