@@ -15,7 +15,7 @@ const CommentList = ({ setPlan, plan, user }) => {
     return (
       <li key={comment.id} className='callout comment-tile'>
         <div className='comment-head'>
-          <UserTile user={comment.user} small={true} /><br />
+          <UserTile user={comment.user} small={true} />
           <h5>{dateString} @ {tTime}</h5>
         </div>
         <div className='comment'>
