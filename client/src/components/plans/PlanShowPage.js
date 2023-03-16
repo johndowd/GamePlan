@@ -79,7 +79,11 @@ const PlanShowPage = ({ user, match }) => {
 
   let playerList
   playerList = state.plan.players.map(player => {
-    return <UserTile key={player.id} user={player} small={true} />
+    return <UserTile
+      key={player.id}
+      user={player}
+      small={true}
+    />
   })
 
   let spotsLeftComponent
@@ -134,26 +138,31 @@ const PlanShowPage = ({ user, match }) => {
     )
   }
 
+  console.log(screen.width);
+
   return (
     <div className='white-background content-background '>
       <div className='plan-show-page'>
         <h1>{state.plan.name}</h1>
-        <div className='grid-x'>
-          <img className='cell small-6' src={state.plan.game.image_url} />
-          <div>
-            <h3 className='cell small-6 host-name'>Host</h3>
-            <UserTile user={state.plan.owner} />
-          </div>
+        <div className='plan-tile-top-row'>
+          <h5>{tDay}, {tDate}, {tTime} </h5>
+          <p>Hosted By
+            <a href={`/users/${state.plan.owner.username}`}>
+              <b>{state.plan.owner.username}
+                <img className={`plan-tile-top-row ${screen.width > 550 ? 'grid-x' : ''}`} src={state.plan.owner.image_url} />
+              </b>
+            </a>
+          </p>
         </div>
-        <div className='grid-x grid-x-padding plan-details row'>
-          <div className='cell small-6'>
+        <img className='' src={state.plan.game.image_url} />
+        <div className='plan-details'>
+          <div className=''>
             <h2>Location</h2>
-            <h5>{tDay}, {tDate}, {tTime} </h5>
             <h3>@ {state.plan.location}</h3>
             <h5>{state.plan.address}</h5>
             {state.plan?.address ? <SimpleMap address={state.plan.address} /> : ""}
           </div>
-          <div className='cell small-6 grid'>
+          <div className='cell small-6'>
             <h2> Attendees </h2>
             {playerListComponent}
             {joinButton}
@@ -163,7 +172,7 @@ const PlanShowPage = ({ user, match }) => {
         {descriptionComponent}
         <CommentList comments={state.plan.comments} plan={state.plan} setPlan={setPlan} user={user} />
       </div>
-    </div>
+    </div >
   )
 }
 
