@@ -23,7 +23,7 @@ const PlanTile = ({ plan }) => {
         <div style={{ width: 100000 }}>
           <h4>{name}</h4>
           <div className='plan-tile-top-row'>
-            <p /><b>{owner.username}<img className='plan-tile-top-row' src={owner.image_url} /></b>
+            <p />Hosted By<b>{owner.username}<img className='plan-tile-top-row' src={owner.image_url} /></b>
             <p id='hosted-by-name' className={todayStyling}> {todayMessage}{tDay}, {tDate}, {tTime}. </p>
 
           </div>
