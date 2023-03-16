@@ -6,31 +6,22 @@ import { Plan, Signup } from "../../../models/index.js"
 import PlanSerializer from "../../../serializers/PlanSerializer.js"
 import cleanUserInput from "../../../services/cleanUserInput.js"
 import setReqDate from "../../../services/setReqDate.js"
+import PlanSummary from "../../../services/PlanSummary.js"
 
 const plansRouter = new express.Router()
 
 plansRouter.get("/frequency", async (req, res) => {
   try {
+    const futureDate = new Date()
+    futureDate.setDate(futureDate.getDate() + 45)
     const plans = await Plan.query()
-    const usedDates = []
-    const pairArray = []
-
-    plans.forEach(plan => {
-      const dateObject = new Date(plan.date)
-      const formattedDate = format(dateObject, 'yyyy-MM-dd')
-      if (usedDates.includes(formattedDate)) {
-        const index = pairArray.findIndex(pair => pair.day === formattedDate)
-        pairArray[index].value += 1
-      } else {
-        const pair = {
-          value: 1,
-          day: formattedDate
-        }
-        usedDates.push(formattedDate)
-        pairArray.push(pair)
-      }
+      .where('date', '<', futureDate)
+    const pairArray = PlanSummary.getSummary(plans)
+    return res.status(200).json({
+      frequencyPairs: pairArray,
+      startDate: format(new Date(), 'yyyy-MM-dd'),
+      endDate: format(futureDate, 'yyyy-MM-dd')
     })
-    return res.status(200).json({ frequencyPairs: pairArray })
   } catch (error) {
     return res.status(500).json({ errors: error })
   }
