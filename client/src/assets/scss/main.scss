@@ -45,13 +45,6 @@ body {
   background-color: inherit;
 }
 
-.top-bar li {
-  display: flex;
-  flex-direction: row;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
 .footer {
   background-color: $color-darkgrey;
   position: absolute;
@@ -83,8 +76,6 @@ a:focus {
 .plan-show-page img {
   width: auto;
   height: auto;
-  max-width: 300px;
-  margin: 1.5rem;
 }
 
 .plan-show-description {
@@ -113,9 +104,6 @@ a:focus {
   width: auto;
   border: solid 65% $color-primary .5rem;
   border-radius: 12px;
-  @media screen and (max-width:623px){
-    flex-wrap: wrap;
-  }
 }
 
 .plan-tile:hover {
@@ -126,6 +114,9 @@ a:focus {
 .plan-tile img {
   @media screen and (max-width: 640px) {
     width: 100%;
+  }
+  @media screen and (max-width: 530px) {
+    display: none;
   }
   order: 1;
   height: 250px;
@@ -209,7 +200,9 @@ a:focus {
 }
 
 .player-list {
-  margin-right: 40px;
+  display: flex;
+  direction: ltr;
+  flex-wrap: wrap;
 }
 
 .comment-list {
@@ -235,6 +228,7 @@ a:focus {
 }
 .comment-head{
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   padding: 1rem;
 }
@@ -261,8 +255,8 @@ h1,h2,h5 {
   margin: .5rem;
   border: solid $color-darkgrey;
   background-color: white;
-  padding-right: 25px;
   border-radius: 26px;
+  overflow: hidden;
 }
 
 .user-tile img {
@@ -285,7 +279,7 @@ ul {
   background-color: white;
   border-radius: 26px;
   margin: 1rem;
-  padding-right: 2rem;
+  padding-right:2rem;
 }
 
 .user-tile-small a {
