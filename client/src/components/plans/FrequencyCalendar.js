@@ -19,21 +19,25 @@ const FrequencyCalendar = () => {
     fetchData()
   }, [])
 
-  let timeRange = ""
+  let dataViz = ""
   if (data?.startDate) {
-    timeRange = <ResponsiveTimeRange
+    dataViz = <ResponsiveTimeRange
       data={data.frequencyPairs}
       from={data.startDate}
       to={data.endDate}
       emptyColor="#eeeeee"
-      colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
-      margin={{ top: 40, right: 40, bottom: 100, left: 40 }}
-      dayBorderWidth={2}
+      colors={['#C7C4C0', '#FFE8D9', '#FFBB90', '#F98D48']}
+      margin={{ top: 0, right: 40, bottom: 100, left: 40 }}
+      dayRadius={5}
+      dayBorderWidth={1}
       dayBorderColor="#ffffff"
+      onClick={(d, e) => {
+        location.href = `/plans?d=${d.day}`
+      }}
     />
   }
 
-  return <> {timeRange} </>
+  return <> {dataViz} </>
 
 }
 
