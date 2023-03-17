@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import PlanTile from './PlanTile';
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import PlanClient from '../../services/apiClient/PlanClient';
 
-const PlanList = ({ user }) => {
+const PlanList = (props) => {
+  const { user } = props
   const [state, setState] = useState({
     plans: [],
     index: 0
   })
+
+  const getParams = () => {
+    const { search } = useLocation()
+    const kvp = search.split('=', -1)
+    kvp[0] = kvp[0][1]
+    const result = { [kvp[0]]: kvp[1] }
+    return result
+  }
+
+  const params = getParams()
 
   const fetchPlans = async () => {
     const newPlans = await PlanClient.fetchThreePlans(state.index)

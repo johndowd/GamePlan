@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ResponsiveTimeRange } from '@nivo/calendar'
 import { Redirect } from 'react-router-dom';
 
-const FrequencyCalendar = () => {
+const FrequencyCalendar = (props) => {
   const [data, setData] = useState([])
   const [redirect, setRedirect] = useState(false)
 
@@ -21,7 +21,7 @@ const FrequencyCalendar = () => {
   }, [])
 
   if (redirect) {
-    return <Redirect to={redirect} />
+    return <Redirect {...props} to={redirect} />
   }
 
   let dataViz = ""
