@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { ResponsiveTimeRange } from '@nivo/calendar'
+import { Redirect } from 'react-router-dom';
 
 const FrequencyCalendar = () => {
-
   const [data, setData] = useState([])
+  const [redirect, setRedirect] = useState(false)
 
   const fetchData = async () => {
     try {
@@ -19,6 +20,10 @@ const FrequencyCalendar = () => {
     fetchData()
   }, [])
 
+  if (redirect) {
+    return <Redirect to={redirect} />
+  }
+
   let dataViz = ""
   if (data?.startDate) {
     dataViz = <ResponsiveTimeRange
@@ -32,7 +37,7 @@ const FrequencyCalendar = () => {
       dayBorderWidth={1}
       dayBorderColor="#ffffff"
       onClick={(d, e) => {
-        location.href = `/plans?d=${d.day}`
+        setRedirect(`/plans?d=${d.day}`)
       }}
     />
   }
