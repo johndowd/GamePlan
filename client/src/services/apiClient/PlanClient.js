@@ -1,6 +1,6 @@
 class PlanClient {
   static async fetchThreePlans(index) {
-    const url = `/api/v1/plans/find?index=${index}`
+    const url = `/api/v1/plans?q=3&index=${index}`
     try {
       const response = await fetch(url)
       if (!response.ok) {

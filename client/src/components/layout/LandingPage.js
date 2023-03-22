@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { faArrowDown, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import FrequencyCalendar from '../plans/FrequencyCalendar';
 
 
@@ -14,7 +14,8 @@ const LandingPage = ({ user }) => {
         <div className='banner-content'>
           <div className='banner-content-text'>
             <h1>Find your new board game crew</h1>
-            <p>A platform designed to help people organize and coordinate game nights with friends and family.</p>
+            <p>A platform designed to help people organize and coordinate game nights with friends and family. </p>
+            <p>Two different ways to find a game <FontAwesomeIcon icon={faArrowDown} /></p>
           </div>
           <div>
             <img src='https://gameplan-jd-development.s3.us-east-2.amazonaws.com/ai-image-1.webp'></img>
@@ -22,26 +23,18 @@ const LandingPage = ({ user }) => {
         </div>
         <div className='bottom-row'>
           <Link className='bottom-row-cell' to="/plans">
+            <h5>Find upcoming plans<FontAwesomeIcon icon={faArrowDown} /></h5>
             <img className='' src="https://gameplan-jd-development.s3.us-east-2.amazonaws.com/ai-image-2.webp" />
 
-            <h5>Find a game night <FontAwesomeIcon icon={faArrowRight} /></h5>
           </Link>
-          <Link className='bottom-row-cell' to="/games">
-
-            <img className='' src="https://gameplan-jd-development.s3.us-east-2.amazonaws.com/ai-image-3.webp" />
-            <h5>Discover new games <FontAwesomeIcon icon={faArrowRight} /> </h5>
-          </Link>
-          <Link className='bottom-row-cell' to="/users">
-            <img className='' src="https://gameplan-jd-development.s3.us-east-2.amazonaws.com/ai-image-4.webp" />
-            <h5>Make new friends <FontAwesomeIcon icon={faArrowRight} /></h5>
-          </Link>
-        </div>
-        <div className='data-vis'>
-          <h2>See when our games are happening</h2>
-          <FrequencyCalendar />
-          <div className='about-tag'>
-            <a href="/about">about</a>
+          <div className='data-vis'>
+            <h5>Select a date<FontAwesomeIcon icon={faArrowDown} /></h5>
+            <FrequencyCalendar />
           </div>
+
+        </div>
+        <div className='about-tag'>
+          <a href="/about">about</a>
         </div>
       </div>
     </>

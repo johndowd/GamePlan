@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { ResponsiveCalendar } from '@nivo/calendar'
+import { ResponsiveTimeRange } from '@nivo/calendar'
+import { Redirect } from 'react-router-dom';
 
-const FrequencyCalendar = () => {
-
+const FrequencyCalendar = (props) => {
   const [data, setData] = useState([])
+  const [redirect, setRedirect] = useState(false)
 
   const fetchData = async () => {
     try {
       const response = await fetch("/api/v1/plans/frequency")
       const body = await response.json()
-      setData(body.frequencyPairs)
+      setData(body)
     } catch (error) {
       console.error(error)
     }
@@ -19,32 +20,30 @@ const FrequencyCalendar = () => {
     fetchData()
   }, [])
 
-  return (
-    <ResponsiveCalendar
-      data={data}
-      from="2023-01-02"
-      to="2023-12-30"
+  if (redirect) {
+    return <Redirect {...props} to={redirect} />
+  }
+
+  let dataViz = ""
+  if (data?.startDate) {
+    dataViz = <ResponsiveTimeRange
+      data={data.frequencyPairs}
+      from={data.startDate}
+      to={data.endDate}
       emptyColor="#eeeeee"
-      colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
-      margin={{ top: 0, right: 20, bottom: 10, left: 20 }}
-      yearSpacing={20}
-      monthBorderColor="#ffffff"
-      dayBorderWidth={2}
+      colors={['#C7C4C0', '#FFE8D9', '#FFBB90', '#F98D48']}
+      margin={{ top: 0, right: 40, bottom: 100, left: 40 }}
+      dayRadius={5}
+      dayBorderWidth={1}
       dayBorderColor="#ffffff"
-      legends={[
-        {
-          anchor: 'bottom-right',
-          direction: 'row',
-          translateY: 36,
-          itemCount: 4,
-          itemWidth: 42,
-          itemHeight: 36,
-          itemsSpacing: 14,
-          itemDirection: 'right-to-left'
-        }
-      ]}
+      onClick={(d, e) => {
+        setRedirect(`/plans?d=${d.day}`)
+      }}
     />
-  )
+  }
+
+  return <> {dataViz} </>
+
 }
 
 export default FrequencyCalendar
