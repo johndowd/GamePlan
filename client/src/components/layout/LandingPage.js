@@ -10,12 +10,11 @@ const LandingPage = ({ user }) => {
   return (
     <>
       <div className='landing-page'>
-        <div className='circle'></div>
         <div className='banner-content'>
           <div className='banner-content-text'>
             <h1>Find your new board game crew</h1>
             <p>A platform designed to help people organize and coordinate game nights with friends and family. </p>
-            <p>Two different ways to find a game <FontAwesomeIcon icon={faArrowDown} /></p>
+            <p>Two different ways to find a game  <FontAwesomeIcon icon={faArrowDown} /></p>
           </div>
           <div>
             <img src='https://gameplan-jd-development.s3.us-east-2.amazonaws.com/ai-image-1.webp'></img>
@@ -28,7 +27,7 @@ const LandingPage = ({ user }) => {
 
           </Link>
           <div className='data-vis'>
-            <h5>Select a date<FontAwesomeIcon icon={faArrowDown} /></h5>
+            <h5>Select a date  <FontAwesomeIcon icon={faArrowDown} /></h5>
             <FrequencyCalendar />
           </div>
 
