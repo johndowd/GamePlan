@@ -366,13 +366,11 @@ ul {
 }
 
 .banner-content {
-  margin: 1rem auto;
+  margin: auto 1rem;
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   background-color: inherit;
-  padding-right: 1rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .data-vis {
@@ -397,7 +395,6 @@ ul {
 }
 
 .banner-content-text {
-  margin-right: 2rem;
   font-weight: bold;
 }
 
