@@ -32,9 +32,6 @@ const LandingPage = ({ user }) => {
           </div>
 
         </div>
-        <div className='about-tag'>
-          <a href="/about">about</a>
-        </div>
       </div>
     </>
   )
