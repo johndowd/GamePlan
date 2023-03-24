@@ -32,8 +32,8 @@ pass: 123456
 - [x] Pagination [#51](https://github.com/johndowd/GamePlan/pull/51)
 - [x] About page [#54](https://github.com/johndowd/GamePlan/pull/54)
 - [ ] Cypress testing for all pages [in progress](https://github.com/johndowd/GamePlan/tree/adding-cypress-testing)
-- [ ] Footer on page
-- [ ] Data visualation at /games to see most popular games on the site
+- [x] Footer on page #54 (https://github.com/johndowd/GamePlan/pull/54)
+- [x] Data visualation change [#68] (https://github.com/johndowd/GamePlan/pull/68)
 - [ ] controller tests for api endpoints
 - [ ] model level tests for methods
 
