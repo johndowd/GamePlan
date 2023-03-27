@@ -336,16 +336,15 @@ ul {
   display: inline-block;
   font-size: 16px;
   border-radius: 8px;
+  .disabled {
+    background-color: #C7C4C0;
+  }
 }
 
 .button:hover {
   background-color: $color-primary;
   opacity: 77.5%;
   transition: .75s ease;
-}
-
-.button:focus {
-  background-color: $color-primary;
 }
 
 .centered {
