@@ -8,23 +8,15 @@ import PlanClient from '../../services/apiClient/PlanClient';
 
 const PlanList = (props) => {
   const { user } = props
+  const { search } = useLocation()
+  const searchQuery = search.substring(1, search.length)
   const [state, setState] = useState({
     plans: [],
     index: 0
   })
 
-  const getParams = () => {
-    const { search } = useLocation()
-    const kvp = search.split('=', -1)
-    kvp[0] = kvp[0][1]
-    const result = { [kvp[0]]: kvp[1] }
-    return result
-  }
-
-  const params = getParams()
-
   const fetchPlans = async () => {
-    const newPlans = await PlanClient.fetchThreePlans(state.index)
+    const newPlans = await PlanClient.fetchThreePlans(state.index, [searchQuery])
     setState({
       ...state,
       plans: state.plans.concat(newPlans),
@@ -33,7 +25,7 @@ const PlanList = (props) => {
   }
 
   useEffect(() => {
-    fetchPlans(state.index)
+    fetchPlans()
   }, [])
 
   const planTiles = state.plans.map(plan => {
