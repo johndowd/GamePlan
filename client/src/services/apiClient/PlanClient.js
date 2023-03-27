@@ -1,6 +1,7 @@
 class PlanClient {
-  static async fetchThreePlans(index) {
-    const url = `/api/v1/plans?q=3&index=${index}`
+  static async fetchThreePlans(index, params) {
+    const search = params.length > 0 ? '&' + params.join('&') : ''
+    const url = `/api/v1/plans?q=3&index=${index}${search}`
     try {
       const response = await fetch(url)
       if (!response.ok) {
