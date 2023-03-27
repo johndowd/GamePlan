@@ -52,22 +52,6 @@ const FrequencyCalendar = (props) => {
       onClick={(d, e) => {
         setSelectedDate(d.day)
       }}
-      legends={
-        [
-          {
-            anchor: 'bottom-right',
-            direction: 'row',
-            justify: false,
-            itemCount: 2,
-            itemWidth: 35,
-            itemHeight: 70,
-            itemsSpacing: 0,
-            itemDirection: 'top-to-bottom',
-            translateX: -60,
-            translateY: -60,
-            symbolSize: 15
-          }
-        ]}
     />
   }
 
