@@ -138,8 +138,6 @@ const PlanShowPage = ({ user, match }) => {
     )
   }
 
-  console.log(screen.width);
-
   return (
     <div className='white-background content-background '>
       <div className='plan-show-page'>
