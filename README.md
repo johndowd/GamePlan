@@ -34,8 +34,6 @@ pass: 123456
 - [ ] Cypress testing for all pages [in progress](https://github.com/johndowd/GamePlan/tree/adding-cypress-testing)
 - [x] Footer on page #54 (https://github.com/johndowd/GamePlan/pull/54)
 - [x] Data visualation change [#68] (https://github.com/johndowd/GamePlan/pull/68)
-- [ ] controller tests for api endpoints
-- [ ] model level tests for methods
 
 # Technologies Used
 
