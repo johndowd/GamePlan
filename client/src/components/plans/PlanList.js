@@ -29,7 +29,7 @@ const PlanList = (props) => {
   }, [])
 
   const planTiles = state.plans.map(plan => {
-    return <PlanTile key={plan.id} plan={plan} />
+    return <PlanTile key={plan?.id} plan={plan} />
   })
 
   let addNewPlanLink
