@@ -90,18 +90,22 @@ const PlanShowPage = ({ user, match }) => {
   if (slotsLeft == 0) {
     spotsLeftComponent = ""
   } else if (slotsLeft < 2) {
-    spotsLeftComponent = <li> {`${slotsLeft} spot left!`} </li>
+    spotsLeftComponent = <p> {`${slotsLeft} spot left!`} </p>
   } else {
-    spotsLeftComponent = <li> {`${slotsLeft} spots left!`} </li>
+    spotsLeftComponent = <p> {`${slotsLeft} spots left!`} </p>
   }
 
   let playerListComponent
   if (playerLength > 0) {
     playerListComponent =
-      <ul className='player-list'>
-        {playerList}
+      <>
+        <ul className='player-list'>
+          {playerList}
+        </ul>
+        <br />
         {spotsLeftComponent}
-      </ul>
+      </>
+
   }
 
   let adminComponent
