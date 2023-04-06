@@ -1,6 +1,6 @@
 import express from "express";
 import { User } from "../../../models/index.js";
-import uploadImage from "../../../services/uploadImage.js";
+import uploadImage from "../../../services/AWS/uploadImage.js"
 import UserSerializer from "../../../serializers/UserSerializer.js";
 import { ValidationError } from "objection";
 

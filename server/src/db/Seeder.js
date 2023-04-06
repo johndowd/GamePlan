@@ -31,6 +31,13 @@ class Seeder {
     console.log("Done!")
     await connection.destroy()
   }
+
+  static async generate() {
+    console.log('generating user....');
+    await UserSeeder.generateUser()
+
+    await connection.destroy()
+  }
 }
 
 export default Seeder

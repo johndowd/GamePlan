@@ -2,7 +2,7 @@ import express from "express"
 import { ValidationError } from "objection"
 import { Game } from "../../../models/index.js"
 import PlanSerializer from "../../../serializers/PlanSerializer.js"
-import searchApi from "../../../services/apiClientBGA/searchApi.js"
+import searchApi from "../../../services/apiClient/searchApi.js"
 
 const gamesRouter = new express.Router()
 
