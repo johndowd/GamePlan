@@ -1,5 +1,5 @@
 import { Game } from "../../models/index.js"
-import fetchGameFromApi from "../../services/apiClientBGA/fetchGameFromApi.js"
+import fetchGameFromApi from "../../services/apiClient/fetchGameFromApi.js"
 
 class GameSeeder {
   static async seed() {
