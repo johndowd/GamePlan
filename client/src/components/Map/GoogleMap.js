@@ -7,7 +7,7 @@ import ResultList from "./ResultList"
 
 const GoogleMap = (props) => {
 
-  const [searchQuery, setSearchQuery] = useState("")
+  const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const [error, setError] = useState("")
 
@@ -22,7 +22,7 @@ const GoogleMap = (props) => {
       const boston = { lat: 42.361, lng: -71.057 };
 
       const request = {
-        query: searchQuery,
+        query: props.formData.location,
         location: boston,
         radius: "500"
       };
@@ -70,7 +70,11 @@ const GoogleMap = (props) => {
 
   return (
     <>
-      <MapSearch setSearchQuery={setSearchQuery} />
+      <MapSearch
+        setSearchQuery={setSearchQuery}
+        handleChange={props.handleChange}
+        formData={props.formData}
+      />
       <p className="error">{error}</p>
       <div id="map" style={{ height: 300 }}></div>
       <ResultList

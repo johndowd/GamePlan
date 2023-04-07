@@ -102,43 +102,6 @@ const NewPlan = (props) => {
     return <p>Not authorized</p>
   }
 
-  let mapComponent = ""
-  if (showMap) {
-    mapComponent =
-      <div className='cell'>
-        <GoogleMap
-          setFormData={setFormData}
-          formData={formData}
-          showMap={showMap}
-          setShowMap={setShowMap}
-        />
-      </div>
-  } else {
-    mapComponent =
-      <div className=''>
-        <label>Location Name:
-          <input
-            type="text"
-            id="location"
-            value={formData.location}
-            onChange={handleChange}
-          />
-        </label>
-        <label>Address:
-          <input
-            type="text"
-            id="address"
-            value={formData.address}
-            onChange={handleChange}
-          />
-        </label>
-        <button className='button' onClick={event => {
-          event.preventDefault()
-          setShowMap(!showMap)
-        }}>Search maps</button>
-      </div >
-  }
-
   return (
     <form className='grid-container' onSubmit={handleSubmit}>
       <h4>Add a new plan</h4>
@@ -172,9 +135,17 @@ const NewPlan = (props) => {
         </div>
       </label>
       <FormError error={errors.Date} />
-      <div className=''>
-        {mapComponent}
-      </div>
+      <div className='cell'>
+        <label>Location:
+          <GoogleMap
+            setFormData={setFormData}
+            formData={formData}
+            showMap={showMap}
+            setShowMap={setShowMap}
+            handleChange={handleChange}
+          />
+        </label>
+      </div >
       {gameSelectComponent}
       {errors["Game Id"] ? <FormError error={errors["Game Id"]} /> : ""}
       <button id='submit' className='button'>Submit</button>
