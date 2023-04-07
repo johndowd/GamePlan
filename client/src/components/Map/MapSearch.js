@@ -1,24 +1,20 @@
 import React, { useState } from "react"
 
 const MapSearch = (props) => {
-  const [searchInput, setSearchInput] = useState("")
-
-  const handleChange = (event) => {
-    setSearchInput(event.currentTarget.value)
-  }
 
   const handleSearch = (event) => {
     event.preventDefault()
-    props.setSearchQuery(searchInput)
+    props.setSearchQuery(props?.formData?.location)
   }
 
   return (
     <>
-      <label htmlFor="search">Search maps:
+      <label htmlFor="location">
         <input
-          id="search"
+          id="location"
           type="text"
-          onChange={handleChange}
+          onChange={props.handleChange}
+          value={props?.formData?.location}
         />
       </label>
       <button className="button" onClick={handleSearch}>Search</button>
