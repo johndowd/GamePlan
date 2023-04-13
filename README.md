@@ -25,7 +25,7 @@ pass: 123456
 * Users can edit/delete plans if they are the one who created them.
 * Users can view most popular days for board game plans on the landing page using Nivo Calendar 
 * Users can view their friends on their profile page, and go to other user's profile pages to add them as friends
-* Uses OpenAI API to create new users to make the site appear more active
+* Uses OpenAI API to create new users, plans, and comments to make the site appear more active
 
 ### TO DO:
 
