@@ -94,6 +94,12 @@ class UserSeeder {
     console.log({ ...user });
     await User.query().insert({ ...user })
   }
+
+  static async getRandomUser() {
+    const users = await User.query()
+    const rand = Math.floor(Math.random() * users.length)
+    return users[rand]
+  }
 }
 
 export default UserSeeder

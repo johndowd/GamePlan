@@ -26,6 +26,12 @@ class GameSeeder {
       }
     }
   }
+
+  static async getRandomGame() {
+    const games = await Game.query()
+    const rand = Math.floor(Math.random() * games.length)
+    return games[rand]
+  }
 }
 
 export default GameSeeder

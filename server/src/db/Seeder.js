@@ -6,6 +6,8 @@ import SignupSeeder from "./seeders/SignupSeeder.js"
 import GameSeeder from "./seeders/GameSeeder.js"
 import CommentSeeder from "./seeders/CommentSeeder.js"
 import FriendSeeder from "./seeders/FriendSeeder.js"
+import OpenAIClient from "../services/apiClient/openAI/openAIClient.js"
+import { Plan } from "../models/index.js"
 
 class Seeder {
   static async seed() {
@@ -32,11 +34,31 @@ class Seeder {
     await connection.destroy()
   }
 
-  static async generate() {
+  static async generateUser() {
     console.log('generating user....');
     await UserSeeder.generateUser()
 
     await connection.destroy()
+  }
+
+  static async generatePlan() {
+    const owner = await UserSeeder.getRandomUser()
+    const game = await GameSeeder.getRandomGame()
+
+
+    const ai = new OpenAIClient()
+    const { name, location, address, date } = await ai.generatePlanInfo(owner, game)
+
+    const plan = {
+      name,
+      gameId: game.id,
+      ownerUserId: owner.id,
+      address,
+      location,
+      date
+    }
+    const insertedPlan = await Plan.query().insertAndFetch(plan)
+    return insertedPlan
   }
 }
 
