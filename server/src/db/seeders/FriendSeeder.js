@@ -2,7 +2,6 @@ import { User } from "../../models/index.js"
 
 class FriendSeeder {
   static async seed() {
-    console.log('Seeding Friendships');
 
     const user1 = await User.query().findById(1)
     const user2 = await User.query().findById(2)
