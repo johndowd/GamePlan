@@ -89,6 +89,14 @@ class Plan extends Model {
     })
     return searchedPlans
   }
+
+  async $afterInsert() {
+    const { Signup } = require('./index')
+    await Signup.query().insert({
+      planId: this.id,
+      userId: this.ownerUserId
+    })
+  }
 }
 
 module.exports = Plan
