@@ -127,6 +127,12 @@ class User extends uniqueFunc(Model) {
 
     return serializedJson;
   }
+
+  static async getRandomUser() {
+    const users = await User.query()
+    const rand = Math.floor(Math.random() * users.length)
+    return users[rand]
+  }
 }
 
 module.exports = User;

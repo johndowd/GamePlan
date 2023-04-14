@@ -6,11 +6,11 @@ class OpenAIClient {
     const config = new Configuration({
       apiKey: process.env.OPENAI_API_KEY,
     });
-    this.openai = new OpenAIApi(config);
+    this.openAi = new OpenAIApi(config);
   }
 
   async generateUsername() {
-    const response = await this.openai.createCompletion({
+    const response = await this.openAi.createCompletion({
       "model": "text-davinci-003",
       "n": 1,
       "prompt": "come up with a username that is less than 25 characters"
@@ -21,7 +21,7 @@ class OpenAIClient {
   }
 
   async generateProfileImage(prompt) {
-    const response = await this.openai.createImage({
+    const response = await this.openAi.createImage({
       prompt: `create a profile picture for ${prompt}`,
       response_format: 'b64_json'
     })
@@ -43,7 +43,7 @@ class OpenAIClient {
     "date": (date 30min intervals only)
   }'`
 
-    const response = await this.openai.createChatCompletion({
+    const response = await this.openAi.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [{
         'role': 'user',

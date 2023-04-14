@@ -1,5 +1,4 @@
 import { User } from "../../models/index.js"
-import OpenAIClient from "../../services/apiClient/openAI/openAIClient.js"
 
 class UserSeeder {
   static async seed() {
@@ -79,26 +78,6 @@ class UserSeeder {
         await User.query().insert(user)
       }
     }
-  }
-
-  static async generateUser() {
-    const ai = new OpenAIClient()
-
-    const generatedUsername = await ai.generateUsername()
-    const username = generatedUsername.substring(2)
-    const email = username + "@fake-email.com"
-    const password = username
-    const image_url = await ai.generateProfileImage(username)
-
-    const user = { username, email, password, image_url }
-    console.log({ ...user });
-    await User.query().insert({ ...user })
-  }
-
-  static async getRandomUser() {
-    const users = await User.query()
-    const rand = Math.floor(Math.random() * users.length)
-    return users[rand]
   }
 }
 
