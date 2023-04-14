@@ -54,6 +54,12 @@ class Game extends uniqueFunc(Model) {
     })
     return games
   }
+
+  static async getRandomGame() {
+    const games = await Game.query()
+    const rand = Math.floor(Math.random() * games.length)
+    return games[rand]
+  }
 }
 
 module.exports = Game
