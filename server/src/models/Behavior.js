@@ -23,6 +23,23 @@ class Behavior extends Model {
     }
   }
 
+  static async getRandomBehavior() {
+    const behaviors = await Behavior.query()
+    const index = Math.floor(Math.random() * behaviors.length)
+    return behaviors[index]
+  }
+
+  static async getTwoRandomBehaviors() {
+    const behaviors = await Behavior.query()
+
+    let x, y;
+    do {
+      x = Math.floor(Math.random() * behaviors.length);
+      y = Math.floor(Math.random() * behaviors.length);
+    } while (x === y);
+
+    return [behaviors[x], behaviors[y]]
+  }
 }
 
 module.exports = Behavior
