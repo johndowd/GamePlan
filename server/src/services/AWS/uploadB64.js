@@ -28,8 +28,6 @@ export const uploadB64 = async (base64) => {
     if (err) {
       console.log(err);
       console.log('Error uploading data: ', data);
-    } else {
-      console.log('successfully uploaded the image!');
     }
   }).promise()
 
