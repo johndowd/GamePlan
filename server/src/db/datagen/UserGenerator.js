@@ -10,8 +10,9 @@ class UserGenerator {
     const email = username + "@fake-email.com"
     const password = username
     const image_url = await ai.generateProfileImage(username)
+    const isAi = true
 
-    const user = { username, email, password, image_url }
+    const user = { username, email, password, image_url, isAi }
     return await User.query().insertAndFetch({ ...user })
   }
 }

@@ -9,8 +9,6 @@ class FriendSeeder {
     const user4 = await User.query().findById(4)
 
     await user1.addFriend(user2)
-    await user1.addFriend(user3)
-    await user2.addFriend(user4)
   }
 }
 

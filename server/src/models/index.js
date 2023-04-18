@@ -5,6 +5,8 @@ const Signup = require("./Signup.js")
 const Game = require("./Game")
 const Comment = require("./Comment")
 const Friendship = require("./Friendship")
+const Behavior = require("./Behavior.js")
+const Personality = require("./Personality.js")
 
-module.exports = { User, Plan, Signup, Game, Comment, Friendship }
+module.exports = { User, Plan, Signup, Game, Comment, Friendship, Behavior, Personality }
 
