@@ -6,6 +6,8 @@ import SignupSeeder from "./seeders/SignupSeeder.js"
 import GameSeeder from "./seeders/GameSeeder.js"
 import CommentSeeder from "./seeders/CommentSeeder.js"
 import FriendSeeder from "./seeders/FriendSeeder.js"
+import BehaviorSeeder from "./seeders/BehaviorSeeder.js"
+import PersonalitySeeder from "./seeders/PersonalitySeeder.js"
 
 class Seeder {
   static async seed() {
@@ -27,6 +29,15 @@ class Seeder {
 
     console.log("Seeding Comments");
     await CommentSeeder.seed()
+
+    console.log('----')
+    console.log('Seeding AI stuff')
+
+    console.log("Seeding Behaviors");
+    await BehaviorSeeder.seed()
+
+    console.log('Seeding personalities')
+    await PersonalitySeeder.seed()
 
     console.log("Done!")
     await connection.destroy()

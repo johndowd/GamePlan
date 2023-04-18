@@ -39,7 +39,7 @@ class User extends uniqueFunc(Model) {
   }
 
   static get relationMappings() {
-    const { Plan, User, Friendship } = require("./index")
+    const { Plan, User, Friendship, Behavior } = require("./index")
 
     return {
       plans: {
@@ -101,6 +101,18 @@ class User extends uniqueFunc(Model) {
           },
           to: "users.id"
         }
+      },
+      behaviors: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Behavior,
+        join: {
+          from: "users.id",
+          through: {
+            from: "personalities.userId",
+            to: "personalities.behaviorId"
+          },
+          to: "behaviors.id"
+        }
       }
     }
   }
@@ -128,8 +140,8 @@ class User extends uniqueFunc(Model) {
     return serializedJson;
   }
 
-  static async getRandomUser() {
-    const users = await User.query()
+  static async getRandomAiUser() {
+    const users = await User.query().where({ isAi: true })
     const rand = Math.floor(Math.random() * users.length)
     return users[rand]
   }

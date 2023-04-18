@@ -3,6 +3,10 @@ import { connection } from "../src/boot.js"
 
 
 let i = 0
+
+if (process.argv.length === 2) {
+  throw new Error('must include parameters')
+}
 while (i < process.argv.length) {
   let arg = process.argv[i]
   if (arg[0] === '-') {
