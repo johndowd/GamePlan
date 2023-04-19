@@ -25,7 +25,7 @@ class OpenAIClient {
 
   async generateProfileImage(username, behaviors) {
     const traits = behaviors.map(b => b.trait).join(' & ')
-    const prompt = `create a ${traits} social media profile picture for ${username} `
+    const prompt = `create a social media profile picture for ${username}, a user that is ${traits} `
     const response = await this.openAi.createImage({
       prompt,
       response_format: 'b64_json'
