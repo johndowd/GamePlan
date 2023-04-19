@@ -7,7 +7,7 @@ class DataGenerator {
   static async generateUser() {
     const user = await UserGenerator.generate()
     const behaviors = await user.$relatedQuery('behaviors')
-    console.log(`User '${user.username}' generated with a ${behaviors.map(b => b.trait).join(' & ')} personality. view at http://localhost:3000/users/${user.id}`);
+    console.log(`User '${user.username}' generated with a ${behaviors.map(b => b.trait).join(' & ')} personality. view at http://localhost:3000/users/${user.username}`);
     return user
   }
 
