@@ -150,7 +150,7 @@ const PlanShowPage = ({ user, match }) => {
           <h5>{tDay}, {tDate}, {tTime} </h5>
           <p>Hosted By
             <a href={`/users/${state.plan.owner.username}`}>
-              <b>{state.plan.owner.username}
+              <b>&nbsp; {state.plan.owner.username}
                 <img className={`plan-tile-top-row ${screen.width > 550 ? 'grid-x' : ''}`} src={state.plan.owner.image_url} />
               </b>
             </a>
