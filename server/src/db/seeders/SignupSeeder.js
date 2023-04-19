@@ -27,7 +27,6 @@ class SignupSeeder {
 
     await Signup.query().insert({ userId: user5.id, planId: plan9.id })
     await Signup.query().insert({ userId: user10.id, planId: plan4.id })
-    await Signup.query().insert({ userId: user3.id, planId: plan7.id })
     await Signup.query().insert({ userId: user5.id, planId: plan10.id })
 
     await Signup.query().insert({ userId: user1.id, planId: plan1.id })
