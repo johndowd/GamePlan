@@ -97,6 +97,12 @@ class Plan extends Model {
       userId: this.ownerUserId
     })
   }
+
+  static async getRandomPlan() {
+    const plans = await Plan.query()
+    const randomIndex = Math.floor(Math.random() * plans.length)
+    return plans[randomIndex]
+  }
 }
 
 module.exports = Plan

@@ -1,5 +1,5 @@
 import { Configuration, OpenAIApi } from "openai";
-import Behavior from "../../../models/Behavior.js";
+import { User } from "../../../models/index.js";
 import { uploadB64 } from "../../AWS/uploadB64.js";
 
 class OpenAIClient {
@@ -41,13 +41,13 @@ class OpenAIClient {
     const laterDate = new Date()
 
     const behaviors = await owner.$relatedQuery('behaviors')
-    const traits = behaviors.join(', ')
+    const traits = behaviors.map(b => b.trait).join(', ')
     laterDate.setDate(laterDate.getDate() + 30)
 
-    const prompt = `You are role playing as ${owner.username}, a witty user on a website that users create plans to play boardgames on. Your personality type is ${traits}. Create a name for a plan to play the game ${game.name}, along with specifying a place to play it in Boston, MA. Additionally, send back a date between ${today.toISOString()} and ${laterDate.toISOString()} but the time only in 30m intervals. Send the data back as a javascript object with no additional text.
+    const prompt = `You are role playing as ${owner.username}, a user on a website that users create plans to play boardgames on. Your personality traits are ${traits}. Create a name for a plan to play the game ${game.name}, along with specifying a place to play it in Boston, MA. Additionally, send back a date between ${today.toISOString()} and ${laterDate.toISOString()} but the time only in 30m intervals. Send the data back as a javascript object with no additional text.
   '{
     "name": (name),
-    "location": (tom),
+    "location": (location),
     "address": (address of location),
     "date": (date 30min intervals only)
   }'`
@@ -63,6 +63,39 @@ class OpenAIClient {
     const { content } = choices[0].message
     const aiObject = JSON.parse(content)
     return aiObject
+  }
+
+  async generateComment(user, plan, game, data = null) {
+    const owner = await plan.$relatedQuery('owner')
+    const behaviors = await user.$relatedQuery('behaviors')
+    const traits = behaviors.map(b => b.trait).join(', ')
+
+    const comments = await plan.$relatedQuery('comments')
+
+    const readableComments = await Promise.all(comments.map(async c => {
+      const commentUser = await User.query().findById(c.userId)
+      return `'${commentUser.username}' said ${c.text}`
+    }))
+
+    let dataText = ''
+    if (data) {
+      for (const [key, value] of Object.entries(data)) {
+        dataText += `${key} : ${value}`
+      }
+    }
+    const prompt = `You are role playing as ${user.username}, a user on a website that users create plans to play boardgames on. Your personality traits are ${traits}. Create a comment on the board game plan '${plan.name}' that ${owner.username} created, where the game ${game.name}is going to be played. You may also consider the following previous comments on the plan listed here : [${readableComments}]. do not place quotation marks around the comment. Additionally, you may consider the following data that was sent to you: ${dataText}`
+
+    const response = await this.openAi.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages: [{
+        'role': 'user',
+        'content': prompt
+      }]
+    })
+
+    const { choices } = response.data
+    const { content } = choices[0].message
+    return content
   }
 }
 
