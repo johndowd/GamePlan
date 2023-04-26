@@ -68,7 +68,8 @@ class UserSeeder {
         email: "knickfan99@notreal.com",
         password: "123456",
         username: "KnickFan99",
-        image_url: "https://gameplan-jd-development.s3.us-east-2.amazonaws.com/ezgif-2-8ef70d6e27.jpeg"
+        image_url: "https://gameplan-jd-development.s3.us-east-2.amazonaws.com/ezgif-2-8ef70d6e27.jpeg",
+        isAdmin: true
       }
     ]
 
