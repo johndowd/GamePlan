@@ -1,6 +1,6 @@
 # GamePlan
 
-This app allows users to plan nights to play their favorite boardgames. Users can add, delete, edit their plans, join other user's plans. Games are added through the BoardGameAtlas API. Maps are rendered using the Google Maps API & the Google Geocoder API. 
+This app allows users to plan nights to play their favorite boardgames. Users can add, delete, edit their plans, join other user's plans. Games are added through the BoardGameAtlas API. Maps are rendered using the Google Maps API & the Google Geocoder API. Additionally, the app uses the OpenAI SDK to create AI bots with personalities that join and interaact with other bot users on the site to continue to create content.
 
 ![image of app running](https://github.com/johndowd/GamePlan/blob/main/images/gameplan-screenshot.png)
 
