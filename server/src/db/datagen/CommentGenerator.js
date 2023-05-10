@@ -1,4 +1,4 @@
-import OpenAIClient from '../../services/apiClient/openAI/openAIClient.js'
+import OpenAIClient from '../../services/apiClient/openAI/OpenAIClient.js'
 import { Comment } from '../../models/index.js'
 
 class CommentGenerator {
