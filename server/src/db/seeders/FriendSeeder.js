@@ -8,8 +8,12 @@ class FriendSeeder {
     const user3 = await User.query().findById(3)
     const user4 = await User.query().findById(4)
 
-    await user1.addFriend(user2)
-    await user3.addFriend(user4)
+    try {
+      await user1.addFriend(user2)
+      await user3.addFriend(user4)
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 
