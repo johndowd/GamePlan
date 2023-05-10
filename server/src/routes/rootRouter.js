@@ -6,6 +6,7 @@ import plansRouter from "./api/v1/plansRouter.js";
 import signupsRouter from "./api/v1/signupsRouter.js";
 import gamesRouter from "./api/v1/gamesRouter.js";
 import commentsRouter from "./api/v1/commentsRouter.js";
+import behaviorRouter from "./api/v1/behaviorRouter.js";
 
 const rootRouter = new express.Router();
 
@@ -16,6 +17,7 @@ rootRouter.use("/api/v1/plans", plansRouter)
 rootRouter.use("/api/v1/signups", signupsRouter)
 rootRouter.use("/api/v1/games", gamesRouter)
 rootRouter.use("/api/v1/comments", commentsRouter)
-//place your server-side routes here
+rootRouter.use("/api/v1/behavior", behaviorRouter)
+
 
 export default rootRouter;
