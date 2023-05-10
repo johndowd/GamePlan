@@ -1,5 +1,5 @@
 import { Behavior, Personality, User } from '../../models/index.js'
-import OpenAIClient from '../../services/apiClient/openAI/openAIClient.js'
+import OpenAIClient from '../../services/apiClient/openAI/OpenAIClient.js'
 
 class UserGenerator {
   static async generate() {
