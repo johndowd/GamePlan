@@ -6,7 +6,7 @@ class UserSerializer {
   }
 
   static async getDetails(user) {
-    const allowedAttributes = ["id", "username", "image_url"]
+    const allowedAttributes = ["id", "username", "image_url", "isAi", "isAdmin"]
     const serializedUser = {}
 
     for (const attr of allowedAttributes) {
