@@ -63,15 +63,18 @@ const UserProfile = ({ match, user }) => {
     })
   }
 
-  const aiButtons = <>
-    <h2> Ai Controls</h2>
-    <button
-      id='generate-plan-button'
-      className='button'
-      onClick={handleCreatePlan}
-    >Create new plan</button>
-    <br />
-  </>
+  let aiButtons = ''
+  if (userProfile.isAi) {
+    aiButtons = <>
+      <h2> Ai Controls</h2>
+      <button
+        id='generate-plan-button'
+        className='button'
+        onClick={handleCreatePlan}
+      >Create new plan</button>
+      <br />
+    </>
+  }
 
   return (
     <div className='user-profile content-background'>
