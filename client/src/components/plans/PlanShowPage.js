@@ -112,7 +112,7 @@ const PlanShowPage = ({ user, match }) => {
   if (isAdmin()) {
     adminComponent =
       <div className='centered'>
-        <a id="edit" className='button' onClick={e => setEdit(true)}>Edit Plan</a>
+        <a id="edit" className='button' onClick={e => setState({ ...state, edit: true })}>Edit Plan</a>
       </div>
   }
 
@@ -129,7 +129,7 @@ const PlanShowPage = ({ user, match }) => {
 
   const { tDay, tDate, tTime } = translateDate(state.plan.date)
   if (state.edit) {
-    return <EditPlanPage plan={plan} user={user} setPlan={setPlan} />
+    return <EditPlanPage plan={state.plan} user={user} setPlan={setPlan} />
   }
 
   let descriptionComponent
