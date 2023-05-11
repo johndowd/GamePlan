@@ -70,11 +70,11 @@ const EditPlanForm = ({ user, plan, setPlan }) => {
       const response = await fetch(`/api/v1/plans/${plan.id}`, {
         method: "DELETE"
       })
-      const body = await response.json()
-      if (body.success) {
+      if (response.ok) {
         return setDeleteSuccess(true)
+      } else {
+        throw new Error(body)
       }
-      throw new Error(body)
     } catch (error) {
       console.error(error)
     }
