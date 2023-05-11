@@ -1,8 +1,8 @@
 import express from "express"
 import { format } from 'date-fns'
+import { ValidationError } from "objection"
+import { Plan } from "../../../models/index.js"
 
-import { ValidationError, raw } from "objection"
-import { Plan, Signup } from "../../../models/index.js"
 import PlanSerializer from "../../../serializers/PlanSerializer.js"
 import cleanUserInput from "../../../services/cleanUserInput.js"
 import setReqDate from "../../../services/setReqDate.js"
@@ -96,7 +96,6 @@ plansRouter.post("/", async (req, res) => {
   }
   try {
     const plan = await Plan.query().insert({ ...body, ownerUserId: user.id })
-    await Signup.query().insert({ planId: plan.id, userId: user.id })
     return res.status(201).json({ plan })
   } catch (error) {
     if (error instanceof ValidationError) {
@@ -110,15 +109,19 @@ plansRouter.delete("/:id", async (req, res) => {
   const { id } = req.params
   const { user } = req
   try {
-    const planToDelete = await Plan.query().findOne({ id, ownerUserId: user.id })
-    if (planToDelete) {
-      await Signup.query().where("planId", id).delete()
-      const success = await planToDelete.$query().delete()
-      res.status(201).json({ success })
+    const plan = await Plan.query().findById(id)
+    if (plan.ownerUserId !== parseInt(user.id)) {
+      return res.status(403).json({ errors: "Unauthorized" })
+    }
+    await plan.$beforeDelete()
+    const status = await Plan.query().deleteById(id)
+    if (status) {
+      return res.status(204).json({ status: true })
     } else {
-      throw new Error()
+      return res.status(404).json({ errors: "Plan not found" })
     }
   } catch (error) {
+    console.error(error);
     res.status(500).json({ errors: error })
   }
 })

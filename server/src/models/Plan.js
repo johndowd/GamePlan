@@ -1,7 +1,6 @@
 const Model = require("./Model")
 
 class Plan extends Model {
-
   static get tableName() {
     return "plans"
   }
@@ -22,7 +21,7 @@ class Plan extends Model {
   }
 
   static get relationMappings() {
-    const { User, Game, Comment } = require("./index.js")
+    const { User, Game, Comment, Signup } = require("./index.js")
     return {
       users: {
         relation: Model.ManyToManyRelation,
@@ -58,6 +57,14 @@ class Plan extends Model {
         join: {
           from: "plans.id",
           to: "comments.planId"
+        }
+      },
+      signups: {
+        relation: Model.HasManyRelation,
+        modelClass: Signup,
+        join: {
+          from: "plans.id",
+          to: "signups.planId"
         }
       }
     }
@@ -102,6 +109,13 @@ class Plan extends Model {
     const plans = await Plan.query()
     const randomIndex = Math.floor(Math.random() * plans.length)
     return plans[randomIndex]
+  }
+
+  async $beforeDelete(queryContext) {
+    await super.$beforeDelete(queryContext)
+    await this.$relatedQuery('users').unrelate()
+    await this.$relatedQuery('signups').delete()
+    await this.$relatedQuery('comments').delete()
   }
 }
 
