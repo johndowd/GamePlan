@@ -75,7 +75,7 @@ const SignInForm = () => {
   return (
     <div className="grid-container" onSubmit={onSubmit}>
       <h1>Sign In</h1>
-      <a href="/users/new">Don't have an account? Click here</a>
+      <a href="/users/new">Don't have an account? <b>Click here</b></a>
       <br />
       <FormError error={errors.login} />
       <form>
@@ -98,6 +98,8 @@ const SignInForm = () => {
             <FormError error={errors.password} />
           </label>
         </div>
+        <p>username: email: knickfan99@notreal.com, pass: 123456</p>
+
         <div>
           <input type="submit" className="button" value="Sign In" />
         </div>
