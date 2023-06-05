@@ -21,11 +21,20 @@ const LandingPage = ({ user }) => {
           </div>
         </div>
         <div className='bottom-row'>
-          <Link className='bottom-row-cell' to="/plans">
-            <h5>Find upcoming plans<FontAwesomeIcon icon={faArrowDown} /></h5>
-            <img className='' src="https://gameplan-jd-development.s3.us-east-2.amazonaws.com/ai-image-2.webp" />
-
-          </Link>
+          <div>
+            <Link className='bottom-row-cell' to="/plans">
+              <h5>Find upcoming plans<FontAwesomeIcon icon={faArrowDown} /></h5>
+              <img className='' src="https://gameplan-jd-development.s3.us-east-2.amazonaws.com/ai-image-2.webp" />
+            </Link>
+            <div className='bottom-row-cell'>
+              <Link className={`button ${user ? '' : 'disabled'}`} to='/plans/new'>
+                Create New Plan
+              </Link>
+              <Link className={`button warning ${user ? '' : 'disabled'}`} to='/users/'>
+                Find AI User
+              </Link>
+            </div>
+          </div>
           <div className='data-vis'>
             <h5>Select a date  <FontAwesomeIcon icon={faArrowDown} /></h5>
             <FrequencyCalendar />

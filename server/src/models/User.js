@@ -147,6 +147,10 @@ class User extends uniqueFunc(Model) {
     const rand = Math.floor(Math.random() * users.length)
     return users[rand]
   }
+
+  static async getAiUsers() {
+    return await User.query().where({ isAi: true })
+  }
 }
 
 module.exports = User;
