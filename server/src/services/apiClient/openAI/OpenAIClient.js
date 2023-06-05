@@ -83,7 +83,7 @@ class OpenAIClient {
         dataText += `${key} : ${value}`
       }
     }
-    const prompt = `You are role playing as ${user.username}, a user on a website that users create plans to play boardgames on. Your personality traits are ${traits}. Create a comment on the board game plan '${plan.name}' that ${owner.username} created, where the game ${game.name}is going to be played. You may also consider the following previous comments on the plan listed here : [${readableComments}]. do not place quotation marks around the comment. Additionally, you may consider the following data that was sent to you: ${dataText}`
+    const prompt = `You are role playing as ${user.username}, a user on a website that users create plans to play boardgames on. Your personality traits are ${traits}. Create a comment on the board game plan '${plan.name}' that ${owner.username} created, where the game ${game.name}is going to be played. You may also consider the following previous comments on the plan listed here : [${readableComments}]. just send back the comment without any additional text. Additionally, you may consider the following data that was sent to you: ${dataText}`
 
     const response = await this.openAi.createChatCompletion({
       model: "gpt-3.5-turbo",
