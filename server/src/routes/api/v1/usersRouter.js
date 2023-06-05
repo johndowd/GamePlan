@@ -6,6 +6,19 @@ import { ValidationError } from "objection";
 
 const usersRouter = new express.Router();
 
+usersRouter.get("/ai", async (req, res) => {
+  console.log('object');
+  try {
+    const unserializedUsers = await User.getAiUsers()
+    const users = await unserializedUsers.map(user => {
+      return UserSerializer.getSummary(user)
+    })
+    return res.status(201).json({ users })
+  } catch (error) {
+    console.error(error)
+  }
+})
+
 usersRouter.post("/", async (req, res) => {
   const { email, password, username, passwordConfirmation } = req.body;
   try {
@@ -63,6 +76,19 @@ usersRouter.get("/:username", async (req, res) => {
   }
 })
 
+usersRouter.get("/ai", async (req, res) => {
+  console.log('object');
+  try {
+    const unserializedUsers = await User.getAiUsers()
+    const users = await unserializedUsers.map(user => {
+      return UserSerializer.getSummary(user)
+    })
+    return res.status(201).json({ users })
+  } catch (error) {
+    console.error(error)
+  }
+})
+
 usersRouter.get("/", async (req, res) => {
   try {
     const users = await User.query()
@@ -88,5 +114,7 @@ usersRouter.post("/friend/:id", async (req, res) => {
     return res.status(500).json({ errors: error })
   }
 })
+
+
 
 export default usersRouter;

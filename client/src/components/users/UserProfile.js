@@ -57,8 +57,20 @@ const UserProfile = ({ match, user }) => {
   const handleCreatePlan = async (e) => {
     e.preventDefault()
     document.getElementById('generate-plan-button').innerHTML = 'generating...'
+    document.getElementById('join-plan-button').disabled = true
     document.getElementById('generate-plan-button').disabled = true
     BotBehaviorClient.createPlan(userProfile.username).then(d => {
+      window.location.href = `/plans/${d.plan.id}`
+    })
+  }
+
+  const handleJoinPlan = async (e) => {
+    e.preventDefault()
+    document.getElementById('join-plan-button').innerHTML = 'joining...'
+    document.getElementById('join-plan-button').disabled = true
+    document.getElementById('generate-plan-button').disabled = true
+
+    BotBehaviorClient.joinPlan(userProfile.username).then(d => {
       window.location.href = `/plans/${d.plan.id}`
     })
   }
@@ -73,6 +85,11 @@ const UserProfile = ({ match, user }) => {
         onClick={handleCreatePlan}
       >Create new plan</button>
       <br />
+      <button
+        id='join-plan-button'
+        className='button warning'
+        onClick={handleJoinPlan}
+      >Join a random plan</button>
     </>
   }
 

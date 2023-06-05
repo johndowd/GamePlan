@@ -21,6 +21,16 @@ class UserClient {
     }
   }
 
+  static async fetchAiUsers() {
+    try {
+      const response = await fetch("/api/v1/users/ai")
+      const body = await response.json()
+      return body.users
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   static async createUser(userPayload) {
     try {
       const response = await fetch("/api/v1/users", {

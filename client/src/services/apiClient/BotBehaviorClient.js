@@ -13,6 +13,21 @@ class BotBehaviorClient {
       console.error(error)
     }
   }
+
+  static async joinPlan(username) {
+    try {
+      const res = await fetch(`/api/v1/behavior/${username}/join`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      const data = await res.json()
+      return data
+    } catch (error) {
+      console.error(error)
+    }
+  }
 }
 
 export default BotBehaviorClient

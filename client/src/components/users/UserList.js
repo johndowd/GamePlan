@@ -7,7 +7,7 @@ const UserList = () => {
   const [users, setUsers] = useState([])
 
   useState(async () => {
-    const newUsers = await UserClient.fetchUsers()
+    const newUsers = await UserClient.fetchAiUsers()
     setUsers(newUsers)
   }, [])
 
@@ -17,7 +17,7 @@ const UserList = () => {
 
   return (
     <div className='users-list content-background'>
-      <h1>Active Users </h1>
+      <h1>Ai Users </h1>
       <ul className='user-list'>
         {userTiles}
       </ul>
